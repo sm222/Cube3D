@@ -32,6 +32,8 @@ typedef struct	s_parsing
 {
 	char	*s;
 	size_t	i;
+	void		*window;
+	void		*mlx;
 }	t_parsing;
 
 typedef struct	s_cube
