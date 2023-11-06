@@ -51,7 +51,8 @@ int	main(int ac, char **av)
 	if (ac < 2 || ac > 2)
 		return (bad_args_main(ac));
 	set_main_data(&cub);
-	parsing(av[1]);
+	if (!parsing(av[1]))
+		return (1);
 	cub.mlx = mlx_init();
 	cub.window = mlx_new_window(cub.mlx, 10 * 64, 10 * 64, "test");
 	mlx_key_hook(cub.window, keybinds, &cub);
