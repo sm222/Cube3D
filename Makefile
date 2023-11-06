@@ -16,6 +16,9 @@ LIBFT_DIR		=	lib/lib_ft/
 PARSE_LIB		=	parsing.a
 PARSE_DIR		=	parsing/
 
+MLX_LIB		=	libmlx.a
+MLX_DIR		=	lib/minilibx_opengl_20191021/
+
 # Compiler and flags
 CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra -g
@@ -29,11 +32,11 @@ OBJS	=	$(SRCS:.c=.o)
 
 USER = $(shell whoami)
 
-all: libft parse $(NAME)
+all: mlx libft parse $(NAME)
 	@printf "$(CYN) \n\n			correction is made by $(USER)\n\n  $(RESET)\n"
 	
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT) \
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT) $(MLX_DIR)$(MLX_LIB) -framework OpenGL -framework AppKit \
 	$(PARSE_DIR)$(PARSE_LIB) -o $(NAME)
 libft:
 	@printf "$(GRN)making libft$(WHT)\n"
@@ -43,6 +46,8 @@ parse:
 	@printf "$(GRN)making parsing$(WHT)\n"
 	@make -C parsing
 
+mlx:
+	@make -C $(MLX_DIR)
 
 mem: all
 	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
