@@ -6,16 +6,14 @@
 int	exit_window(t_cub *info)
 {
 	mlx_destroy_window(info->mlx, info->window);
+	exit(0); //you need it ;)
 	return (0);
 }
 
 int	keybinds(int keycode, t_cub *info)
 {
 	if (keycode == 53)
-	{
-		mlx_destroy_window(info->mlx, info->window);
-		exit(0); //you need it ;)
-	}
+		exit_window(info);
 	return (0);
 }
 
