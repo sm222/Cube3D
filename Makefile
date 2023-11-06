@@ -58,6 +58,7 @@ mem: all
 clean:
 	@$(RM) $(OBJS)
 	@make -C $(LIBFT_DIR)     clean
+	@make -C $(MLX_DIR)   clean
 	@make -C parsing		  clean
 	@echo $(shell clear)
 	@printf "$(GRN)clean *.o$(RESET)\n"

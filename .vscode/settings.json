@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"*.c": "c",
+		"structure.h": "c",
+		"libft.h": "c",
+		"ft_printf.h": "c",
+		"stdio.h": "c",
+		"stdlib.h": "c"
+	}
+}

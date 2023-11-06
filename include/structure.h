@@ -15,7 +15,8 @@
 //--------------------------//
 
 enum e_cube {
-	data,
+	e_data,
+	e_map,
 }; 
 
 //--------------------------//
@@ -32,16 +33,16 @@ typedef struct	s_parsing
 {
 	char	*s;
 	size_t	i;
-	void		*window;
-	void		*mlx;
 }	t_parsing;
 
-typedef struct	s_cube
+typedef struct	s_cub
 {
 	t_parsing	pars;
 	t_map		map;
 	int			file_fd;
-}	t_cube;
+	void		*mlx;
+	void		*window;
+}	t_cub;
 
 
 
