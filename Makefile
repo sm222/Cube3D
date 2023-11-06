@@ -37,7 +37,7 @@ all: mlx libft parse $(NAME)
 	
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT) $(MLX_DIR)$(MLX_LIB) -framework OpenGL -framework AppKit \
-	$(PARSE_DIR)$(PARSE_LIB) -o $(NAME)
+	$(PARSE_DIR)$(PARSE_LIB) C_tools/C_tool.a -o $(NAME)
 libft:
 	@printf "$(GRN)making libft$(WHT)\n"
 	@make -C $(LIBFT_DIR)

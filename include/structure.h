@@ -17,13 +17,14 @@
 enum e_cube {
 	e_data,
 	e_map,
-}; 
+};
 
 //--------------------------//
 //			type			//
 //--------------------------//
 
-typedef char** t_map; // char **
+typedef char**	t_map; // char **
+typedef int		t_fd;  // int
 
 //--------------------------//
 //			struct			//
@@ -33,6 +34,8 @@ typedef struct	s_parsing
 {
 	char	*s;
 	size_t	i;
+	t_map	map;
+	t_fd	fd;
 }	t_parsing;
 
 typedef struct	s_cub
