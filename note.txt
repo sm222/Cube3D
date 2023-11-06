@@ -1,0 +1,24 @@
+
+# Une map dans le format *.cub
+
+• open, close, read, write,
+printf, malloc, free,
+perror, strerror, exit
+• Toutes les fonctions de
+la lib math (-lm man man 3
+math)
+• Toutes les fonctions de la
+MinilibX
+
+Vous devez créer une représentation graphique 3D
+"réalistique" que nous pourrions avoir au sein d’un
+labyrinthe en utilisant une vue subjective. Vous
+devez créer cette représentation en utilisant les
+principes du ray-casting mentionnés plus tôt.
+
+
+//TODO:
+
+
+//TEST:
+
