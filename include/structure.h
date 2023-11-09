@@ -29,6 +29,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include "error.h"
 # include "../lib/lib_ft/libft.h"
 
 //--------------------------//
@@ -53,10 +54,13 @@ typedef int		t_fd;  // int
 
 typedef struct	s_parsing
 {
+	char	*map_name;
 	char	*s;
 	size_t	i;
+	t_map	pre_map;
 	t_map	map;
 	t_fd	fd;
+	int		err;
 }	t_parsing;
 
 typedef struct	s_cub
@@ -67,9 +71,6 @@ typedef struct	s_cub
 	void		*mlx;
 	void		*window;
 }	t_cub;
-
-
-
 
 
 #endif // STRUCTURE_H
