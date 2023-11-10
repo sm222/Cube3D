@@ -29,6 +29,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include <stdbool.h>
 # include "error.h"
 # include "../lib/lib_ft/libft.h"
 
@@ -52,15 +53,34 @@ typedef int		t_fd;  // int
 //			struct			//
 //--------------------------//
 
+typedef struct	s_texture
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+}	t_texture;
+
+typedef struct	s_extract_t
+{
+	char	name[5][3];
+	bool	side[4];
+	t_err	err;
+	size_t	line;
+}	t_extract_t;
+
+
+
 typedef struct	s_parsing
 {
-	char	*map_name;
-	char	*s;
-	size_t	i;
-	t_map	pre_map;
-	t_map	map;
-	t_fd	fd;
-	int		err;
+	char		*map_name;
+	char		*s;
+	size_t		i;
+	t_map		pre_map;
+	t_map		map;
+	t_fd		fd;
+	int			err;
+	t_texture	texture;
 }	t_parsing;
 
 typedef struct	s_cub

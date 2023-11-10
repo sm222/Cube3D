@@ -11,6 +11,7 @@ SRCS	=	parsing.c\
 			read_map.c\
 			parsing_err.c\
 			parsing_look_char.c\
+			parsing_texture.c\
 
 OBJS	=	$(SRCS:.c=.o)
 
