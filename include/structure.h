@@ -42,6 +42,13 @@ enum e_cube {
 	e_map,
 };
 
+enum side_tex {
+	e_no,
+	e_so,
+	e_we,
+	e_ea,
+};
+
 //--------------------------//
 //			type			//
 //--------------------------//
@@ -55,16 +62,12 @@ typedef int		t_fd;  // int
 
 typedef struct	s_texture
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
+	char	*side[4];
 }	t_texture;
 
 typedef struct	s_extract_t
 {
 	char	name[5][3];
-	bool	side[4];
 	t_err	err;
 	size_t	line;
 }	t_extract_t;
