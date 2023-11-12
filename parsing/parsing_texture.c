@@ -1,14 +1,23 @@
 
 #include "parsing.h"
 
-static	t_err read_line_texture(char *line, t_extract_t *var, t_parsing *data)
+static size_t	skip_space(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
+}
+
+static t_err	read_line_texture(char *line, t_extract_t *var, t_parsing *data)
 {
 	t_index	dex;
 	(void)data;
 
 	ft_bzero(&dex, sizeof(t_index));
-	while (line[dex.i] && line[dex.i] == ' ')
-		dex.i++;
+	dex.i += skip_space(line);
 	if (line[dex.i])
 	{
 		while (dex.j < 4)
