@@ -7,7 +7,11 @@ RM		=	rm -f
 LIBFT		=	libft.a
 LIBFT_DIR	=	../lib/lib_ft/
 
-SRCS	=	parsing.c
+SRCS	=	parsing.c\
+			read_map.c\
+			parsing_err.c\
+			parsing_look_char.c\
+			parsing_texture.c\
 
 OBJS	=	$(SRCS:.c=.o)
 
