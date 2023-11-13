@@ -2,19 +2,19 @@ NO                      ./img/optic/4.png
 WE                                                           ./img/optic/3.png
                      C     0,        0,         0
                                SO ./img/optic/2.png
-EA ./img/optic/1.png
-EA ./img/optic/1.png
-EA ./img/optic/1.png
-EA ./img/optic/1.png
-EA ./img/optic/1.png
-EA ./img/optic/1.png
-EA ./img/optic/1.png
-
-
-
+EA ./img/optic/1.png   
+EA ./img/optic/1.png   
+        
+        
 F 255,255,255
+     
+   
 
 
+        
+         
+          
+           
        1
       1S1
      10001

@@ -13,6 +13,7 @@ static t_err	look_all(t_parsing *data)
 	if (rvalue < e_success)
 		return (rvalue);
 	extract_texture(data);
+	clean_parsing(data);
 	return (e_success);
 }
 

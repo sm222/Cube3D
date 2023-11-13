@@ -33,6 +33,7 @@ static void	set_main_data(t_cub *cub)
 
 static int	bad_args_main(int ac)
 {
+	ft_printf(2, "%oError\n", NULL);
 	if (ac > 2)
 		ft_printf(2, "%otoo many argument\n", NULL);
 	else

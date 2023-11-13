@@ -53,8 +53,9 @@ enum side_tex {
 //			type			//
 //--------------------------//
 
-typedef char**	t_map; // char **
-typedef int		t_fd;  // int
+typedef char**			t_map;   // char **
+typedef int				t_fd;    // int
+typedef unsigned char	t_color; // unsing char use for color
 
 //--------------------------//
 //			struct			//
@@ -63,11 +64,14 @@ typedef int		t_fd;  // int
 typedef struct	s_texture
 {
 	char	*side[4];
+	bool	cf[2];
+	t_color	flore[3];
+	t_color	seling[3];
 }	t_texture;
 
 typedef struct	s_extract_t
 {
-	char	name[5][3];
+	char	name[5][5];
 	t_err	err;
 	size_t	line;
 }	t_extract_t;
@@ -77,7 +81,6 @@ typedef struct	s_extract_t
 typedef struct	s_parsing
 {
 	char		*map_name;
-	char		*s;
 	size_t		i;
 	t_map		pre_map;
 	t_map		map;
