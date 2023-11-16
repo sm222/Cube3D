@@ -4,6 +4,7 @@
 static int	look_name(char *name)
 {
 	char	*tmp;
+	size_t	i;
 
 	if (!name)
 		return (-1);
@@ -12,6 +13,13 @@ static int	look_name(char *name)
 	{
 		ft_printf(2, "%oError\nCub3D: "RED"%s"WHT" don't finish in .cub\n", \
 		NULL, name);
+		if (tmp)
+		{
+			i = (tmp - name) + 7;
+			while (i--)
+				ft_printf(2, "~");
+			ft_printf(2, "^\n");
+		}
 		return (-1);
 	}
 	return (1);
@@ -39,6 +47,25 @@ int	open_file(t_parsing *data, char *file)
 	return (data->fd);
 }
 
+static void fix_empty(char **line)
+{
+	char	*new;
+
+	new = NULL;
+	if (*line)
+	{
+		if (*line[0] && *line[0] == '\n')
+		{
+			new = ft_strjoin(" ", *line);
+			if (new)
+			{
+				*line = ft_free(*line);
+				*line = new;
+			}
+		}
+	}
+}
+
 /// @brief 
 /// @param data 
 /// @return 
@@ -57,6 +84,7 @@ t_err	read_map(t_parsing *data)
 		if (tmp == NULL && line == 0)
 			return (e_empty_map);
 		line++;
+		fix_empty(&tmp);
 		join = ft_strfjoin(join, tmp);
 		ft_free(tmp);
 		if (!join)

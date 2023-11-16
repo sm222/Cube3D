@@ -9,6 +9,7 @@
 		"parsing.h": "c",
 		"err.h": "c",
 		"unistd.h": "c",
-		"error.h": "c"
+		"error.h": "c",
+		"stdbool.h": "c"
 	}
 }

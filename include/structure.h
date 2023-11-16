@@ -37,9 +37,15 @@
 //			enum			//
 //--------------------------//
 
+//use for return_ptr
 enum e_cube {
+	e_set,
+	e_get,
+	e_add,
 	e_data,
 	e_map,
+	e_parsing,
+	e_p_err_index,
 };
 
 enum side_tex {
@@ -82,6 +88,7 @@ typedef struct	s_parsing
 {
 	char		*map_name;
 	size_t		i;
+	size_t		err_p;
 	t_map		pre_map;
 	t_map		map;
 	t_fd		fd;

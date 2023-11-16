@@ -21,18 +21,40 @@ static t_err	get_nbr(char *s, t_color color[3])
 	int		tmp;
 
 	j = 0;
-	i = 0;
+	i = 1;
+	while (s && s[i] && s[i] == ' ')
+		read_and_set_err_p(i++, e_set);
+	if (s[i] == ',')
+		return (e_bad_char);
 	while (j < 3)
 	{
-		i += skip_space(s);
 		tmp = ft_atoi(s + i);
+		read_and_set_err_p(i, e_set);
 		if (tmp > 255)
+		{
+			read_and_set_err_p(1, e_add);
 			return (e_bad_number);
+		}
 		color[j] = tmp;
-		i += skip_to(s + i, ',');
+		i += skip_to(s + i, ',') + 1;
+		printf("%s\n", s + i);
 		j++;
 	}
 	return (e_success);
+}
+
+static short	look_next(char *s, size_t i)
+{
+	while (s && s[i])
+	{
+		if (s[i] == ',')
+			return (1);
+		else if (ft_isdigit(s[i]))
+			return (0);
+		else
+			i++;
+	}
+	return (0);
 }
 
 t_err	extract_line_nbr(char *s, t_parsing *data, short c)
@@ -45,20 +67,23 @@ t_err	extract_line_nbr(char *s, t_parsing *data, short c)
 	data->texture.cf[c] = true;
 	while (s[i] && (ft_isdigit(s[i]) || s[i] == ',' || s[i] == ' '))
 	{
+		read_and_set_err_p(1, e_add);
 		if (s[i] == ',')
+		{
 			vergul++;
-		if (vergul > 2 || (s[i] == ',' && s[i + 1] == ','))
-			break ;
+			if (look_next(s, i + 1) || vergul > 2 )
+				return (e_bad_char);
+		}
 		i++;
 	}
-	if (i == ft_strlen(s))
+	if (i == ft_strlen(s) && vergul == 2)
 	{
 		if (c == 0)
 			return (get_nbr(s + 1, data->texture.celing));
 		if (c == 1)
 			return (get_nbr(s + 1, data->texture.flore));
 	}
-	return (e_bad_char);
+	return (e_inva_arg);
 }
 
 char	*extract_line_txt(char *s, t_err *err)
@@ -76,9 +101,10 @@ char	*extract_line_txt(char *s, t_err *err)
 		j++;
 	if (look_at_end(s + i + j))
 	{
-		ft_printf(2, "Error\n");
-		ft_printf(2, "%oCub: invalid char after data\n", NULL);
-		*err = e_bad_char;
+		while (s[j + i] && s[j + i] == ' ')
+			j++;
+		read_and_set_err_p(i + j, e_add);
+		*err = e_inva_data_end;
 		return (NULL);
 	}
 	new = ft_strndup(s + i, j);

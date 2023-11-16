@@ -7,6 +7,9 @@
 # include "../include/structure.h"
 # include "../lib/lib_ft/libft.h"
 
+//debug
+void	print_debug(t_parsing *data);
+
 // use
 t_map	parsing(char *arg);
 
@@ -26,5 +29,6 @@ size_t	skip_space(const char *s);
 size_t	skip_to(const char *s, char c);
 
 t_err	extract_line_nbr(char *s, t_parsing *data, short c);
+size_t	read_and_set_err_p(size_t in, short set_get);
 
 #endif // PARSING_H

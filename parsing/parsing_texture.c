@@ -3,15 +3,27 @@
 
 static short	print_err(t_err code, char *line, size_t i)
 {
+	size_t	j;
+
+	j = read_and_set_err_p(0, e_get);
+	if (code == e_end_of_tex)
+		return (1);
 	if (code != e_empty_line && code < e_success)
 	{
 		ft_printf(2, "%oError\n", NULL);
 		if (code == e_bad_char)
-			ft_printf(2, "%o[%d] bad char: %s\n", NULL, i, line);
+			ft_printf(2, "%o[%d] bad char: \n%s\n", NULL, i, line);
 		if (code == e_bad_number)
-			ft_printf(2, "%o[%d] bad number: %s\n", NULL, i, line);
+			ft_printf(2, "%o[%d] bad number: \n%s\n", NULL, i, line);
 		if (code == e_double_card)
-			ft_printf(2, "%o[%d] double cord: %s\n", NULL, i, line);
+			ft_printf(2, "%o[%d] double cord: \n%s\n", NULL, i, line);
+		if (code == e_inva_data_end)
+			ft_printf(2, "%o[%d] "INVA_DATA_END"\n%s\n", NULL, i, line);
+		if (code == e_inva_arg)
+			ft_printf(2, "%o[%d] ivalid argument\n%s\n", NULL, i, line);
+		while (j--)
+			ft_printf(2, RED"~");
+		ft_printf(2, RED"^\n"WHT);
 		return (1);
 	}
 	return (0);
@@ -22,17 +34,11 @@ static t_err	look_data_fc(char *s, t_parsing *data)
 	if (ft_strncmp(s, "C ", 2) == 0 && !data->texture.cf[0])
 		return (extract_line_nbr(s, data, 0));
 	else if (ft_strncmp(s, "C ", 2) == 0 && data->texture.cf[0])
-	{
-		ft_printf(2, "ici %s\n", s);
 		return (e_double_card);
-	}
 	else if (ft_strncmp(s, "F ", 2) == 0 && !data->texture.cf[1])
 		return (extract_line_nbr(s, data, 1));
 	else if (ft_strncmp(s, "F ", 2) == 0 && data->texture.cf[1])
-	{
-		ft_printf(2, "ici %s\n", s);
 		return (e_double_card);
-	}
 	return (e_bad_char);
 }
 
@@ -47,10 +53,10 @@ static t_err	look_data_str(char *s, t_extract_t *var, t_parsing *data)
 		!data->texture.side[j])
 		{
 			data->texture.side[j] = extract_line_txt(s, &var->err);
-			return (e_success);
+			return (var->err);
 		}
 		else if (ft_strncmp(s, var->name[j], 3) == 0 && \
-			data->texture.side[j])
+		data->texture.side[j])
 			return (e_double_card);
 		j++;
 	}
@@ -61,19 +67,22 @@ static t_err	read_line_texture(char *line, t_extract_t *var, t_parsing *data)
 {
 	size_t	i;
 	t_err	err;
-
+	
+	read_and_set_err_p(0, e_set);
 	i = skip_space(line);
 	if (line[i])
 	{
+		read_and_set_err_p(i, e_add);
 		err = look_data_str(line + i, var, data);
-		if (err == e_bad_number)
+		if (err < e_success)
 			return (err);
-		if (look_all_texture(&data->texture) != 6 && err == e_bad_char)
-			return (e_fail);
+		if (look_all_texture(&data->texture) == 6 && err == e_bad_char)
+			return (e_end_of_tex);
 	}
 	else
 		return (e_empty_line);
 	return (err);
+	
 }
 
 /// @brief 
@@ -92,11 +101,6 @@ t_err	extract_texture(t_parsing *data)
 			break ;
 		var.line++;
 	}
-	printf("no%s\n", data->texture.side[e_no]);
-	printf("so%s\n", data->texture.side[e_so]);
-	printf("we%s\n", data->texture.side[e_we]);
-	printf("ea%s\n", data->texture.side[e_ea]);
-	printf("C %d,%d,%d\n", data->texture.celing[0], data->texture.celing[1], data->texture.celing[2]);
-	printf("F %d,%d,%d\n", data->texture.flore[0], data->texture.flore[1], data->texture.flore[2]);
+	print_debug(data);
 	return (0);
 }

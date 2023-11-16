@@ -1,6 +1,18 @@
 
 #include "parsing.h"
 
+size_t	read_and_set_err_p(size_t in, short set_get)
+{
+	size_t	*i;
+
+	i = ft_return_ptr(NULL, e_p_err_index);
+	if (set_get == e_set)
+		*i = in;
+	if (set_get == e_add)
+		(*i) += in;
+	return (*i);
+}
+
 static t_err	look_all(t_parsing *data)
 {
 	t_err		rvalue;
@@ -24,6 +36,8 @@ t_map	parsing(char *arg)
 
 	rvalue = 0;
 	ft_bzero(&data, sizeof(t_parsing));
+	ft_return_ptr(&data, e_parsing);
+	ft_return_ptr(&data.err_p, e_p_err_index);
 	if (!arg)
 		return (NULL);
 	data.map_name = arg;
