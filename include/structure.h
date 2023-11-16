@@ -66,7 +66,7 @@ typedef struct	s_texture
 	char	*side[4];
 	bool	cf[2];
 	t_color	flore[3];
-	t_color	seling[3];
+	t_color	celing[3];
 }	t_texture;
 
 typedef struct	s_extract_t

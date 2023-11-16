@@ -22,4 +22,3 @@ t_err	parsing_look_c(t_parsing *data)
 	}
 	return (e_success);
 }
-

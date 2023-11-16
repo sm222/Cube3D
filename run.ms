@@ -1,0 +1,1 @@
+make re && ./Cub3D map/map2.cub

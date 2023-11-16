@@ -14,6 +14,7 @@ typedef enum e_err {
 	e_bad_char		=	-3, //bad char, your map suck
 	e_empty_line	=	-4, //not a real err, just ignore it
 	e_double_card	=	-5, //find more ten one ... oof
+	e_bad_number	=	-6, //find more ten one ... oof
 }	t_err;
 
 #endif // ERR_H

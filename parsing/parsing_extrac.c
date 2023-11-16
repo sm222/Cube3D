@@ -14,14 +14,54 @@ static short	look_at_end(char *end)
 	return (1);
 }
 
-void	extract_line_nbr(char *s, t_extract_t *var, t_parsing *data, short c)
+static t_err	get_nbr(char *s, t_color color[3])
 {
-	printf("%s\n", s);
-	data->texture.cf[c] = true;
-	(void)var;
+	size_t	i;
+	size_t	j;
+	int		tmp;
+
+	j = 0;
+	i = 0;
+	while (j < 3)
+	{
+		i += skip_space(s);
+		tmp = ft_atoi(s + i);
+		if (tmp > 255)
+			return (e_bad_number);
+		color[j] = tmp;
+		i += skip_to(s + i, ',');
+		j++;
+	}
+	return (e_success);
 }
 
-char *extract_line_txt(char *s, t_err *err)
+t_err	extract_line_nbr(char *s, t_parsing *data, short c)
+{
+	size_t		i;
+	short		vergul;
+
+	i = 1;
+	vergul = 0;
+	data->texture.cf[c] = true;
+	while (s[i] && (ft_isdigit(s[i]) || s[i] == ',' || s[i] == ' '))
+	{
+		if (s[i] == ',')
+			vergul++;
+		if (vergul > 2 || (s[i] == ',' && s[i + 1] == ','))
+			break ;
+		i++;
+	}
+	if (i == ft_strlen(s))
+	{
+		if (c == 0)
+			return (get_nbr(s + 1, data->texture.celing));
+		if (c == 1)
+			return (get_nbr(s + 1, data->texture.flore));
+	}
+	return (e_bad_char);
+}
+
+char	*extract_line_txt(char *s, t_err *err)
 {
 	char	*new;
 	size_t	i;
