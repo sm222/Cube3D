@@ -1,7 +1,7 @@
-NO                      ./img/optic/4.png
-WE                                                           ./img/optic/3.png 
+NO                      ./img/optic/4.png       
+WE                                   ./img/optic/3.png
     
-                     C   99       , 255     , 
+                     C   99       , 256   ,   29
                                SO ./img/optic/2.png
 EA ./img/optic/1.png   
 

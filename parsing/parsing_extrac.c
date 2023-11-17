@@ -21,15 +21,15 @@ static t_err	get_nbr(char *s, t_color color[3])
 	int		tmp;
 
 	j = 0;
-	i = 1;
-	while (s && s[i] && s[i] == ' ')
-		read_and_set_err_p(i++, e_set);
+	i = skip_space(s);
 	if (s[i] == ',')
-		return (e_bad_char);
+	{
+		read_and_set_err_p(-1, e_add);
+		return (e_inva_arg);
+	}
 	while (j < 3)
 	{
 		tmp = ft_atoi(s + i);
-		read_and_set_err_p(i, e_set);
 		if (tmp > 255)
 		{
 			read_and_set_err_p(1, e_add);
@@ -37,7 +37,7 @@ static t_err	get_nbr(char *s, t_color color[3])
 		}
 		color[j] = tmp;
 		i += skip_to(s + i, ',') + 1;
-		printf("%s\n", s + i);
+		read_and_set_err_p(skip_to(s + i, ','), e_add);
 		j++;
 	}
 	return (e_success);
@@ -57,6 +57,19 @@ static short	look_next(char *s, size_t i)
 	return (0);
 }
 
+static short	look_last_number(char *s, size_t i)
+{
+	while (i > 0)
+	{
+		if (ft_isdigit(s[i]))
+			return (1);
+		if (s[i] == ',')
+			return (0);
+		i--;
+	}
+	return (0);
+}
+
 t_err	extract_line_nbr(char *s, t_parsing *data, short c)
 {
 	size_t		i;
@@ -67,7 +80,6 @@ t_err	extract_line_nbr(char *s, t_parsing *data, short c)
 	data->texture.cf[c] = true;
 	while (s[i] && (ft_isdigit(s[i]) || s[i] == ',' || s[i] == ' '))
 	{
-		read_and_set_err_p(1, e_add);
 		if (s[i] == ',')
 		{
 			vergul++;
@@ -75,8 +87,9 @@ t_err	extract_line_nbr(char *s, t_parsing *data, short c)
 				return (e_bad_char);
 		}
 		i++;
+		read_and_set_err_p(1, e_add);
 	}
-	if (i == ft_strlen(s) && vergul == 2)
+	if (i == ft_strlen(s) && vergul == 2 && look_last_number(s , i))
 	{
 		if (c == 0)
 			return (get_nbr(s + 1, data->texture.celing));
@@ -103,7 +116,7 @@ char	*extract_line_txt(char *s, t_err *err)
 	{
 		while (s[j + i] && s[j + i] == ' ')
 			j++;
-		read_and_set_err_p(i + j, e_add);
+		read_and_set_err_p(i + j -1, e_add);
 		*err = e_inva_data_end;
 		return (NULL);
 	}

@@ -21,9 +21,7 @@ static short	print_err(t_err code, char *line, size_t i)
 			ft_printf(2, "%o[%d] "INVA_DATA_END"\n%s\n", NULL, i, line);
 		if (code == e_inva_arg)
 			ft_printf(2, "%o[%d] ivalid argument\n%s\n", NULL, i, line);
-		while (j--)
-			ft_printf(2, RED"~");
-		ft_printf(2, RED"^\n"WHT);
+		ft_print_err_len(j);
 		return (1);
 	}
 	return (0);
@@ -70,9 +68,9 @@ static t_err	read_line_texture(char *line, t_extract_t *var, t_parsing *data)
 	
 	read_and_set_err_p(0, e_set);
 	i = skip_space(line);
+	read_and_set_err_p(i, e_add);
 	if (line[i])
 	{
-		read_and_set_err_p(i, e_add);
 		err = look_data_str(line + i, var, data);
 		if (err < e_success)
 			return (err);
@@ -82,7 +80,6 @@ static t_err	read_line_texture(char *line, t_extract_t *var, t_parsing *data)
 	else
 		return (e_empty_line);
 	return (err);
-	
 }
 
 /// @brief 
