@@ -12,6 +12,7 @@ void	print_debug(t_parsing *data);
 
 // use
 t_map	parsing(char *arg);
+t_err	extract_map(t_parsing *data);
 
 t_err	read_map(t_parsing *data);
 t_err	parsing_err(t_parsing *data, t_err err);

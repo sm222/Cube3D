@@ -9,6 +9,7 @@ LIBFT_DIR	=	../lib/lib_ft/
 
 SRCS	=	debugft.c\
 			clean_parsing.c\
+			parsing_map.c\
 			parsing.c\
 			parsing_err.c\
 			parsing_extrac.c\

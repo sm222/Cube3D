@@ -67,14 +67,19 @@ typedef unsigned char	t_color; // unsing char use for color
 //			struct			//
 //--------------------------//
 
+/// @brief 
 typedef struct	s_texture
 {
 	char	*side[4];
 	bool	cf[2];
 	t_color	flore[3];
 	t_color	celing[3];
+	int		p_x;
+	int		p_y;
+	char	p_side;
 }	t_texture;
 
+/// @brief 
 typedef struct	s_extract_t
 {
 	char	name[5][5];
@@ -82,8 +87,7 @@ typedef struct	s_extract_t
 	size_t	line;
 }	t_extract_t;
 
-
-
+/// @brief 
 typedef struct	s_parsing
 {
 	char		*map_name;
@@ -96,6 +100,7 @@ typedef struct	s_parsing
 	t_texture	texture;
 }	t_parsing;
 
+/// @brief 
 typedef struct	s_cub
 {
 	t_parsing	pars;
@@ -104,6 +109,5 @@ typedef struct	s_cub
 	void		*mlx;
 	void		*window;
 }	t_cub;
-
 
 #endif // STRUCTURE_H
