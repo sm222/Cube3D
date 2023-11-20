@@ -12,6 +12,7 @@ int	look_all_texture(t_texture *in)
 		i++;
 	if (in->cf[1])
 		i++;
+	printf("==%d\n", i);
 	while (j < 4)
 	{
 		if (in->side[j])

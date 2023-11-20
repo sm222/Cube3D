@@ -77,7 +77,7 @@ t_err	extract_line_nbr(char *s, t_parsing *data, short c)
 
 	i = 1;
 	vergul = 0;
-	data->texture.cf[c] = true;
+	printf("moi %d\n", c);
 	while (s[i] && (ft_isdigit(s[i]) || s[i] == ',' || s[i] == ' '))
 	{
 		if (s[i] == ',')
@@ -89,6 +89,8 @@ t_err	extract_line_nbr(char *s, t_parsing *data, short c)
 		i++;
 		read_and_set_err_p(1, e_add);
 	}
+	printf("ici--\n");
+	data->texture.cf[c] = true;
 	if (i == ft_strlen(s) && vergul == 2 && look_last_number(s , i))
 	{
 		if (c == 0)
@@ -96,6 +98,7 @@ t_err	extract_line_nbr(char *s, t_parsing *data, short c)
 		if (c == 1)
 			return (get_nbr(s + 1, data->texture.flore));
 	}
+	printf("--ici\n");
 	return (e_inva_arg);
 }
 
