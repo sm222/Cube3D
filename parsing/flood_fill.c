@@ -30,7 +30,7 @@ void	flod_err(t_map map, int x, int y)
 	if (err > 0)
 		return ;
 	i = 0;
-	ft_printf(2, "%oError\n", NULL);
+	err = ft_printf(2, "%oError\n", NULL);
 	while (map[i])
 	{
 		j = 0;
@@ -47,7 +47,6 @@ void	flod_err(t_map map, int x, int y)
 		ft_printf(2, "%o\n", NULL);
 		i++;
 	}
-	err++;
 }
 
 static int	flood_fill(int x, int y, t_map map, int *up)
@@ -56,7 +55,10 @@ static int	flood_fill(int x, int y, t_map map, int *up)
 
 	out = 0;
 	if (x < 0 || y < 0 || y > *up || x > (int)ft_strlen(map[y]))
+	{
+		if (y > *up && ft_strlen(map[y]) > ft_strlen(map[y - 1]))
 		return (0);
+	}
 	if (map[y][x] == '1')
 		return (0);
 	if (map[y][x] == '0' || ft_strchr("NWES", map[y][x]))

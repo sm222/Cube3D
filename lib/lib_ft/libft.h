@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:07:18 by anboisve          #+#    #+#             */
-/*   Updated: 2023/11/17 09:32:37 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:56:55 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,14 @@ typedef struct s_info
 	int		rv;
 	size_t	cut;
 }	t_info;
+
+typedef struct s_str
+{
+	char	*s;
+	size_t	len;
+	size_t	i;
+	size_t	j;
+}	t_str;
 
 char		*get_next_line(int fd);
 char		*ft_strfjoin(char *s1, char *s2);

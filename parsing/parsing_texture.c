@@ -40,20 +40,20 @@ static t_err	look_data_fc(char *s, t_parsing *data)
 	return (e_bad_char);
 }
 
-static t_err	look_data_str(char *s, t_extract_t *var, t_parsing *data)
+static t_err	look_data_str(char *s, t_extract_t *var, t_parsing *data, size_t len)
 {
 	size_t	j;
 
 	j = 0;
 	while (j < 4)
 	{
-		if (ft_strncmp(s, var->name[j], 2) == 0 && \
+		if (ft_strncmp(s + len, var->name[j], 2) == 0 && \
 		!data->texture.side[j] && s[2] == ' ')
 		{
 			data->texture.side[j] = extract_line_txt(s, &var->err);
 			return (var->err);
 		}
-		else if (ft_strncmp(s, var->name[j], 2) == 0 && \
+		else if (ft_strncmp(s + len, var->name[j], 2) == 0 && \
 		data->texture.side[j])
 			return (e_double_card);
 		j++;
@@ -72,7 +72,7 @@ static t_err	read_line_texture(char *line, t_extract_t *var, t_parsing *data)
 	read_and_set_err_p(i, e_add);
 	if (line[i])
 	{
-		err = look_data_str(line + i, var, data);
+		err = look_data_str(line , var, data, i);
 		if (err < e_success)
 			return (err);
 	}

@@ -1,7 +1,7 @@
 
 #include "parsing.h"
 
-short	look_at_end(char *end)
+short	look_at_end(char *end, size_t len)
 {
 	size_t	i;
 

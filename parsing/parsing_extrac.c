@@ -58,7 +58,7 @@ t_err	extract_line_nbr(char *s, t_parsing *data, short c)
 	return (e_inva_arg);
 }
 
-char	*extract_line_txt(char *s, t_err *err)
+char	*extract_line_txt(char *s, t_err *err, size_t len)
 {
 	char	*new;
 	size_t	i;
@@ -67,11 +67,11 @@ char	*extract_line_txt(char *s, t_err *err)
 	new = NULL;
 	i = 2;
 	j = 0;
-	while (s && s[i] && s[i] == ' ')
+	while (s && i < len && s[i] == ' ')
 		i++;
-	while (s && s[i + j] && s[i + j] != ' ')
+	while (s && i+ j < len && s[i + j] != ' ')
 		j++;
-	if (look_at_end(s + i + j))
+	if (look_at_end(s + i + j, len))
 	{
 		while (s[j + i] && s[j + i] == ' ')
 			j++;

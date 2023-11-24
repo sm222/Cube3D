@@ -20,7 +20,7 @@ int		open_file(t_parsing *data, char *file);
 
 t_err	parsing_look_c(t_parsing *data);
 t_err	extract_texture(t_parsing *data);
-char	*extract_line_txt(char *s, t_err *err);
+char	*extract_line_txt(char *s, t_err *err, size_t len);
 short	clean_parsing(t_parsing *data);
 
 int		look_all_texture(t_texture *in);
@@ -34,7 +34,7 @@ size_t	read_and_set_err_p(size_t in, short set_get);
 
 int		call_flood_fill(t_map in);
 
-short	look_at_end(char *end);
+short	look_at_end(char *end, size_t len);
 short	look_next(char *s, size_t i);
 short	look_last_number(char *s, size_t i);
 
