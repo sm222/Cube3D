@@ -1,19 +1,5 @@
 # include "parsing.h"
 
-static short	look_at_end(char *end)
-{
-	size_t	i;
-
-	i = 0;
-	if (!end || !end[0])
-		return (0);
-	while (end[i] && end[i] == ' ')
-		i++;
-	if (!end[i])
-		return (0);
-	return (1);
-}
-
 static t_err	get_nbr(char *s, t_color color[3])
 {
 	size_t	i;
@@ -43,33 +29,6 @@ static t_err	get_nbr(char *s, t_color color[3])
 	return (e_success);
 }
 
-static short	look_next(char *s, size_t i)
-{
-	while (s && s[i])
-	{
-		if (s[i] == ',')
-			return (1);
-		else if (ft_isdigit(s[i]))
-			return (0);
-		else
-			i++;
-	}
-	return (0);
-}
-
-static short	look_last_number(char *s, size_t i)
-{
-	while (i > 0)
-	{
-		if (ft_isdigit(s[i]))
-			return (1);
-		if (s[i] == ',')
-			return (0);
-		i--;
-	}
-	return (0);
-}
-
 t_err	extract_line_nbr(char *s, t_parsing *data, short c)
 {
 	size_t		i;
@@ -77,28 +36,25 @@ t_err	extract_line_nbr(char *s, t_parsing *data, short c)
 
 	i = 1;
 	vergul = 0;
-	printf("moi %d\n", c);
 	while (s[i] && (ft_isdigit(s[i]) || s[i] == ',' || s[i] == ' '))
 	{
 		if (s[i] == ',')
 		{
 			vergul++;
-			if (look_next(s, i + 1) || vergul > 2 )
+			if (look_next(s, i + 1) || vergul > 2)
 				return (e_bad_char);
 		}
 		i++;
 		read_and_set_err_p(1, e_add);
 	}
-	printf("ici--\n");
 	data->texture.cf[c] = true;
-	if (i == ft_strlen(s) && vergul == 2 && look_last_number(s , i))
+	if (i == ft_strlen(s) && vergul == 2 && look_last_number(s, i))
 	{
 		if (c == 0)
 			return (get_nbr(s + 1, data->texture.celing));
 		if (c == 1)
 			return (get_nbr(s + 1, data->texture.flore));
 	}
-	printf("--ici\n");
 	return (e_inva_arg);
 }
 
@@ -125,5 +81,7 @@ char	*extract_line_txt(char *s, t_err *err)
 	}
 	new = ft_strndup(s + i, j);
 	*err = e_success;
+	if (!new)
+		*err = e_inva_arg;
 	return (new);
 }

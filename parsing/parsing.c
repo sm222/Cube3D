@@ -27,7 +27,8 @@ static t_err	look_all(t_parsing *data)
 	rvalue = extract_texture(data);
 	if (rvalue < e_success)
 		return (rvalue);
-	extract_map(data);
+	if (extract_map(data) < e_success)
+		return (e_fail);
 	clean_parsing(data);
 	return (e_success);
 }

@@ -47,7 +47,7 @@ int	open_file(t_parsing *data, char *file)
 	return (data->fd);
 }
 
-static void fix_empty(char **line)
+static void	fix_empty(char **line)
 {
 	char	*new;
 

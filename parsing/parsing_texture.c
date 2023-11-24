@@ -48,7 +48,7 @@ static t_err	look_data_str(char *s, t_extract_t *var, t_parsing *data)
 	while (j < 4)
 	{
 		if (ft_strncmp(s, var->name[j], 2) == 0 && \
-		!data->texture.side[j])
+		!data->texture.side[j] && s[2] == ' ')
 		{
 			data->texture.side[j] = extract_line_txt(s, &var->err);
 			return (var->err);
@@ -58,7 +58,6 @@ static t_err	look_data_str(char *s, t_extract_t *var, t_parsing *data)
 			return (e_double_card);
 		j++;
 	}
-	printf("test\n");
 	return (look_data_fc(s, data));
 }
 
@@ -66,7 +65,7 @@ static t_err	read_line_texture(char *line, t_extract_t *var, t_parsing *data)
 {
 	size_t	i;
 	t_err	err;
-	
+
 	err = e_success;
 	read_and_set_err_p(0, e_set);
 	i = skip_space(line);
@@ -75,11 +74,7 @@ static t_err	read_line_texture(char *line, t_extract_t *var, t_parsing *data)
 	{
 		err = look_data_str(line + i, var, data);
 		if (err < e_success)
-		{
-			//if (look_all_texture(&data->texture) == 6)
-			//	return (e_end_of_tex);
 			return (err);
-		}
 	}
 	else
 		return (e_empty_line);
@@ -100,8 +95,13 @@ t_err	extract_texture(t_parsing *data)
 	while (data->pre_map && data->pre_map[var.line])
 	{
 		var.err = read_line_texture(data->pre_map[var.line], &var, data);
-		printf("%zu %d\n", var.line + 1, err);
-		if (print_err(var.err, data->pre_map[var.line], var.line + 1) < e_success)
+		if (var.err == e_bad_char && look_all_texture(&data->texture) == 6)
+		{
+			data->i = var.line;
+			return (e_success);
+		}
+		if (print_err(var.err, data->pre_map[var.line], \
+		var.line + 1) < e_success)
 		{
 			err = var.err;
 			break ;
@@ -109,9 +109,5 @@ t_err	extract_texture(t_parsing *data)
 		var.line++;
 	}
 	data->i = var.line;
-	//while (data->pre_map && data->pre_map[var.line])
-	//{
-	//	printf("%s\n", data->pre_map[var.line++]);
-	//}
-	return(err);
+	return (e_fail);
 }

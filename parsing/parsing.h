@@ -32,4 +32,10 @@ size_t	skip_to(const char *s, char c);
 t_err	extract_line_nbr(char *s, t_parsing *data, short c);
 size_t	read_and_set_err_p(size_t in, short set_get);
 
+int		call_flood_fill(t_map in);
+
+short	look_at_end(char *end);
+short	look_next(char *s, size_t i);
+short	look_last_number(char *s, size_t i);
+
 #endif // PARSING_H
