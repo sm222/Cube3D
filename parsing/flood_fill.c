@@ -20,6 +20,36 @@ static short	find_spawn(int *x, int *y, t_map map)
 	return (0);
 }
 
+void	flod_err(t_map map, int x, int y)
+{
+	int				i;
+	int				j;
+	static short	err = 0;
+
+
+	if (err > 0)
+		return ;
+	i = 0;
+	ft_printf(2, "%oError\n", NULL);
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (y == i && x == j)
+				ft_printf(2, "%o"RED"X"WHT, NULL);
+			else if (map[i][j] == '\b')
+				ft_printf(2, "%o%c", NULL, '0');
+			else
+				ft_printf(2, "%o%c", NULL, map[i][j]);
+			j++;
+		}
+		ft_printf(2, "%o\n", NULL);
+		i++;
+	}
+	err++;
+}
+
 static int	flood_fill(int x, int y, t_map map, int *up)
 {
 	int	out;
@@ -40,6 +70,7 @@ static int	flood_fill(int x, int y, t_map map, int *up)
 	}
 	if (map[y][x] == '\b')
 		return (0);
+	flod_err(map, x, y);
 	return (1);
 }
 
@@ -51,12 +82,13 @@ int	call_flood_fill(t_map in)
 	t_map	copy;
 	int		up;
 
-	err = 0;
+	err = e_success;
 	if (find_spawn(&x, &y, in))
 	{
 		up = ft_strlen_double(in);
 		copy = ft_cpy_double_char(in);
-		printf("total %d\n", flood_fill(x, y, copy, &up));
+		if (flood_fill(x, y, copy, &up) > 0)
+			err = e_fail;
 		ft_double_sfree((void **)copy);
 	}
 	else

@@ -75,6 +75,7 @@ t_err	extract_map(t_parsing *data)
 	if (flag)
 		return (e_fail);
 	data->map = copy_map_and_valid(data->pre_map + data->i);
-	call_flood_fill(data->map);
+	if (call_flood_fill(data->map) == e_fail)
+		return (e_fail);
 	return (e_success);
 }
