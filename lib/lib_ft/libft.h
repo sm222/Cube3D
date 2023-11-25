@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:07:18 by anboisve          #+#    #+#             */
-/*   Updated: 2023/11/24 17:56:55 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:17:33 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <stdarg.h>
+# include <stdbool.h>
 # include "index.h"
 # include "ft_printf.h"
 
@@ -165,11 +166,17 @@ typedef struct s_info
 
 typedef struct s_str
 {
+	bool	mal;
 	char	*s;
 	size_t	len;
 	size_t	i;
 	size_t	j;
 }	t_str;
+
+int			ft_str_free(t_str *data);
+int			ft_str_m_free(t_str *data);
+t_str		*ft_str_m_set(char *s, bool mal);
+int			ft_str_set(char *s, t_str *data, bool mal);
 
 char		*get_next_line(int fd);
 char		*ft_strfjoin(char *s1, char *s2);

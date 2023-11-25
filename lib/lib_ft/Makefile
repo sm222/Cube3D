@@ -78,7 +78,8 @@ SRCS	=	ft_atoi.c\
 			ft_lstclear.c\
 			ft_lstiter.c\
 			ft_lstmap.c\
-			ft_find_doc.c
+			ft_find_doc.c\
+			ft_str.c
 
 
 OBJS	=	$(SRCS:.c=.o)
