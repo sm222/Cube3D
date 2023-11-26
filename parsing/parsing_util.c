@@ -21,14 +21,13 @@ int	look_all_texture(t_texture *in)
 	return (i);
 }
 
-size_t	skip_to(const char *s, char c)
+size_t	skip_to(t_str *str, char c)
 {
-	size_t	i;
-
-	i = 0;
-	while (s && s[i] && s[i] != c)
-		i++;
-	return (i);
+	if (!str)
+		return (0);
+	while (str->s && str->i < str->len && str->s[str->i] != c)
+		str->i++;
+	return (str->i);
 }
 
 size_t	skip_space(const char *s)

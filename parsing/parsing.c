@@ -36,9 +36,7 @@ static t_err	look_all(t_parsing *data)
 t_map	parsing(char *arg)
 {
 	t_parsing	data;
-	t_err		rvalue;
 
-	rvalue = 0;
 	ft_bzero(&data, sizeof(t_parsing));
 	ft_return_ptr(&data, e_parsing);
 	ft_return_ptr(&data.err_p, e_p_err_index);

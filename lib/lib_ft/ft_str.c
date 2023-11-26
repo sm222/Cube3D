@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:57:22 by anboisve          #+#    #+#             */
-/*   Updated: 2023/11/25 18:17:44 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/11/26 11:24:12 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,3 +59,4 @@ int	ft_str_m_free(t_str *data)
 	ft_free(data);
 	return (1);
 }
+

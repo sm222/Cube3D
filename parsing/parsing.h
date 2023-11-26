@@ -27,7 +27,7 @@ int		look_all_texture(t_texture *in);
 void	set_value(char in[5][5], t_parsing *data);
 
 size_t	skip_space(const char *s);
-size_t	skip_to(const char *s, char c);
+size_t	skip_to(t_str *str, char c);
 
 t_err	extract_line_nbr(char *s, t_parsing *data, short c);
 size_t	read_and_set_err_p(size_t in, short set_get);

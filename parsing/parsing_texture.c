@@ -40,14 +40,14 @@ static t_err	look_data_fc(char *s, t_parsing *data)
 	return (e_bad_char);
 }
 
-static t_err	look_data_str(char *s, t_extract_t *var, t_parsing *data, size_t len)
+static t_err	look_data_str(t_str *str, t_extract_t *var, t_parsing *data)
 {
 	size_t	j;
 
 	j = 0;
-	while (j < 4)
+	while (j < 4 && str->i - str->len > 3)
 	{
-		if (ft_strncmp(s + len, var->name[j], 2) == 0 && \
+		if (ft_strncmp(str->s + str->i, var->name[j], 2) == 0 && \
 		!data->texture.side[j] && s[2] == ' ')
 		{
 			data->texture.side[j] = extract_line_txt(s, &var->err);
@@ -61,18 +61,18 @@ static t_err	look_data_str(char *s, t_extract_t *var, t_parsing *data, size_t le
 	return (look_data_fc(s, data));
 }
 
-static t_err	read_line_texture(char *line, t_extract_t *var, t_parsing *data)
+static t_err	read_line_textu(t_str *str, t_extract_t *var, t_parsing *data)
 {
 	size_t	i;
 	t_err	err;
 
 	err = e_success;
 	read_and_set_err_p(0, e_set);
-	i = skip_space(line);
+	i = skip_to(str, ' ');
 	read_and_set_err_p(i, e_add);
-	if (line[i])
+	if (str->i != str->len -1)
 	{
-		err = look_data_str(line , var, data, i);
+		err = look_data_str(str->s , var, data, i);
 		if (err < e_success)
 			return (err);
 	}
@@ -87,13 +87,13 @@ static t_err	read_line_texture(char *line, t_extract_t *var, t_parsing *data)
 t_err	extract_texture(t_parsing *data)
 {
 	t_extract_t	var;
-	t_err		err;
+	t_str		str;
 
-	err = e_success;
 	ft_bzero(&var, sizeof(t_extract_t));
 	set_value(var.name, data);
 	while (data->pre_map && data->pre_map[var.line])
 	{
+		ft_str_set(data->pre_map[var.line], &str, true);
 		var.err = read_line_texture(data->pre_map[var.line], &var, data);
 		if (var.err == e_bad_char && look_all_texture(&data->texture) == 6)
 		{
@@ -102,10 +102,7 @@ t_err	extract_texture(t_parsing *data)
 		}
 		if (print_err(var.err, data->pre_map[var.line], \
 		var.line + 1) < e_success)
-		{
-			err = var.err;
 			break ;
-		}
 		var.line++;
 	}
 	data->i = var.line;
