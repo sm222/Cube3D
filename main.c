@@ -7,7 +7,8 @@
 
 int	exit_window(t_cub *info)
 {
-	mlx_destroy_window(info->mlx, info->window);
+	(void)info;
+	//mlx_destroy_window(info->mlx, info->window);
 	exit(0); //you need it ;)
 	return (0);
 }
@@ -54,9 +55,9 @@ int	main(int ac, char **av)
 	set_main_data(&cub);
 	if (!parsing(av[1]))
 		return (1);
-	cub.mlx = mlx_init();
-	cub.window = mlx_new_window(cub.mlx, 10 * 64, 10 * 64, "test");
-	mlx_key_hook(cub.window, keybinds, &cub);
-	mlx_hook(cub.window, 17, 0, exit_window, &cub);
-	mlx_loop(cub.mlx);
+	//cub.mlx = mlx_init();
+	//cub.window = mlx_new_window(cub.mlx, 10 * 64, 10 * 64, "test");
+	//mlx_key_hook(cub.window, keybinds, &cub);
+	//mlx_hook(cub.window, 17, 0, exit_window, &cub);
+	//mlx_loop(cub.mlx);
 }

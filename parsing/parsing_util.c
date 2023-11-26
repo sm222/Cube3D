@@ -30,14 +30,13 @@ size_t	skip_to(t_str *str, char c)
 	return (str->i);
 }
 
-size_t	skip_space(const char *s)
+size_t	skip_while(t_str *str, char c)
 {
-	size_t	i;
-
-	i = 0;
-	while (s && s[i] && s[i] == ' ')
-		i++;
-	return (i);
+	if (!str)
+		return (0);
+	while (str->s && str->i < str->len && str->s[str->i] == c)
+		str->i++;
+	return (str->i);
 }
 
 void	set_value(char in[5][5], t_parsing *data)

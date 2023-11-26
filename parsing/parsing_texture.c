@@ -27,15 +27,15 @@ static short	print_err(t_err code, char *line, size_t i)
 	return (1);
 }
 
-static t_err	look_data_fc(char *s, t_parsing *data)
+static t_err	look_data_fc(t_str *str, t_parsing *data)
 {
-	if (ft_strncmp(s, "C", 1) == 0 && !data->texture.cf[0])
-		return (extract_line_nbr(s, data, 0));
-	else if (ft_strncmp(s, "C", 1) == 0 && data->texture.cf[0])
+	if (ft_strncmp(str->s + str->i, "C", 1) == 0 && !data->texture.cf[0])
+		return (extract_line_nbr(str, data, 0));
+	else if (ft_strncmp(str->s + str->i, "C", 1) == 0 && data->texture.cf[0])
 		return (e_double_card);
-	else if (ft_strncmp(s, "F", 1) == 0 && !data->texture.cf[1])
-		return (extract_line_nbr(s, data, 1));
-	else if (ft_strncmp(s, "F", 1) == 0 && data->texture.cf[1])
+	else if (ft_strncmp(str->s + str->i, "F", 1) == 0 && !data->texture.cf[1])
+		return (extract_line_nbr(str, data, 1));
+	else if (ft_strncmp(str->s+ str->i, "F", 1) == 0 && data->texture.cf[1])
 		return (e_double_card);
 	return (e_bad_char);
 }
@@ -47,18 +47,19 @@ static t_err	look_data_str(t_str *str, t_extract_t *var, t_parsing *data)
 	j = 0;
 	while (j < 4 && str->i - str->len > 3)
 	{
+		printf("-c- %s\n", str->s + str->i);
 		if (ft_strncmp(str->s + str->i, var->name[j], 2) == 0 && \
-		!data->texture.side[j] && s[2] == ' ')
+		!data->texture.side[j] && str->s[str->i + 2] == ' ')
 		{
-			data->texture.side[j] = extract_line_txt(s, &var->err);
+			data->texture.side[j] = extract_line_txt(str, &var->err);
 			return (var->err);
 		}
-		else if (ft_strncmp(s + len, var->name[j], 2) == 0 && \
-		data->texture.side[j])
+		else if (ft_strncmp(str->s + str->i, var->name[j], 2) == 0 && \
+		data->texture.side[j] && str->s[str->i + 2] == ' ')
 			return (e_double_card);
 		j++;
 	}
-	return (look_data_fc(s, data));
+	return (look_data_fc(str, data));
 }
 
 static t_err	read_line_textu(t_str *str, t_extract_t *var, t_parsing *data)
@@ -68,11 +69,13 @@ static t_err	read_line_textu(t_str *str, t_extract_t *var, t_parsing *data)
 
 	err = e_success;
 	read_and_set_err_p(0, e_set);
-	i = skip_to(str, ' ');
+	printf("-a- %s\n", str->s + str->i);
+	i = skip_while(str, ' ');
+	printf("-b- %s\n", str->s + str->i);
 	read_and_set_err_p(i, e_add);
-	if (str->i != str->len -1)
+	if (str->i != str->len)
 	{
-		err = look_data_str(str->s , var, data, i);
+		err = look_data_str(str , var, data);
 		if (err < e_success)
 			return (err);
 	}
@@ -94,7 +97,7 @@ t_err	extract_texture(t_parsing *data)
 	while (data->pre_map && data->pre_map[var.line])
 	{
 		ft_str_set(data->pre_map[var.line], &str, true);
-		var.err = read_line_texture(data->pre_map[var.line], &var, data);
+		var.err = read_line_textu(&str, &var, data);
 		if (var.err == e_bad_char && look_all_texture(&data->texture) == 6)
 		{
 			data->i = var.line;

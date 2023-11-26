@@ -36,7 +36,7 @@ all: mlx libft parse $(NAME)
 	@printf "$(CYN) \n\n			correction is made by $(USER)\n\n  $(RESET)\n"
 	
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT) $(MLX_DIR)$(MLX_LIB) -framework OpenGL -framework AppKit \
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT) \
 	$(PARSE_DIR)$(PARSE_LIB) C_tools/C_tool.a -o $(NAME)
 libft:
 	@printf "$(GRN)making libft$(WHT)\n"

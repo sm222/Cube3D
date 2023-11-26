@@ -1,16 +1,16 @@
 
 #include "parsing.h"
 
-short	look_at_end(char *end, size_t len)
+short	look_at_end(t_str *str)
 {
 	size_t	i;
 
 	i = 0;
-	if (!end || !end[0])
+	if (str->i + str->j > str->len)
 		return (0);
-	while (end[i] && end[i] == ' ')
-		i++;
-	if (!end[i])
+	while (str->i + str->j < str->len && str->s[str->i + str->j] == ' ')
+		str->j++;
+	if (!str->s[str->i + str->j])
 		return (0);
 	return (1);
 }

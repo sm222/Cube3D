@@ -47,5 +47,6 @@ t_map	parsing(char *arg)
 		return (NULL);
 	if (look_all(&data) < e_success)
 		return (NULL);
+	data.map = (char **)ft_double_sfree((void **)data.map);
 	return (data.map);
 }
