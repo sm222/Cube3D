@@ -29,6 +29,7 @@ static t_err	look_all(t_parsing *data)
 		return (rvalue);
 	if (extract_map(data) < e_success)
 		return (e_fail);
+	print_debug(data);
 	clean_parsing(data);
 	return (e_success);
 }

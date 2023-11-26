@@ -29,6 +29,7 @@ static short	print_err(t_err code, char *line, size_t i)
 
 static t_err	look_data_fc(t_str *str, t_parsing *data)
 {
+	printf("ici--%s\n", str->s + str->i);
 	if (ft_strncmp(str->s + str->i, "C", 1) == 0 && !data->texture.cf[0])
 		return (extract_line_nbr(str, data, 0));
 	else if (ft_strncmp(str->s + str->i, "C", 1) == 0 && data->texture.cf[0])
@@ -47,7 +48,6 @@ static t_err	look_data_str(t_str *str, t_extract_t *var, t_parsing *data)
 	j = 0;
 	while (j < 4 && str->i - str->len > 3)
 	{
-		printf("-c- %s\n", str->s + str->i);
 		if (ft_strncmp(str->s + str->i, var->name[j], 2) == 0 && \
 		!data->texture.side[j] && str->s[str->i + 2] == ' ')
 		{
@@ -69,9 +69,7 @@ static t_err	read_line_textu(t_str *str, t_extract_t *var, t_parsing *data)
 
 	err = e_success;
 	read_and_set_err_p(0, e_set);
-	printf("-a- %s\n", str->s + str->i);
 	i = skip_while(str, ' ');
-	printf("-b- %s\n", str->s + str->i);
 	read_and_set_err_p(i, e_add);
 	if (str->i != str->len)
 	{
