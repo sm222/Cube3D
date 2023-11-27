@@ -29,7 +29,6 @@ static short	print_err(t_err code, char *line, size_t i)
 
 static t_err	look_data_fc(t_str *str, t_parsing *data)
 {
-	printf("ici--%s\n", str->s + str->i);
 	if (ft_strncmp(str->s + str->i, "C", 1) == 0 && !data->texture.cf[0])
 		return (extract_line_nbr(str, data, 0));
 	else if (ft_strncmp(str->s + str->i, "C", 1) == 0 && data->texture.cf[0])

@@ -5,7 +5,7 @@ static t_err	get_nbr(t_str *str, t_color color[3])
 	size_t	j;
 	int		tmp;
 
-	skip_to(str, ' ');
+	skip_while(str, ' ');
 	j = 0;
 	if (str->s[str->i] == ',')
 	{
@@ -21,8 +21,8 @@ static t_err	get_nbr(t_str *str, t_color color[3])
 			return (e_bad_number);
 		}
 		color[j] = tmp;
-		skip_to(str, ' ');
 		read_and_set_err_p(skip_to(str, ','), e_add);
+		str->i++;
 		j++;
 	}
 	return (e_success);
@@ -35,23 +35,24 @@ static t_err	get_nbr(t_str *str, t_color color[3])
 /// @return 
 t_err	extract_line_nbr(t_str *str, t_parsing *data, short c)
 {
-	short		vergul;
+	short	vergul;
 
 	str->i++;
+	str->j = str->i;
 	vergul = 0;
-	while (str->i < str->len && ft_strchr("0123456789 ,", str->s[str->i]))
+	while (str->j < str->len && ft_strchr("0123456789 ,", str->s[str->j]))
 	{
-		if (str->s[str->i] == ',')
+		if (str->s[str->j] == ',')
 		{
 			vergul++;
-			if (look_next(str->s, str->i + 1) || vergul > 2)
+			if (look_next(str->s, str->j + 1) || vergul > 2)
 				return (e_bad_char);
 		}
-		str->i++;
+		str->j++;
 		read_and_set_err_p(1, e_add);
 	}
 	data->texture.cf[c] = true;
-	if (str->i == str->len && vergul == 2 && look_last_number(str->s, str->i))
+	if (str->j == str->len && vergul == 2 && look_last_number(str->s, str->j))
 	{
 		if (c == 0)
 			return (get_nbr(str, data->texture.celing));
