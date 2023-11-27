@@ -3,9 +3,6 @@
 
 short	look_at_end(t_str *str)
 {
-	size_t	i;
-
-	i = 0;
 	if (str->i + str->j > str->len)
 		return (0);
 	while (str->i + str->j < str->len && str->s[str->i + str->j] == ' ')
