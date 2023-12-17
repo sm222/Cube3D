@@ -1,0 +1,1 @@
+make && valgrind ./Cub3D map/map2.cub
