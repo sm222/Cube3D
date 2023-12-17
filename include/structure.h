@@ -98,6 +98,9 @@ typedef struct	s_parsing
 	t_fd		fd;
 	int			err;
 	t_texture	texture;
+	size_t		errw;
+	size_t		errh;
+	char		*err_line;
 }	t_parsing;
 
 /// @brief 
