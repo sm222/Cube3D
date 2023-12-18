@@ -72,8 +72,6 @@ void	flod_err(t_map map, int x, int y)
 	int				i;
 	static short	err = 0;
 
-
-	(void)y;
 	if (err > 0)
 		return ;
 	i = 0;
