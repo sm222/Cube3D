@@ -20,36 +20,76 @@ static short	find_spawn(int *x, int *y, t_map map)
 	return (0);
 }
 
-void	flod_err(t_map map, int x, int y)
+static	int find_longer_line(t_map map)
 {
-	int				i;
-	int				j;
-	static short	err = 0;
+	int	len;
+	int	tmp;
+	int	i;
 
-
-	if (err > 0)
-		return ;
 	i = 0;
-	err = ft_printf(2, "%oError\n", NULL);
-	while (map[i])
+	len = 0;
+	while (map && map[i])
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (y == i && x == j)
-				ft_printf(2, "%o"RED"X"WHT, NULL);
-			else if (map[i][j] == '\b')
-				ft_printf(2, "%o%c", NULL, '0');
-			else
-				ft_printf(2, "%o%c", NULL, map[i][j]);
-			j++;
-		}
-		ft_printf(2, "%o\n", NULL);
+		tmp = ft_strlen(map[i]);
+		if (tmp > len)
+			len = tmp;
+		i++;
+	}
+	return (len);
+}
+
+static char rt_char(char c)
+{
+	if (c == '\b')
+		return ('0');
+	return (c);
+}
+
+static void	print_type(char *line , int err_x, int len, int y)
+{
+	int	i;
+	int	len_line;
+
+	i = 0;
+	len_line = ft_strlen(line);
+	while (i < len)
+	{
+		if (i < len_line && i != err_x)
+			ft_printf(2, "%o%c", NULL, rt_char(line[i]));
+		else if (i < len_line && !y)
+			ft_printf(2, "%o%c", NULL, rt_char(line[i]));
+		else if (i == err_x && y)
+			ft_printf(2, "%o"RED"X"WHT, NULL);
+		else
+			ft_printf(2, "%o ", NULL);
 		i++;
 	}
 }
 
-static int	flood_fill(int x, int y, t_map map, int *up)
+
+void	flod_err(t_map map, int x, int y)
+{
+	int				i;
+	static short	err = 0;
+
+
+	(void)y;
+	if (err > 0)
+		return ;
+	i = 0;
+	err = ft_printf(2, "%oError \n", NULL);
+	while (map[i])
+	{
+		if (i == y)
+			print_type(map[i], x, find_longer_line(map), 1);
+		else
+			print_type(map[i], x, find_longer_line(map), 0);
+		i++;
+		ft_printf(2, "%o\n", NULL);
+	}
+}
+
+int	flood_fill(int x, int y, t_map map, int *up)
 {
 	int	out;
 
@@ -57,7 +97,7 @@ static int	flood_fill(int x, int y, t_map map, int *up)
 	if (x < 0 || y < 0 || y > *up || x > (int)ft_strlen(map[y]))
 	{
 		if (y > *up && ft_strlen(map[y]) > ft_strlen(map[y - 1]))
-		return (0);
+			return (0);
 	}
 	if (map[y][x] == '1')
 		return (0);
@@ -81,17 +121,18 @@ int	call_flood_fill(t_map in)
 	int		err;
 	int		x;
 	int		y;
-	t_map	copy;
-	int		up;
+	//t_map	copy;
+	//int		up;
 
 	err = e_success;
+	make_safe_copy(in, find_longer_line(in));
 	if (find_spawn(&x, &y, in))
 	{
-		up = ft_strlen_double(in);
-		copy = ft_cpy_double_char(in);
-		if (flood_fill(x, y, copy, &up) > 0)
-			err = e_fail;
-		ft_double_sfree((void **)copy);
+		//up = ft_strlen_double(in);
+		//copy = ft_cpy_double_char(in);
+		//if (flood_fill(x, y, copy, &up) > 0)
+		//	err = e_fail;
+		//ft_double_sfree((void **)copy);
 	}
 	else
 		err = e_fail;
