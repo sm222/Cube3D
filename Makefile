@@ -57,11 +57,12 @@ mem: all
 # Removes objects
 clean:
 	@$(RM) $(OBJS)
-	@make -C $(LIBFT_DIR)     clean
-	@make -C $(MLX_DIR)   clean
-	@make -C parsing		  clean
+	@make -C $(LIBFT_DIR)	clean
+	@make -C $(MLX_DIR)		clean
+	@make -C parsing		clean
 	@echo $(shell clear)
 	@printf "$(GRN)clean *.o$(RESET)\n"
+	@rm -fr Cub3D.dSYM
 
 # Removes objects and executables
 fclean: clean

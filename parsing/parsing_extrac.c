@@ -14,18 +14,36 @@ static t_err	get_nbr(t_str *str, t_color color[3])
 	}
 	while (j < 3)
 	{
+		skip_while(str, ' ');
 		tmp = ft_atoi(str->s + str->i);
 		if (tmp > 255)
 		{
-			read_and_set_err_p(1, e_add);
+			read_and_set_err_p(str->i, e_set);
 			return (e_bad_number);
 		}
 		color[j] = tmp;
-		read_and_set_err_p(skip_to(str, ','), e_add);
-		str->i++;
+		skip_to_next_nbr(str, tmp);
 		j++;
 	}
 	return (e_success);
+}
+
+static int set_up(t_str *str)
+{
+	str->i++;
+	str->j = str->i;
+	while (str->j < str->len)
+	{
+		if (str->s[str->j] == ',')
+		{
+			read_and_set_err_p(str->j, e_set);
+			return (e_bad_char);
+		}
+		else if (ft_isdigit(str->s[str->j]))
+			return (e_success);
+		str->j++;
+	}
+	return (e_empty_line);
 }
 
 /// @brief ft_isdigit(s[i]) || s[i] == ',' || s[i] == ' ')
@@ -37,15 +55,14 @@ t_err	extract_line_nbr(t_str *str, t_parsing *data, short c)
 {
 	short	vergul;
 
-	str->i++;
-	str->j = str->i;
+	if (set_up(str) < e_success)
+		return (e_inva_arg);
 	vergul = 0;
 	while (str->j < str->len && ft_strchr("0123456789 ,", str->s[str->j]))
 	{
 		if (str->s[str->j] == ',')
 		{
-			vergul++;
-			if (look_next(str->s, str->j + 1) || vergul > 2)
+			if (look_next(str->s, str->j + 1, ++vergul))
 				return (e_bad_char);
 		}
 		str->j++;
@@ -59,6 +76,7 @@ t_err	extract_line_nbr(t_str *str, t_parsing *data, short c)
 		if (c == 1)
 			return (get_nbr(str, data->texture.flore));
 	}
+	read_and_set_err_p(str->len, e_set);
 	return (e_inva_arg);
 }
 
@@ -74,15 +92,15 @@ char	*extract_line_txt(t_str *str, t_err *err)
 		str->j++;
 	if (look_at_end(str))
 	{
-		while (str->i + str->j < str->len && str->s[str->i + str->j] == ' ')
-			str->j++;
-		read_and_set_err_p(str->i + str->j - 1, e_add);
 		*err = e_inva_data_end;
 		return (NULL);
 	}
 	new = ft_strndup(str->s + str->i, str->j);
 	*err = e_success;
 	if (!new)
+	{
+		printf("moi4\n");
 		*err = e_inva_arg;
+	}
 	return (new);
 }

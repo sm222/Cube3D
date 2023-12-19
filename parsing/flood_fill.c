@@ -87,25 +87,22 @@ void	flod_err(t_map map, int x, int y)
 	}
 }
 
-int	flood_fill(int x, int y, t_map map, int *up)
+int	flood_fill(int x, int y, t_map map)
 {
 	int	out;
 
 	out = 0;
-	if (x < 0 || y < 0 || y > *up || x > (int)ft_strlen(map[y]))
-	{
-		if (y > *up && ft_strlen(map[y]) > ft_strlen(map[y - 1]))
-			return (0);
-	}
+	if (x < 0 || y < 0)
+		return (1);
 	if (map[y][x] == '1')
 		return (0);
 	if (map[y][x] == '0' || ft_strchr("NWES", map[y][x]))
 	{
 		map[y][x] = '\b';
-		out += flood_fill(x + 1, y, map, up);
-		out += flood_fill(x - 1, y, map, up);
-		out += flood_fill(x, y + 1, map, up);
-		out += flood_fill(x, y - 1, map, up);
+		out += flood_fill(x + 1, y, map);
+		out += flood_fill(x - 1, y, map);
+		out += flood_fill(x, y + 1, map);
+		out += flood_fill(x, y - 1, map);
 		return (out);
 	}
 	if (map[y][x] == '\b')
@@ -119,18 +116,15 @@ int	call_flood_fill(t_map in)
 	int		err;
 	int		x;
 	int		y;
-	//t_map	copy;
-	//int		up;
+	t_map	safe;
 
 	err = e_success;
-	make_safe_copy(in, find_longer_line(in));
-	if (find_spawn(&x, &y, in))
+	safe = make_safe_copy(in, find_longer_line(in));
+	if (find_spawn(&x, &y, safe))
 	{
-		//up = ft_strlen_double(in);
-		//copy = ft_cpy_double_char(in);
-		//if (flood_fill(x, y, copy, &up) > 0)
-		//	err = e_fail;
-		//ft_double_sfree((void **)copy);
+		if (flood_fill(x, y, safe) > 0)
+			err = e_fail;
+		ft_double_sfree((void **)safe);
 	}
 	else
 		err = e_fail;

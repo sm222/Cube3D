@@ -16,9 +16,31 @@ static short	set_space(t_map map, size_t const len, size_t const max_len)
 	return (e_success);
 }
 
-t_map	make_safe_copy(t_map map, const size_t max_len)
+static short	add_space_to_line(t_map old, t_map new, const size_t max)
 {
 	size_t	i;
+	size_t	len;
+	char	*tmp;
+
+	i = 0;
+	while (old && old[i])
+	{
+		len = max - ft_strlen(old[i] + 1);
+		tmp = ft_calloc(len + 1, sizeof(char));
+		if (!tmp)
+			return (e_malloc_f);
+		ft_memset(tmp, ' ', len);
+		ft_printf(NO_PRINT, "%o %s%s", &new[i + 1], old[i], tmp);
+		tmp = ft_free(tmp);
+		if (!new[i + 1])
+			return (e_malloc_f);
+		i++;
+	}
+	return (e_success);
+}
+
+t_map	make_safe_copy(t_map map, const size_t max_len)
+{
 	size_t	len;
 	t_map	new_map;
 
@@ -30,19 +52,11 @@ t_map	make_safe_copy(t_map map, const size_t max_len)
 		ft_free(new_map);
 		return (NULL);
 	}
-	i = 1;
-	while (i < len - 2)
+	if (add_space_to_line(map, new_map, max_len) < e_success)
 	{
-		new_map[i] = ft_strdup(map[i - 1]);
-		i++;
+		new_map[len - 2] = ft_free(new_map[len - 2]);
+		new_map = (char **)ft_double_sfree((void **)new_map);
+		ft_printf(2, "%oError\nCub3D: malloc fail\n", NULL);
 	}
-	printf("top                     -\n");
-	for (size_t k = 0; k < len; k++)
-	{
-		printf("%s|\n", new_map[k]);
-		ft_free(new_map[k]);
-	}
-	ft_free(new_map);
-	printf("bot                     -\n");
-	return (NULL);
+	return (new_map);
 }
