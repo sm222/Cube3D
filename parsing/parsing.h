@@ -31,6 +31,7 @@ size_t	skip_to(t_str *str, char c);
 
 t_err	extract_line_nbr(t_str *str, t_parsing *data, short c);
 size_t	read_and_set_err_p(size_t in, short set_get);
+t_err	set_err_and_return_code(size_t len, t_err code);
 
 int		call_flood_fill(t_map in);
 t_map	make_safe_copy(t_map map, const size_t max_len);

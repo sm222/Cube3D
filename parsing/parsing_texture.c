@@ -21,6 +21,8 @@ static short	print_err(t_err code, char *line, size_t i)
 			ft_printf(2, "%o[%d] "INVA_DATA_END"\n%s\n", NULL, i, line);
 		if (code == e_inva_arg)
 			ft_printf(2, "%o[%d] ivalid argument\n%s\n", NULL, i, line);
+		if (code == e_double_tex)
+			ft_printf(2, "%o[%d] double texture: \n%s\n", NULL, i, line);
 		ft_print_err_len(j);
 		return (code);
 	}
@@ -32,11 +34,11 @@ static t_err	look_data_fc(t_str *str, t_parsing *data)
 	if (ft_strncmp(str->s + str->i, "C", 1) == 0 && !data->texture.cf[0])
 		return (extract_line_nbr(str, data, 0));
 	else if (ft_strncmp(str->s + str->i, "C", 1) == 0 && data->texture.cf[0])
-		return (e_double_card);
+		return (e_double_tex);
 	else if (ft_strncmp(str->s + str->i, "F", 1) == 0 && !data->texture.cf[1])
 		return (extract_line_nbr(str, data, 1));
 	else if (ft_strncmp(str->s+ str->i, "F", 1) == 0 && data->texture.cf[1])
-		return (e_double_card);
+		return (e_double_tex);
 	return (e_bad_char);
 }
 
@@ -55,7 +57,7 @@ static t_err	look_data_str(t_str *str, t_extract_t *var, t_parsing *data)
 		}
 		else if (ft_strncmp(str->s + str->i, var->name[j], 2) == 0 && \
 		data->texture.side[j] && str->s[str->i + 2] == ' ')
-			return (e_double_card);
+			return (e_double_tex);
 		j++;
 	}
 	return (look_data_fc(str, data));

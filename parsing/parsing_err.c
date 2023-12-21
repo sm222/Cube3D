@@ -1,5 +1,11 @@
 #include "parsing.h"
 
+t_err	set_err_and_return_code(size_t len, t_err code)
+{
+	read_and_set_err_p(len, e_set);
+	return (code);
+}
+
 t_err	parsing_err(t_parsing *data, t_err err)
 {
 	if (err < e_success)

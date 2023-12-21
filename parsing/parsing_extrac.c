@@ -1,5 +1,17 @@
 # include "parsing.h"
 
+
+static t_err	look_end(t_str *str)
+{
+	while (str->i < str->len)
+	{
+		if (str->s[str->i] != ' ')
+			return (set_err_and_return_code(str->i, e_inva_arg));
+		str->i++;
+	}
+	return (e_success);
+}
+
 static t_err	get_nbr(t_str *str, t_color color[3])
 {
 	size_t	j;
@@ -8,24 +20,18 @@ static t_err	get_nbr(t_str *str, t_color color[3])
 	skip_while(str, ' ');
 	j = 0;
 	if (str->s[str->i] == ',')
-	{
-		read_and_set_err_p(-1, e_add);
-		return (e_inva_arg);
-	}
+		return (set_err_and_return_code(str->i, e_inva_arg));
 	while (j < 3)
 	{
 		skip_while(str, ' ');
 		tmp = ft_atoi(str->s + str->i);
 		if (tmp > 255)
-		{
-			read_and_set_err_p(str->i, e_set);
-			return (e_bad_number);
-		}
+			return (set_err_and_return_code(str->i, e_bad_number));
 		color[j] = tmp;
 		skip_to_next_nbr(str, tmp);
 		j++;
 	}
-	return (e_success);
+	return (look_end(str));
 }
 
 static int set_up(t_str *str)
@@ -35,13 +41,13 @@ static int set_up(t_str *str)
 	while (str->j < str->len)
 	{
 		if (str->s[str->j] == ',')
-		{
-			read_and_set_err_p(str->j, e_set);
-			return (e_bad_char);
-		}
+			return (set_err_and_return_code(str->j,e_bad_char));
 		else if (ft_isdigit(str->s[str->j]))
 			return (e_success);
-		str->j++;
+		else if (str->s[str->j] == ' ')
+			str->j++;
+		else
+			return (set_err_and_return_code(str->j,e_inva_arg));
 	}
 	return (e_empty_line);
 }
@@ -76,8 +82,7 @@ t_err	extract_line_nbr(t_str *str, t_parsing *data, short c)
 		if (c == 1)
 			return (get_nbr(str, data->texture.flore));
 	}
-	read_and_set_err_p(str->len, e_set);
-	return (e_inva_arg);
+	return (set_err_and_return_code(str->j, e_inva_arg));
 }
 
 char	*extract_line_txt(t_str *str, t_err *err)
