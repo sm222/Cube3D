@@ -37,7 +37,7 @@ static t_err	look_data_fc(t_str *str, t_parsing *data)
 		return (e_double_tex);
 	else if (ft_strncmp(str->s + str->i, "F", 1) == 0 && !data->texture.cf[1])
 		return (extract_line_nbr(str, data, 1));
-	else if (ft_strncmp(str->s+ str->i, "F", 1) == 0 && data->texture.cf[1])
+	else if (ft_strncmp(str->s + str->i, "F", 1) == 0 && data->texture.cf[1])
 		return (e_double_tex);
 	return (e_bad_char);
 }
@@ -74,7 +74,7 @@ static t_err	read_line_textu(t_str *str, t_extract_t *var, t_parsing *data)
 	read_and_set_err_p(i, e_add);
 	if (str->i != str->len)
 	{
-		err = look_data_str(str , var, data);
+		err = look_data_str(str, var, data);
 		if (err < e_success)
 			return (err);
 	}

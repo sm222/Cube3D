@@ -16,7 +16,8 @@ t_err	parsing_err(t_parsing *data, t_err err)
 		ft_printf(2, "%oCub3D: "RED"malloc fail"WHT"\n", NULL);
 	if (err == e_bad_char)
 	{
-		ft_printf(2, "%oCub3D: "RED"bad char at line %u"WHT"\n", NULL, data->errh);
+		ft_printf(2, "%oCub3D: "RED"bad char at line %u"WHT"\n", \
+		NULL, data->errh);
 		ft_printf(2, "%o%s\n", NULL, data->err_line);
 		ft_print_err_len(data->errw - 1);
 	}

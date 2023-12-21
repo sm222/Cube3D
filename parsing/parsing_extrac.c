@@ -1,6 +1,5 @@
 # include "parsing.h"
 
-
 static t_err	look_end(t_str *str)
 {
 	while (str->i < str->len)
@@ -34,20 +33,20 @@ static t_err	get_nbr(t_str *str, t_color color[3])
 	return (look_end(str));
 }
 
-static int set_up(t_str *str)
+static int	set_up(t_str *str)
 {
 	str->i++;
 	str->j = str->i;
 	while (str->j < str->len)
 	{
 		if (str->s[str->j] == ',')
-			return (set_err_and_return_code(str->j,e_bad_char));
+			return (set_err_and_return_code(str->j, e_bad_char));
 		else if (ft_isdigit(str->s[str->j]))
 			return (e_success);
 		else if (str->s[str->j] == ' ')
 			str->j++;
 		else
-			return (set_err_and_return_code(str->j,e_inva_arg));
+			return (set_err_and_return_code(str->j, e_inva_arg));
 	}
 	return (e_empty_line);
 }
@@ -93,7 +92,8 @@ char	*extract_line_txt(t_str *str, t_err *err)
 	str->i += 2;
 	while (str->s && str->i && str->s[str->i] == ' ')
 		str->i++;
-	while (str->s && str->i + str->j < str->len && str->s[str->i + str->j] != ' ')
+	while (str->s && str->i + str->j < str->len && \
+	str->s[str->i + str->j] != ' ')
 		str->j++;
 	if (look_at_end(str))
 	{

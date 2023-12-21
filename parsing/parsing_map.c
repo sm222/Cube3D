@@ -43,8 +43,7 @@ static t_err	read_line_map(char *s, size_t i)
 		{
 			ft_printf(2, "%oError\n[%u] invalid char\n%s\n", NULL, i + 1, s);
 			ft_print_err_len(j++);
-			err = e_fail;
-			continue ;
+			return (e_fail);
 		}
 	}
 	return (err);
@@ -77,7 +76,6 @@ t_err	extract_map(t_parsing *data)
 	if (flag)
 		return (e_fail);
 	data->map = copy_map_and_valid(data->pre_map + data->i);
-	//return (e_success);
 	if (call_flood_fill(data->map) == e_fail)
 		return (e_fail);
 	return (e_success);

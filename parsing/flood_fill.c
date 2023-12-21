@@ -1,26 +1,7 @@
 
 #include "parsing.h"
 
-static short	find_spawn(int *x, int *y, t_map map)
-{
-	*y = 0;
-	while (map[*y])
-	{
-		*x = 0;
-		while (map[*y][*x])
-		{
-			if (ft_strchr("NWSE", map[*y][*x]))
-				return (1);
-			*x += 1;
-		}
-		*y += 1;
-	}
-	*y = 0;
-	*x = 0;
-	return (0);
-}
-
-static	int find_longer_line(t_map map)
+static int	find_longer_line(t_map map)
 {
 	int	len;
 	int	tmp;
@@ -38,14 +19,7 @@ static	int find_longer_line(t_map map)
 	return (len);
 }
 
-static char rt_char(char c)
-{
-	if (c == '\b')
-		return ('0');
-	return (c);
-}
-
-static void	print_type(char *line , int err_x, int len, int y)
+static void	print_type(char *line, int err_x, int len, int y)
 {
 	int	i;
 	int	len_line;
@@ -65,7 +39,6 @@ static void	print_type(char *line , int err_x, int len, int y)
 		i++;
 	}
 }
-
 
 void	flod_err(t_map map, int x, int y)
 {

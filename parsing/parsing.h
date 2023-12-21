@@ -41,5 +41,7 @@ short	look_next(char *s, size_t i, short ver);
 short	look_last_number(char *s, size_t i);
 
 t_err	skip_to_next_nbr(t_str *str, int nbr);
+short	find_spawn(int *x, int *y, t_map map);
+char	rt_char(char c);
 
 #endif // PARSING_H

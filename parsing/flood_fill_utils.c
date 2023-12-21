@@ -1,5 +1,24 @@
 #include "parsing.h"
 
+short	find_spawn(int *x, int *y, t_map map)
+{
+	*y = 0;
+	while (map[*y])
+	{
+		*x = 0;
+		while (map[*y][*x])
+		{
+			if (ft_strchr("NWSE", map[*y][*x]))
+				return (1);
+			*x += 1;
+		}
+		*y += 1;
+	}
+	*y = 0;
+	*x = 0;
+	return (0);
+}
+
 static short	set_space(t_map map, size_t const len, size_t const max_len)
 {
 	map[0] = ft_calloc(max_len + 2, sizeof(char));
@@ -59,4 +78,11 @@ t_map	make_safe_copy(t_map map, const size_t max_len)
 		ft_printf(2, "%oError\nCub3D: malloc fail\n", NULL);
 	}
 	return (new_map);
+}
+
+char	rt_char(char c)
+{
+	if (c == '\b')
+		return ('0');
+	return (c);
 }
