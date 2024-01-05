@@ -28,9 +28,13 @@ static t_err	look_all(t_parsing *data)
 	if (rvalue < e_success)
 		return (rvalue);
 	if (extract_map(data) < e_success)
+	{
+		clean_parsing(data);
 		return (e_fail);
+	}
 	print_debug(data);
 	clean_parsing(data);
+	printf("end moi\n");
 	return (e_success);
 }
 

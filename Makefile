@@ -49,8 +49,8 @@ parse:
 mlx:
 	@make -C $(MLX_DIR)
 
-mem: all
-	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
+mem:
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME) map/map2.cub
 
 #https://github.com/sm222/C_tools
 

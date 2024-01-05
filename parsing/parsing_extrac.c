@@ -1,5 +1,7 @@
 # include "parsing.h"
 
+
+
 static t_err	look_end(t_str *str)
 {
 	while (str->i < str->len)

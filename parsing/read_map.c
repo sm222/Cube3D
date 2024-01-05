@@ -4,7 +4,6 @@
 static int	look_name(char *name)
 {
 	char	*tmp;
-	size_t	i;
 
 	if (!name)
 		return (-1);
@@ -14,12 +13,9 @@ static int	look_name(char *name)
 		ft_printf(2, "%oError\nCub3D: "RED"%s"WHT" don't finish in .cub\n", \
 		NULL, name);
 		if (tmp)
-		{
-			i = (tmp - name) + 7;
-			while (i--)
-				ft_printf(2, "~");
-			ft_printf(2, "^\n");
-		}
+			ft_print_err_len((tmp - name) + 7);
+		else
+			ft_print_err_len(ft_strlen(name) + 7);
 		return (-1);
 	}
 	return (1);

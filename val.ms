@@ -1,1 +1,1 @@
-make && valgrind  --leak-check=full ./Cub3D map/map2.cub
+make && valgrind  --leak-check=full --show-leak-kinds=all ./Cub3D map/map2.cub

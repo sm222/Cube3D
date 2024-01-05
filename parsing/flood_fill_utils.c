@@ -84,5 +84,7 @@ char	rt_char(char c)
 {
 	if (c == '\b')
 		return ('0');
+	if (c == 's' || c == 'n' || c == 'w' || c == 'e')
+		return (c - 32);
 	return (c);
 }
