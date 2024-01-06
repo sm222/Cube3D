@@ -26,7 +26,8 @@ CFLAGS			=	-Wall -Werror -Wextra -g
 RM				=	rm -f
 
 # Sources are all .c files
-SRCS	=	main.c
+SRCS	=	main.c\
+			debugft.c
 
 OBJS	=	$(SRCS:.c=.o)
 

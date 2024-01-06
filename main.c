@@ -1,9 +1,4 @@
-#include "include/structure.h"
-#include "lib/lib_ft/libft.h"
-#include "lib/minilibx_opengl_20191021/mlx.h"
-#include "parsing/parsing.h"
-#include "C_tools/inc/C_tool.h"
-
+#include "cub.h"
 
 int	exit_window(t_cub *info)
 {
@@ -36,9 +31,9 @@ static int	bad_args_main(int ac)
 {
 	ft_printf(2, "%oError\n", NULL);
 	if (ac > 2)
-		ft_printf(2, "%otoo many argument\n", NULL);
+		ft_printf(2, "%oCub3D: too many argument\n", NULL);
 	else
-		ft_printf(2, "%oneed one argument, *.cub\n", NULL);
+		ft_printf(2, "%oCub3D: need one argument, *.cub\n", NULL);
 	return (1);
 }
 
@@ -53,11 +48,14 @@ int	main(int ac, char **av)
 	if (ac < 2 || ac > 2)
 		return (bad_args_main(ac));
 	set_main_data(&cub);
-	if (!parsing(av[1]))
+	cub.map = parsing(av[1], &cub);
+	if (!cub.map)
 		return (1);
+	debug(cub);
 	//cub.mlx = mlx_init();
 	//cub.window = mlx_new_window(cub.mlx, 10 * 64, 10 * 64, "test");
 	//mlx_key_hook(cub.window, keybinds, &cub);
 	//mlx_hook(cub.window, 17, 0, exit_window, &cub);
 	//mlx_loop(cub.mlx);
+	return (0);
 }

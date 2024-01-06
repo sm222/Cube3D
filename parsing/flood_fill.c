@@ -89,25 +89,30 @@ static int	flood_fill(int x, int y, t_map map, char last)
 	return (1);
 }
 
-int	call_flood_fill(t_map in)
+int	call_flood_fill(t_map in, t_parsing *data)
 {
-	int		err;
 	int		x;
 	int		y;
 	t_map	safe;
 
-	err = e_success;
 	safe = make_safe_copy(in, find_longer_line(in));
 	if (find_spawn(&x, &y, safe))
 	{
+		data->texture.p_x = x;
+		data->texture.p_y = y;
 		if (flood_fill(x, y, safe, 'm') > 0)
-			err = e_fail;
+		{
+			safe = (t_map)ft_double_sfree((void **)safe);
+			data->map = (t_map)ft_double_sfree((void **)data->map);
+			return (e_fail);
+		}
 		safe = (t_map)ft_double_sfree((void **)safe);
+		data->map = make_safe_copy(in, find_longer_line(in));
+		ft_double_sfree((void **)in);
+		return (e_success);
 	}
-	else
-	{
-		ft_printf(2, "%oError\nCub3D: no spawn given\n", NULL);
-		err = e_fail;
-	}
-	return (err);
+	safe = (t_map)ft_double_sfree((void **)safe);
+			data->map = (t_map)ft_double_sfree((void **)data->map);
+	ft_printf(2, "%oError\nCub3D: no spawn given\n", NULL);
+	return (e_fail);
 }

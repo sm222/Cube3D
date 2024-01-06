@@ -10,7 +10,8 @@
     "err.h": "c",
     "unistd.h": "c",
     "error.h": "c",
-    "stdbool.h": "c"
+    "stdbool.h": "c",
+    "c_tool.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

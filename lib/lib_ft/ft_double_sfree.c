@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 13:06:56 by anboisve          #+#    #+#             */
-/*   Updated: 2023/05/26 10:30:53 by anboisve         ###   ########.fr       */
+/*   Updated: 2024/01/05 15:56:32 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	**ft_double_sfree(void **ptr)
 
 	i = 0;
 	while (ptr && ptr[i])
-		free(ptr[i++]);
+		ft_free(ptr[i++]);
 	ft_free(ptr);
 	return (NULL);
 }

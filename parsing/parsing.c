@@ -1,6 +1,10 @@
 
 #include "parsing.h"
 
+/// @brief use to set a err len for the print of the red line
+/// @param in 
+/// @param set_get 
+/// @return 
 size_t	read_and_set_err_p(size_t in, short set_get)
 {
 	size_t	*i;
@@ -13,9 +17,12 @@ size_t	read_and_set_err_p(size_t in, short set_get)
 	return (*i);
 }
 
+/// @brief make all the verification one by one
+/// @param data
+/// @return a t_err flag
 static t_err	look_all(t_parsing *data)
 {
-	t_err		rvalue;
+	t_err	rvalue;
 
 	rvalue = 0;
 	rvalue += parsing_err(data, read_map(data));
@@ -32,13 +39,15 @@ static t_err	look_all(t_parsing *data)
 		clean_parsing(data);
 		return (e_fail);
 	}
-	print_debug(data);
-	clean_parsing(data);
-	printf("end moi\n");
+	data->pre_map = (t_map)ft_double_sfree((void **)data->pre_map);
 	return (e_success);
 }
 
-t_map	parsing(char *arg)
+/// @brief use to make and parse a map
+/// @param arg name of the file
+/// @param cub the main struc
+/// @return map if sucsess or NULL if error
+t_map	parsing(char *arg, t_cub *cub)
 {
 	t_parsing	data;
 
@@ -52,6 +61,6 @@ t_map	parsing(char *arg)
 		return (NULL);
 	if (look_all(&data) < e_success)
 		return (NULL);
-	data.map = (char **)ft_double_sfree((void **)data.map);
+	ft_memcpy(&cub->pars, &data, sizeof(t_parsing));
 	return (data.map);
 }
