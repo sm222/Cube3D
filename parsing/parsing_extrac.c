@@ -1,7 +1,8 @@
 # include "parsing.h"
 
-
-
+/// @brief look if the end of the string is only space
+/// @param str input
+/// @return invalid arg if fail else success
 static t_err	look_end(t_str *str)
 {
 	while (str->i < str->len)
@@ -13,6 +14,10 @@ static t_err	look_end(t_str *str)
 	return (e_success);
 }
 
+/// @brief use to extract the 3 color from string
+/// @param str input
+/// @param color t_color were to store the value
+/// @return ivalid if ',' find, bad number if above 255. else return code from look_end
 static t_err	get_nbr(t_str *str, t_color color[3])
 {
 	size_t	j;
@@ -35,6 +40,9 @@ static t_err	get_nbr(t_str *str, t_color color[3])
 	return (look_end(str));
 }
 
+/// @brief setup in extract_line_nbr
+/// @param str input
+/// @return empty line, invalid_arg, success or bad_char
 static int	set_up(t_str *str)
 {
 	str->i++;
@@ -53,11 +61,12 @@ static int	set_up(t_str *str)
 	return (e_empty_line);
 }
 
-/// @brief ft_isdigit(s[i]) || s[i] == ',' || s[i] == ' ')
-/// @param str 
-/// @param data 
-/// @param c 
-/// @return 
+// ft_isdigit(s[i]) || s[i] == ',' || s[i] == ' ')
+/// @brief use to take the number from line
+/// @param str input string
+/// @param data parsing main struct
+/// @param c flore or celing
+/// @return invalid_args, bad_char or error form get_nbr
 t_err	extract_line_nbr(t_str *str, t_parsing *data, short c)
 {
 	short	vergul;
@@ -86,6 +95,10 @@ t_err	extract_line_nbr(t_str *str, t_parsing *data, short c)
 	return (set_err_and_return_code(str->j, e_inva_arg));
 }
 
+/// @brief use to grab name of texture form t_str
+/// @param str input
+/// @param err &t_err err will be store inside
+/// @return NULL or new texture name
 char	*extract_line_txt(t_str *str, t_err *err)
 {
 	char	*new;
@@ -105,9 +118,6 @@ char	*extract_line_txt(t_str *str, t_err *err)
 	new = ft_strndup(str->s + str->i, str->j);
 	*err = e_success;
 	if (!new)
-	{
-		printf("moi4\n");
 		*err = e_inva_arg;
-	}
 	return (new);
 }

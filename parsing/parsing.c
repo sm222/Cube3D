@@ -2,9 +2,9 @@
 #include "parsing.h"
 
 /// @brief use to set a err len for the print of the red line
-/// @param in 
-/// @param set_get 
-/// @return 
+/// @param in add set or get this value
+/// @param set_get flag e_cube
+/// @return len of i
 size_t	read_and_set_err_p(size_t in, short set_get)
 {
 	size_t	*i;
@@ -18,8 +18,8 @@ size_t	read_and_set_err_p(size_t in, short set_get)
 }
 
 /// @brief make all the verification one by one
-/// @param data
-/// @return a t_err flag
+/// @param data main struct parsing
+/// @return error form fontion call of fail or success
 static t_err	look_all(t_parsing *data)
 {
 	t_err	rvalue;

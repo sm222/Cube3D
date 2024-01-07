@@ -1,6 +1,12 @@
 
 #include "parsing.h"
 
+/// @brief use to see if multiple spawn was find
+/// @param c char to look
+/// @param s line to print if error found
+/// @param i err line
+/// @param j len of the error
+/// @return return 1 if too menny spawn was found else 0
 static short	look_spawn(char c, char *s, size_t i, size_t j)
 {
 	static char	spawn = 0;
@@ -20,12 +26,14 @@ static short	look_spawn(char c, char *s, size_t i, size_t j)
 	return (0);
 }
 
-static t_err	read_line_map(char *s, size_t i)
+/// @brief use to parse the map
+/// @param s line of the map
+/// @param i y cord of the map
+/// @return empty_line, fail or success
+static t_err	read_line_map(char *s, size_t const i)
 {
 	size_t		j;
-	t_err		err;
 
-	err = e_success;
 	j = 0;
 	while (s && s[j] && s[j] == ' ')
 		j++;
@@ -36,7 +44,7 @@ static t_err	read_line_map(char *s, size_t i)
 		if (ft_strchr("01 NSEW", s[j]))
 		{
 			if (look_spawn(s[j], s, i, j))
-				err = e_fail;
+				return (e_fail);
 			j++;
 		}
 		else
@@ -46,9 +54,12 @@ static t_err	read_line_map(char *s, size_t i)
 			return (e_fail);
 		}
 	}
-	return (err);
+	return (e_success);
 }
 
+/// @brief use to be useful ? no clue if not broken don't fix it
+/// @param map 
+/// @return 
 static t_map	copy_map_and_valid(t_map map)
 {
 	t_map	new;
@@ -57,6 +68,9 @@ static t_map	copy_map_and_valid(t_map map)
 	return (new);
 }
 
+/// @brief skip all the texture and other information and take the rest
+/// @param data main parsing struct
+/// @return fail, or success
 t_err	extract_map(t_parsing *data)
 {
 	t_err	err;

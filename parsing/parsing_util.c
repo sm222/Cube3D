@@ -1,6 +1,9 @@
 
 #include "parsing.h"
 
+/// @brief calculate if all texture was found
+/// @param in struct texture
+/// @return 
 int	look_all_texture(t_texture *in)
 {
 	int	i;
@@ -21,6 +24,10 @@ int	look_all_texture(t_texture *in)
 	return (i);
 }
 
+/// @brief use to skip in a t_str
+/// @param str input
+/// @param c skip to that one
+/// @return len of str->i
 size_t	skip_to(t_str *str, char c)
 {
 	if (!str)
@@ -30,6 +37,10 @@ size_t	skip_to(t_str *str, char c)
 	return (str->i);
 }
 
+/// @brief use to skip while c in a t_str
+/// @param str input
+/// @param c while that, skip
+/// @return len of str->i
 size_t	skip_while(t_str *str, char c)
 {
 	if (!str)
@@ -39,12 +50,15 @@ size_t	skip_while(t_str *str, char c)
 	return (str->i);
 }
 
-void	set_value(char in[5][5], t_parsing *data)
+/// @brief set value
+/// @param side walls
+/// @param data main strcut parsing
+void	set_value(char side[5][5], t_parsing *data)
 {
-	ft_memmove(in[0], "NO ", 4);
-	ft_memmove(in[1], "SO ", 4);
-	ft_memmove(in[2], "WE ", 4);
-	ft_memmove(in[3], "EA ", 4);
+	ft_memmove(side[0], "NO ", 4);
+	ft_memmove(side[1], "SO ", 4);
+	ft_memmove(side[2], "WE ", 4);
+	ft_memmove(side[3], "EA ", 4);
 	data->texture.side[e_no] = NULL;
 	data->texture.side[e_so] = NULL;
 	data->texture.side[e_we] = NULL;
@@ -57,5 +71,5 @@ void	set_value(char in[5][5], t_parsing *data)
 	data->texture.celing[2] = 0;
 	data->texture.cf[0] = false;
 	data->texture.cf[1] = false;
-	in[4][0] = 0;
+	side[4][0] = 0;
 }

@@ -60,7 +60,7 @@ short	look_at_end(t_str *str)
 /// @return 1 if error else 0
 short	look_next(char *s, size_t i, short ver)
 {
-	if (ver > 3 || i < ft_strlen(s))
+	if (ver > 3 || i > ft_strlen(s))
 	{
 		read_and_set_err_p(i + 1, e_set);
 		return (1);
@@ -85,11 +85,11 @@ short	look_next(char *s, size_t i, short ver)
 	return (0);
 }
 
-/// @brief 
-/// @param s 
-/// @param i 
-/// @return 
-short	look_last_number(char *s, size_t i)
+/// @brief use to look at the end of the string if invalid data
+/// @param s input string
+/// @param i distance to start at
+/// @return 1 if good else error 0
+short	look_last_number(char const *s, size_t i)
 {
 	size_t	t;
 
@@ -100,13 +100,11 @@ short	look_last_number(char *s, size_t i)
 			return (1);
 		if (s[i] == ',')
 		{
-			printf("moi 7\n");
 			read_and_set_err_p(i, e_set);
 			return (0);
 		}
 		i--;
 	}
-	printf("moi 6\n");
 	read_and_set_err_p(t, e_set);
 	return (0);
 }

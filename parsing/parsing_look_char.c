@@ -1,5 +1,8 @@
 #include "parsing.h"
 
+/// @brief look for invalid char
+/// @param data main struc parsing
+/// @return success or bad_char
 t_err	parsing_look_c(t_parsing *data)
 {
 	size_t	i;

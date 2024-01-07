@@ -1,6 +1,11 @@
 
 #include "parsing.h"
 
+/// @brief use to show a error to the user
+/// @param code error code
+/// @param line were the error was
+/// @param i y cord of the line (meaby need to rename)
+/// @return the error code or 1 
 static short	print_err(t_err code, char *line, size_t i)
 {
 	size_t	j;
@@ -29,6 +34,10 @@ static short	print_err(t_err code, char *line, size_t i)
 	return (1);
 }
 
+/// @brief use to get texture form flore or celing
+/// @param str string
+/// @param data parsing struct
+/// @return code form extract_line_nbr, double_tex, or bad_char
 static t_err	look_data_fc(t_str *str, t_parsing *data)
 {
 	if (ft_strncmp(str->s + str->i, "C", 1) == 0 && !data->texture.cf[0])
@@ -42,6 +51,11 @@ static t_err	look_data_fc(t_str *str, t_parsing *data)
 	return (e_bad_char);
 }
 
+/// @brief use to extract texture of NO SO WE EA, else it send to look_data_fc
+/// @param str line input
+/// @param var were you put the value
+/// @param data main struct for parsing
+/// @return code form look_data_fc, extract_line_txt, or double_tex
 static t_err	look_data_str(t_str *str, t_extract_t *var, t_parsing *data)
 {
 	size_t	j;
@@ -63,6 +77,11 @@ static t_err	look_data_str(t_str *str, t_extract_t *var, t_parsing *data)
 	return (look_data_fc(str, data));
 }
 
+/// @brief us to call all the parsing ft
+/// @param str line to read
+/// @param var storage of value
+/// @param data main struct of parsing
+/// @return error code form all the fontion above or empty_line or success
 static t_err	read_line_textu(t_str *str, t_extract_t *var, t_parsing *data)
 {
 	size_t	i;
@@ -83,9 +102,9 @@ static t_err	read_line_textu(t_str *str, t_extract_t *var, t_parsing *data)
 	return (err);
 }
 
-/// @brief 
-/// @param data 
-/// @return 
+/// @brief do what it say in the name ... hopefully
+/// @param data main stuct parsing
+/// @return fail or success if all texture was found
 t_err	extract_texture(t_parsing *data)
 {
 	t_extract_t	var;

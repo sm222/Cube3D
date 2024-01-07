@@ -24,7 +24,7 @@ t_err	extract_texture(t_parsing *data);
 char	*extract_line_txt(t_str *str, t_err *err);
 
 int		look_all_texture(t_texture *in);
-void	set_value(char in[5][5], t_parsing *data);
+void	set_value(char side[5][5], t_parsing *data);
 
 size_t	skip_while(t_str *str, char c);
 size_t	skip_to(t_str *str, char c);
@@ -38,7 +38,7 @@ t_map	make_safe_copy(t_map const map, size_t const max_len);
 
 short	look_at_end(t_str *str);
 short	look_next(char *s, size_t i, short ver);
-short	look_last_number(char *s, size_t i);
+short	look_last_number(char const *s, size_t i);
 
 t_err	skip_to_next_nbr(t_str *str, int nbr);
 short	find_spawn(int *x, int *y, const t_map map);

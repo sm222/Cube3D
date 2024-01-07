@@ -1,6 +1,9 @@
 
 #include "parsing.h"
 
+/// @brief look at the name of the file
+/// @param name of file and path
+/// @return 1 if good else -1
 static int	look_name(char *name)
 {
 	char	*tmp;
@@ -21,6 +24,10 @@ static int	look_name(char *name)
 	return (1);
 }
 
+/// @brief use to open file
+/// @param data struct parsing
+/// @param file name/path
+/// @return -1 or fd of the file
 int	open_file(t_parsing *data, char *file)
 {
 	if (look_name(file) < 0)
@@ -43,6 +50,8 @@ int	open_file(t_parsing *data, char *file)
 	return (data->fd);
 }
 
+/// @brief use to fix empty line
+/// @param line original line that will be change
 static void	fix_empty(char **line)
 {
 	char	*new;
@@ -62,9 +71,9 @@ static void	fix_empty(char **line)
 	}
 }
 
-/// @brief 
-/// @param data 
-/// @return 
+/// @brief use to read the file with gnl 
+/// @param data main struct parsing
+/// @return empty_map, malloc_fail or success
 t_err	read_map(t_parsing *data)
 {
 	char	*tmp;
