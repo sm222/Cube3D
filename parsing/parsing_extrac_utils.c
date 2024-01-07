@@ -1,6 +1,9 @@
 
 #include "parsing.h"
 
+/// @brief look for the size of a int
+/// @param nb number
+/// @return len in number len char[]
 static int	size_int(int long nb)
 {
 	int	size;
@@ -19,6 +22,10 @@ static int	size_int(int long nb)
 	return (size);
 }
 
+/// @brief use to skip ... to next number
+/// @param str t_str input
+/// @param nbr number to find is len
+/// @return success or fail
 t_err	skip_to_next_nbr(t_str *str, int nbr)
 {
 	str->i += size_int(nbr);
@@ -32,6 +39,9 @@ t_err	skip_to_next_nbr(t_str *str, int nbr)
 	return (e_fail);
 }
 
+/// @brief look at the end of a t_str
+/// @param str string input
+/// @return 1 if stuff at end of line else 0
 short	look_at_end(t_str *str)
 {
 	if (str->i + str->j > str->len)
@@ -40,13 +50,17 @@ short	look_at_end(t_str *str)
 		str->j++;
 	if (!str->s[str->i + str->j])
 		return (0);
-	printf("moi3\n");
 	return (1);
 }
 
+/// @brief use to look next vergul in extract_line_nbr
+/// @param s string
+/// @param i start looking at
+/// @param ver nuber of vergul
+/// @return 1 if error else 0
 short	look_next(char *s, size_t i, short ver)
 {
-	if (ver > 3)
+	if (ver > 3 || i < ft_strlen(s))
 	{
 		read_and_set_err_p(i + 1, e_set);
 		return (1);
@@ -64,7 +78,6 @@ short	look_next(char *s, size_t i, short ver)
 			i++;
 		else
 		{
-			printf("moi 2\n");
 			read_and_set_err_p(i, e_set);
 			return (1);
 		}
@@ -72,6 +85,10 @@ short	look_next(char *s, size_t i, short ver)
 	return (0);
 }
 
+/// @brief 
+/// @param s 
+/// @param i 
+/// @return 
 short	look_last_number(char *s, size_t i)
 {
 	size_t	t;

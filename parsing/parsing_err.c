@@ -1,11 +1,19 @@
 #include "parsing.h"
 
+/// @brief use to set a error to a distance and return the t_err code
+/// @param len len to set
+/// @param code err code to return
+/// @return t_err pass in code
 t_err	set_err_and_return_code(size_t len, t_err code)
 {
 	read_and_set_err_p(len, e_set);
 	return (code);
 }
 
+/// @brief use to print
+/// @param data main struct of parsing
+/// @param err error code 
+/// @return the error code from 'err'
 t_err	parsing_err(t_parsing *data, t_err err)
 {
 	if (err < e_success)

@@ -1,7 +1,10 @@
 
 #include "parsing.h"
 
-static int	find_longer_line(t_map map)
+/// @brief use to find the longets line in a t_map
+/// @param map input
+/// @return the len of the longet find line
+static int	find_longer_line(t_map const map)
 {
 	int	len;
 	int	tmp;
@@ -19,7 +22,13 @@ static int	find_longer_line(t_map map)
 	return (len);
 }
 
-static void	print_type(char *line, int err_x, int len, int y)
+/// @brief use in flod_err to print the right char or red X
+/// @param line line to print
+/// @param err_x x marks the spot
+/// @param len of the pad map
+/// @param y old safety
+static void	print_type(char const *line, int const err_x, \
+						int const len, int const y)
 {
 	int	i;
 	int	len_line;
@@ -40,15 +49,17 @@ static void	print_type(char *line, int err_x, int len, int y)
 	}
 }
 
-void	flod_err(t_map map, int x, int y)
+/// @brief this is call if the flood fill fail in anyway
+/// @brief this shoud be only call one time or could look weird on screen
+/// @param map use to print the error on screen
+/// @param x x error cord
+/// @param y y error cord
+void	flod_err(t_map const map, int const x, int const y)
 {
-	int				i;
-	static short	err = 0;
+	int	i;
 
-	if (err > 0)
-		return ;
 	i = 0;
-	err = ft_printf(2, "%oError\nCub3D: invalid map\n", NULL);
+	ft_printf(2, "%oError\nCub3D: invalid map\n", NULL);
 	while (map[i])
 	{
 		if (i == y)
@@ -60,7 +71,13 @@ void	flod_err(t_map map, int x, int y)
 	}
 }
 
-static int	flood_fill(int x, int y, t_map map, char last)
+/// @brief use to floodfill the map to find holes and see if it valid
+/// @param x were to look in the map
+/// @param y were to look in the map
+/// @param map use to floodfill
+/// @param last last side on witch one was call
+/// @return 0 if sucsess, 1 if error
+static int	flood_fill(int x, int y, t_map const map, char last)
 {
 	int	out;
 
@@ -89,6 +106,10 @@ static int	flood_fill(int x, int y, t_map map, char last)
 	return (1);
 }
 
+/// @brief use to make the (safe) map and look if it is valid
+/// @param in in map use make the new one
+/// @param data main data structure of parsing
+/// @return fail if problem or successe
 int	call_flood_fill(t_map in, t_parsing *data)
 {
 	int		x;
@@ -96,7 +117,7 @@ int	call_flood_fill(t_map in, t_parsing *data)
 	t_map	safe;
 
 	safe = make_safe_copy(in, find_longer_line(in));
-	if (find_spawn(&x, &y, safe))
+	if (find_spawn(&x, &y, safe) == e_success)
 	{
 		data->texture.p_x = x;
 		data->texture.p_y = y;
@@ -112,7 +133,7 @@ int	call_flood_fill(t_map in, t_parsing *data)
 		return (e_success);
 	}
 	safe = (t_map)ft_double_sfree((void **)safe);
-			data->map = (t_map)ft_double_sfree((void **)data->map);
+	data->map = (t_map)ft_double_sfree((void **)data->map);
 	ft_printf(2, "%oError\nCub3D: no spawn given\n", NULL);
 	return (e_fail);
 }

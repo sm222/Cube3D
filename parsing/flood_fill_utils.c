@@ -1,7 +1,17 @@
 #include "parsing.h"
 
-short	find_spawn(int *x, int *y, t_map map)
+/// @brief use to find the starting poin of the flodfill
+/// @param x use a &int input to return the value
+/// @param y use a &int input to return the value
+/// @param map t_map as a input
+/// @return return e_success if found or fail and set back x and y to 0
+short	find_spawn(int *x, int *y, const t_map map)
 {
+	if (!map)
+	{
+		ft_printf(2, "Error\nCub3D: malloc fail\n");
+		return (e_malloc_f);
+	}
 	*y = 0;
 	while (map[*y])
 	{
@@ -9,16 +19,21 @@ short	find_spawn(int *x, int *y, t_map map)
 		while (map[*y][*x])
 		{
 			if (ft_strchr("NWSE", map[*y][*x]))
-				return (1);
+				return (e_success);
 			*x += 1;
 		}
 		*y += 1;
 	}
 	*y = 0;
 	*x = 0;
-	return (0);
+	return (e_fail);
 }
 
+/// @brief use to add pading the the map, add a line of space above and under
+/// @param map the one and only 
+/// @param len len of the box (char *) firt star
+/// @param max_len the longest line of map
+/// @return success, or malloc_fail
 static short	set_space(t_map map, size_t const len, size_t const max_len)
 {
 	map[0] = ft_calloc(max_len + 2, sizeof(char));
@@ -35,7 +50,13 @@ static short	set_space(t_map map, size_t const len, size_t const max_len)
 	return (e_success);
 }
 
-static short	add_space_to_line(t_map old, t_map new, const size_t max)
+/// @brief use to buff the line on the map with one space at the start
+/// @brief and to get to max at the end
+/// @param old use as a guide for the new map
+/// @param new map that will add the new line, need to be malloc
+/// @param max max len of the line can get
+/// @return return malloc_fail or success
+static short	add_space_to_line(t_map const old, t_map new, size_t const max)
 {
 	size_t	i;
 	size_t	len;
@@ -58,7 +79,11 @@ static short	add_space_to_line(t_map old, t_map new, const size_t max)
 	return (e_success);
 }
 
-t_map	make_safe_copy(t_map map, const size_t max_len)
+/// @brief use to make a (safe) copy of map. by safe it pad with space
+/// @param map the one use for copy
+/// @param max_len longet line of the map
+/// @return NULL if fail or the new (safe) map
+t_map	make_safe_copy(t_map const map, size_t const max_len)
 {
 	size_t	len;
 	t_map	new_map;
@@ -80,6 +105,9 @@ t_map	make_safe_copy(t_map map, const size_t max_len)
 	return (new_map);
 }
 
+/// @brief use to print the righ char in the error message
+/// @param c input
+/// @return char to print
 char	rt_char(char c)
 {
 	if (c == '\b')

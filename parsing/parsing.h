@@ -34,14 +34,14 @@ size_t	read_and_set_err_p(size_t in, short set_get);
 t_err	set_err_and_return_code(size_t len, t_err code);
 
 int		call_flood_fill(t_map in, t_parsing *data);
-t_map	make_safe_copy(t_map map, const size_t max_len);
+t_map	make_safe_copy(t_map const map, size_t const max_len);
 
 short	look_at_end(t_str *str);
 short	look_next(char *s, size_t i, short ver);
 short	look_last_number(char *s, size_t i);
 
 t_err	skip_to_next_nbr(t_str *str, int nbr);
-short	find_spawn(int *x, int *y, t_map map);
+short	find_spawn(int *x, int *y, const t_map map);
 char	rt_char(char c);
 
 #endif // PARSING_H

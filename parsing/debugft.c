@@ -1,6 +1,9 @@
 
 #include "parsing.h"
 
+/// @brief 
+/// @param data
+//! remove before pushing
 void	print_debug(t_parsing *data)
 {
 	printf("no%s\n", data->texture.side[e_no]);
