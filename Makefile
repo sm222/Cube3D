@@ -59,6 +59,7 @@ mem:
 clean:
 	@$(RM) $(OBJS)
 	@make -C $(LIBFT_DIR)	clean
+	@make -C C_tools		clean
 	@make -C $(MLX_DIR)		clean
 	@make -C parsing		clean
 	@echo $(shell clear)
@@ -68,8 +69,9 @@ clean:
 # Removes objects and executables
 fclean: clean
 	@$(RM) $(NAME)
-	@make -C $(LIBFT_DIR)     fclean
-	@make -C parsing		  fclean
+	@make -C $(LIBFT_DIR)		fclean
+	@make -C parsing			fclean
+	@make -C C_tools			fclean
 	@echo $(shell clear)
 	@printf "$(GRN)clean all$(RESET)\n"
 
