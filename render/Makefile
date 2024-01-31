@@ -7,7 +7,8 @@ RM		=	rm -f
 LIBFT		=	libft.a
 LIBFT_DIR	=	../lib/lib_ft/
 
-SRCS	=	debugft.c\
+SRCS	=	render.c\
+			color.c
 
 
 

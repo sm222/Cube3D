@@ -28,8 +28,8 @@
 
 # ifndef WIN_SIZE
 #  define WIN_SIZE
-#  define WIN_H 1000
-#  define WIN_W 1000
+#  define WIN_H 10
+#  define WIN_W 10
 # endif
 
 
@@ -65,13 +65,23 @@ enum side_tex {
 //			type			//
 //--------------------------//
 
-typedef char**			t_map;   // char **
+typedef char			**t_map;   // char **
 typedef int				t_fd;    // int
 typedef unsigned char	t_color; // unsing char use for color
 
 //--------------------------//
 //			struct			//
 //--------------------------//
+
+typedef struct s_render
+{
+	short	frame;
+	int		image1[WIN_H][WIN_W];
+	int		image2[WIN_H][WIN_W];
+	int		(*render)(void *, void *, int, int, int);
+	short	img_i;
+	int32_t	color[2];
+}	t_render;
 
 /// @brief 
 typedef struct	s_texture
@@ -113,17 +123,10 @@ typedef struct s_cub
 {
 	t_parsing	pars;
 	t_map		map;
+	t_render	ren;
 	int			file_fd;
 	void		*mlx;
 	void		*window;
 }	t_cub;
-
-typedef struct s_rander
-{
-	short	frame;
-	int		image1[WIN_H][WIN_W];
-	int		image2[WIN_H][WIN_W];
-	int		(*render)(void *, void *, int, int, int);
-}	t_rader;
 
 #endif // STRUCTURE_H

@@ -37,9 +37,10 @@ static int	bad_args_main(int ac)
 	return (1);
 }
 
-int	create_trgb(int t, int r, int g, int b)
+int	call_render(t_cub *cub)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	render(cub, clean);
+
 }
 
 /*
@@ -58,10 +59,11 @@ int	main(int ac, char **av)
 		return (1);
 	debug(cub); //free all parsing in here
 	cub.mlx = mlx_init();
+	cub.ren.render = &mlx_pixel_put;
 	cub.window = mlx_new_window(cub.mlx, WIN_W, WIN_H, "test");
 	mlx_key_hook(cub.window, keybinds, &cub);
 	mlx_hook(cub.window, 17, 0, exit_window, &cub);
-	mlx_loop_hook(cub.mlx, &test, &cub);
+	mlx_loop_hook(cub.mlx, &call_render, &cub);
 	mlx_loop(cub.mlx);
 	return (0);
 }
