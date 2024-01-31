@@ -3,7 +3,7 @@
 int	exit_window(t_cub *info)
 {
 	(void)info;
-	//mlx_destroy_window(info->mlx, info->window);
+	mlx_destroy_window(info->mlx, info->window);
 	exit(0); //you need it ;)
 	return (0);
 }
@@ -37,6 +37,11 @@ static int	bad_args_main(int ac)
 	return (1);
 }
 
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
 /*
 /The "param" argument in mlx functions represents the argument 
 taken by the preceding function argument./
@@ -51,11 +56,12 @@ int	main(int ac, char **av)
 	cub.map = parsing(av[1], &cub);
 	if (!cub.map)
 		return (1);
-	debug(cub);
-	//cub.mlx = mlx_init();
-	//cub.window = mlx_new_window(cub.mlx, 10 * 64, 10 * 64, "test");
-	//mlx_key_hook(cub.window, keybinds, &cub);
-	//mlx_hook(cub.window, 17, 0, exit_window, &cub);
-	//mlx_loop(cub.mlx);
+	debug(cub); //free all parsing in here
+	cub.mlx = mlx_init();
+	cub.window = mlx_new_window(cub.mlx, WIN_W, WIN_H, "test");
+	mlx_key_hook(cub.window, keybinds, &cub);
+	mlx_hook(cub.window, 17, 0, exit_window, &cub);
+	mlx_loop_hook(cub.mlx, &test, &cub);
+	mlx_loop(cub.mlx);
 	return (0);
 }

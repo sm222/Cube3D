@@ -6,6 +6,7 @@
 #include "lib/lib_ft/libft.h"
 #include "lib/minilibx_opengl_20191021/mlx.h"
 #include "parsing/parsing.h"
+#include "render/rander.h"
 #include "C_tools/inc/C_tool.h"
 
 void debug(t_cub cub);

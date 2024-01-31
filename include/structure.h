@@ -26,6 +26,12 @@
 #  define GIT	"\x1b[38;5;82m"
 # endif
 
+# ifndef WIN_SIZE
+#  define WIN_SIZE
+#  define WIN_H 1000
+#  define WIN_W 1000
+# endif
+
 
 # include <stdio.h>
 # include <unistd.h>
@@ -103,7 +109,7 @@ typedef struct	s_parsing
 }	t_parsing;
 
 /// @brief 
-typedef struct	s_cub
+typedef struct s_cub
 {
 	t_parsing	pars;
 	t_map		map;
@@ -111,5 +117,13 @@ typedef struct	s_cub
 	void		*mlx;
 	void		*window;
 }	t_cub;
+
+typedef struct s_rander
+{
+	short	frame;
+	int		image1[WIN_H][WIN_W];
+	int		image2[WIN_H][WIN_W];
+	int		(*render)(void *, void *, int, int, int);
+}	t_rader;
 
 #endif // STRUCTURE_H

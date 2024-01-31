@@ -33,15 +33,18 @@ OBJS	=	$(SRCS:.c=.o)
 
 USER = $(shell whoami)
 
-all: libft parse $(NAME)
+all: C_tool mlx libft parse $(NAME)
 	@printf "$(CYN) \n\n			correction is made by $(USER)\n\n  $(RESET)\n"
 	
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT) \
-	$(PARSE_DIR)$(PARSE_LIB) C_tools/C_tool.a -o $(NAME)
+	$(PARSE_DIR)$(PARSE_LIB) $(MLX_DIR)$(MLX_LIB) -framework OpenGL -framework AppKit C_tools/C_tool.a -o $(NAME)
 libft:
 	@printf "$(GRN)making libft$(WHT)\n"
 	@make -C $(LIBFT_DIR)
+
+C_tool:
+	make -C C_tools
 
 parse:
 	@printf "$(GRN)making parsing$(WHT)\n"
