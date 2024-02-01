@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/antoine/Documents/42/Cube3D",
-      "program": "/home/antoine/Documents/42/Cube3D/build/Debug/outDebug",
+      "cwd": "/Users/anboisve/Documents/Cube3D",
+      "program": "/Users/anboisve/Documents/Cube3D/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

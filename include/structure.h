@@ -26,6 +26,12 @@
 #  define GIT	"\x1b[38;5;82m"
 # endif
 
+# ifndef WIN_SIZE
+#  define WIN_SIZE
+#  define WIN_H 500
+#  define WIN_W 500
+# endif
+
 
 # include <stdio.h>
 # include <unistd.h>
@@ -59,13 +65,31 @@ enum side_tex {
 //			type			//
 //--------------------------//
 
-typedef char**			t_map;   // char **
+typedef char			**t_map;   // char **
 typedef int				t_fd;    // int
 typedef unsigned char	t_color; // unsing char use for color
 
 //--------------------------//
 //			struct			//
 //--------------------------//
+
+typedef struct s_mlx_image
+{
+	void	*img;
+	char	*addr;
+	int		b_per_pix;
+	int		line_len;
+	int		endian;
+}	t_mlx_image;
+
+typedef struct s_render
+{
+	t_mlx_image	frame;
+	void		*(*mlx_make_image)(void *, int, int );
+	char		*(*mlx_addre)(void *, int *, int *, int*);
+	int			(*mlx_image_to_window)(void *, void *, void *, int, int);
+	int32_t		color[2];
+}	t_render;
 
 /// @brief 
 typedef struct	s_texture
@@ -103,10 +127,11 @@ typedef struct	s_parsing
 }	t_parsing;
 
 /// @brief 
-typedef struct	s_cub
+typedef struct s_cub
 {
 	t_parsing	pars;
 	t_map		map;
+	t_render	ren;
 	int			file_fd;
 	void		*mlx;
 	void		*window;

@@ -18,7 +18,8 @@ typedef enum e_err {
 	e_end_of_tex	=	-7, //all texture was find
 	e_inva_data_end	=	-8, //find invalid char after data
 	e_inva_arg		=	-9, //find invalid char after data
-	e_double_tex	=	-10 //find more that one texture
+	e_double_tex	=	-10, //find more that one texture
+	e_bad_args		=	-11 // ivalid argument pass to ft
 }	t_err;
 
 # define INVA_DATA_END "find invalid char after data:"
