@@ -28,8 +28,8 @@
 
 # ifndef WIN_SIZE
 #  define WIN_SIZE
-#  define WIN_H 500
-#  define WIN_W 500
+#  define WIN_H 1000
+#  define WIN_W 2000
 # endif
 
 

@@ -11,7 +11,7 @@ static void	set_back_ground(t_render *data)
 		x = 0;
 		while (x < WIN_W)
 		{
-			data->image[y][x] = data->color[0];
+			render_pixel_to_img(data->color[0], &data->frame, x, y);
 			x++;
 		}
 		y++;
@@ -21,71 +21,23 @@ static void	set_back_ground(t_render *data)
 		x = 0;
 		while (x < WIN_W)
 		{
-			data->image[y][x] = data->color[1];
+			render_pixel_to_img(data->color[1], &data->frame, x, y);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	clean_image(t_render *data)
+static void	render_image(t_render *data, t_cub *cub)
 {
-	int	y;
-
-	y = 0;
-	while (y < WIN_H)
-	{
-		ft_bzero(data->image[y], sizeof(int) * WIN_W);
-		y++;
-	}
-	set_back_ground(data);
+	data->mlx_image_to_window(cub->mlx, cub->window, data->frame.img, 0, 0);
 }
 
-static int	add_layer(t_render *data, int **layer)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < WIN_H)
-	{
-		x = 0;
-		while (x < WIN_W)
-		{
-			if (layer[y][x])
-				data->image[y][x] = layer[y][x];
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
-
-void	render_img(t_render *data, t_cub *cub)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < WIN_H)
-	{
-		x = 0;
-		while (x < WIN_W)
-		{
-			data->render(cub->mlx, cub->window, x, y, data->image[y][x]);
-			x++;
-		}
-		y++;
-	}
-}
-
-int	render(t_cub *data, short mode, int **layer)
+int	render(t_cub *data, short mode)
 {
 	if (mode == e_clean)
-		clean_image(&data->ren);
-	if (mode == e_add_l && layer)
-		add_layer(&data->ren, layer);
+		set_back_ground(&data->ren);
 	if (mode == e_render)
-		render_img(&data->ren, data);
+		render_image(&data->ren, data);
 	return (0);
 }

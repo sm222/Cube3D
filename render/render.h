@@ -26,7 +26,6 @@
 
 enum e_r_mode {
 	e_clean,
-	e_add_l,
 	e_render,
 };
 
@@ -34,8 +33,10 @@ enum e_r_mode {
 //			ft				//
 //--------------------------//
 
-int	render(t_cub *data, short mode, int **layer);
+int	render(t_cub *data, short mode);
 
 int32_t	create_rgb(int r, int g, int b);
+t_err	make_mlx_image(t_mlx_image *ptr, t_cub *cub);
+int		render_pixel_to_img(int32_t color, t_mlx_image *img, int x, int y);
 
 #endif // RENDER_H
