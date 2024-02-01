@@ -24,21 +24,17 @@
 //			enum			//
 //--------------------------//
 
-enum e_render {
-	image1,
-	image2,
-};
-
 enum e_r_mode {
-	clean,
-	render,
+	e_clean,
+	e_add_l,
+	e_render,
 };
 
 //--------------------------//
 //			ft				//
 //--------------------------//
 
-int	render(t_cub *data, short mode);
+int	render(t_cub *data, short mode, int **layer);
 
 int32_t	create_rgb(int r, int g, int b);
 

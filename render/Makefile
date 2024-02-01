@@ -1,4 +1,4 @@
-NAME	=	parsing.a
+NAME	=	render.a
 
 CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra -g

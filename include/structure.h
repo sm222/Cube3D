@@ -28,8 +28,8 @@
 
 # ifndef WIN_SIZE
 #  define WIN_SIZE
-#  define WIN_H 10
-#  define WIN_W 10
+#  define WIN_H 500
+#  define WIN_W 500
 # endif
 
 
@@ -73,14 +73,22 @@ typedef unsigned char	t_color; // unsing char use for color
 //			struct			//
 //--------------------------//
 
+typedef struct s_mlx_image
+{
+	void	*img;
+	char	*addr;
+	int		b_per_pix;
+	int		line_len;
+	int		endian;
+}	t_mlx_image;
+
 typedef struct s_render
 {
-	short	frame;
-	int		image1[WIN_H][WIN_W];
-	int		image2[WIN_H][WIN_W];
-	int		(*render)(void *, void *, int, int, int);
-	short	img_i;
-	int32_t	color[2];
+	t_mlx_image	frame;
+	void		*(*mlx_make_image)(void *, int, int );
+	char		*(*mlx_addre)(void *, int *, int *, int*);
+	int			(*mlx_image_to_window)(void *, void *, void *, int, int);
+	int32_t		color[2];
 }	t_render;
 
 /// @brief 
