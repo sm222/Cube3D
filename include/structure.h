@@ -100,6 +100,7 @@ typedef struct	s_texture
 	t_color	celing[3];
 	int		p_x;
 	int		p_y;
+	char	p_looking;
 }	t_texture;
 
 /// @brief 
