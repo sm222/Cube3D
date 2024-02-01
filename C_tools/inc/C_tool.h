@@ -24,7 +24,10 @@
 
 # define LINE "__________________________________"
 
-int	Ct_err_code;
+# ifndef CT_ERR_CODE
+#  define CT_ERR_CODE
+extern int	Ct_err_code;
+# endif
 # define MEM_OUT_FILE	".mem_file"
 
 

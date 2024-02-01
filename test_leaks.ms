@@ -1,0 +1,1 @@
+make && leaks --atExit --  ./Cub3D map/map2.cub

@@ -16,6 +16,9 @@ LIBFT_DIR		=	lib/lib_ft/
 PARSE_LIB		=	parsing.a
 PARSE_DIR		=	parsing/
 
+RENDER_LIB		=	render.a
+RENDER_DIR		=	render/
+
 MLX_LIB		=	libmlx.a
 MLX_DIR		=	lib/minilibx_opengl_20191021/
 
@@ -26,21 +29,31 @@ CFLAGS			=	-Wall -Werror -Wextra -g
 RM				=	rm -f
 
 # Sources are all .c files
-SRCS	=	main.c
+SRCS	=	main.c\
+			debugft.c
 
 OBJS	=	$(SRCS:.c=.o)
 
 USER = $(shell whoami)
 
-all: mlx libft parse $(NAME)
+all: C_tool mlx libft parse render $(NAME)
 	@printf "$(CYN) \n\n			correction is made by $(USER)\n\n  $(RESET)\n"
 	
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT) $(MLX_DIR)$(MLX_LIB) -framework OpenGL -framework AppKit \
-	$(PARSE_DIR)$(PARSE_LIB) C_tools/C_tool.a -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT) $(RENDER_DIR)$(RENDER_LIB) \
+	$(PARSE_DIR)$(PARSE_LIB) $(MLX_DIR)$(MLX_LIB) \
+	-framework OpenGL -framework AppKit C_tools/C_tool.a -o $(NAME)
+
 libft:
 	@printf "$(GRN)making libft$(WHT)\n"
 	@make -C $(LIBFT_DIR)
+
+C_tool:
+	make -C C_tools
+
+render:
+	@printf "$(GRN)making render$(WHT)\n"
+	make -C $(RENDER_DIR)
 
 parse:
 	@printf "$(GRN)making parsing$(WHT)\n"
@@ -49,25 +62,30 @@ parse:
 mlx:
 	@make -C $(MLX_DIR)
 
-mem: all
-	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
+mem:
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME) map/map2.cub
 
 #https://github.com/sm222/C_tools
 
 # Removes objects
 clean:
 	@$(RM) $(OBJS)
-	@make -C $(LIBFT_DIR)     clean
-	@make -C $(MLX_DIR)   clean
-	@make -C parsing		  clean
+	@make -C $(LIBFT_DIR)	clean
+	@make -C C_tools		clean
+	@make -C $(MLX_DIR)		clean
+	@make -C parsing		clean
+	@make -C render			clean
 	@echo $(shell clear)
 	@printf "$(GRN)clean *.o$(RESET)\n"
+	@rm -fr Cub3D.dSYM
 
 # Removes objects and executables
 fclean: clean
 	@$(RM) $(NAME)
-	@make -C $(LIBFT_DIR)     fclean
-	@make -C parsing		  fclean
+	@make -C $(LIBFT_DIR)		fclean
+	@make -C parsing			fclean
+	@make -C C_tools			fclean
+	@make -C render				fclean
 	@echo $(shell clear)
 	@printf "$(GRN)clean all$(RESET)\n"
 
@@ -84,4 +102,4 @@ cp:
 norm:
 	norminette *.c parsing include lib/lib_ft
 
-.PHONY: all libft run mc
+.PHONY: all libft run mc render

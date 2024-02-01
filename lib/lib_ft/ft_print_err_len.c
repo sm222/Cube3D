@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_double_sfree.c                                  :+:      :+:    :+:   */
+/*   ft_print_err_len.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/15 13:06:56 by anboisve          #+#    #+#             */
-/*   Updated: 2024/01/05 15:56:32 by anboisve         ###   ########.fr       */
+/*   Created: 2023/11/17 09:03:57 by anboisve          #+#    #+#             */
+/*   Updated: 2023/11/25 18:18:12 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/// @brief use to free a double pointer
-/// @param ptr input
-/// @return NULL
-void	**ft_double_sfree(void **ptr)
+void	ft_print_err_len(size_t i)
 {
-	size_t	i;
+	char	*print;
 
-	i = 0;
-	while (ptr && ptr[i])
-		ft_free(ptr[i++]);
-	ft_free(ptr);
-	return (NULL);
+	print = NULL;
+	print = ft_strfjoin(print, "\x1B[31m");
+	while (i--)
+		print = ft_strfjoin(print, "~");
+	print = ft_strfjoin(print, "^\x1B[37m");
+	ft_printf(2, "%o%s\n", NULL, print);
+	ft_free(print);
 }

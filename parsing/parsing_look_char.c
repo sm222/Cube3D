@@ -1,5 +1,8 @@
 #include "parsing.h"
 
+/// @brief look for invalid char
+/// @param data main struc parsing
+/// @return success or bad_char
 t_err	parsing_look_c(t_parsing *data)
 {
 	size_t	i;
@@ -11,9 +14,13 @@ t_err	parsing_look_c(t_parsing *data)
 		j = 0;
 		while (data->pre_map[i][j])
 		{
-			if (ft_strchr("\t\"'", data->pre_map[i][j]) != NULL)
+			if (ft_strchr("	'\"", \
+			data->pre_map[i][j]) != NULL)
 			{
 				data->err = data->pre_map[i][j];
+				data->errh = i + 1;
+				data->errw = j + 1;
+				data->err_line = data->pre_map[i];
 				return (e_bad_char);
 			}
 			j++;
@@ -22,4 +29,3 @@ t_err	parsing_look_c(t_parsing *data)
 	}
 	return (e_success);
 }
-

@@ -23,6 +23,7 @@ SRCS	=	ft_atoi.c\
 			ft_memcmp.c\
 			ft_memcpy.c\
 			ft_memmove.c\
+			ft_print_err_len.c\
 			ft_memset.c\
 			ft_putchar_fd.c\
 			ft_putendl_fd.c\
@@ -77,7 +78,8 @@ SRCS	=	ft_atoi.c\
 			ft_lstclear.c\
 			ft_lstiter.c\
 			ft_lstmap.c\
-			ft_find_doc.c
+			ft_find_doc.c\
+			ft_str.c
 
 
 OBJS	=	$(SRCS:.c=.o)
