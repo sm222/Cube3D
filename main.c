@@ -45,11 +45,11 @@ int	call_render(t_cub *cub)
 	static int i = 0;
 	if (i > 255)
 		i = 0;
-	cub->ren.color[0] = create_rgb(0, 0, i);
-	cub->ren.color[1] = create_rgb(0, i, 0);
-	i += 50;
-	render(cub, e_clean, NULL);
-	render(cub, e_render, NULL);
+	cub->ren.color[0] = create_rgb(0, i / 10, i);
+	cub->ren.color[1] = create_rgb(i, i, 0);
+	i += 2;
+	render(cub, e_clean);
+	render(cub, e_render);
 	return (0);
 }
 
@@ -70,6 +70,7 @@ int	main(int ac, char **av)
 	debug(cub); //free all parsing in here
 	cub.mlx = mlx_init();
 	cub.window = mlx_new_window(cub.mlx, WIN_W, WIN_H, "test");
+	make_mlx_image(&cub.ren.frame, &cub);
 	mlx_key_hook(cub.window, keybinds, &cub);
 	mlx_hook(cub.window, 17, 0, exit_window, &cub);
 	mlx_loop_hook(cub.mlx, &call_render, &cub);

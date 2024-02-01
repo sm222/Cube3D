@@ -10,13 +10,29 @@ int32_t	create_rgb(int r, int g, int b)
 
 t_err	make_mlx_image(t_mlx_image *ptr, t_cub *cub)
 {
+	t_render	*render;
+
 	if (!ptr || !cub)
 		return (e_bad_args);
-	ptr->img = 
+	render = &cub->ren;
+	ptr->img = render->mlx_make_image(cub->mlx, WIN_W, WIN_H);
+	ptr->addr = render->mlx_addre(ptr->img, &ptr->b_per_pix, &ptr->line_len, \
+	&ptr->endian);
+	return (e_success);
 }
 
-int	render_pixel_to_img(int32_t color, t_mlx_image *mlx_img, int x, int y)
+/*
+int	set_pixel(int32_t color, int x, int y)
 {
-	
 
+}
+*/
+
+int	render_pixel_to_img(int32_t color, t_mlx_image *img, int x, int y)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_len + x * (img->b_per_pix / 8));
+	*(unsigned int *)dst = color;
+	return (0);
 }
