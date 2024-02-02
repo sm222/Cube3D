@@ -32,7 +32,8 @@ RM				=	rm -f
 SRCS	=	main.c\
 			debugft.c\
 			main_err.c\
-			main_util.c
+			main_util.c\
+			rendering/raycaster.c\
 
 OBJS	=	$(SRCS:.c=.o)
 

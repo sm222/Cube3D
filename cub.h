@@ -3,6 +3,7 @@
 # define CUB_H
 
 #include "include/structure.h"
+#include "include/raycast.h"
 #include "lib/lib_ft/libft.h"
 #include "lib/minilibx_opengl_20191021/mlx.h"
 #include "parsing/parsing.h"

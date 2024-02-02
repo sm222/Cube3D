@@ -22,6 +22,7 @@ int	keybinds(int keycode, t_cub *info)
 int	call_render(t_cub *cub)
 {
 	render(cub, e_clean);
+	raycaster(cub);
 	render(cub, e_render);
 	return (0);
 }

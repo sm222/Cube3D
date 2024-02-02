@@ -6,12 +6,12 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:47:56 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/01 16:43:35 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:01:38 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCAST_H
-# define RAYCAST_H_H
+# define RAYCAST_H
 
 # include "../include/structure.h"
 # include <math.h>
@@ -20,8 +20,8 @@
 //CP stands for camera plane
 //WIN_RES is the 
 # define P_SPEED 0.5
-# define DVCT_LEN 2
-# define CP_LEN 2
+# define DVCT_LEN 1
+# define CP_LEN 1
 # define WIN_RES 8
 
 typedef struct s_raycasting
@@ -32,6 +32,8 @@ typedef struct s_raycasting
     double  dir_vct_y;
     double  cam_vct_x;
     double  cam_vct_y;
-}	s_raycasting;
+}	t_raycasting;
+
+void    *raycaster(t_cub *cub);
 
 #endif

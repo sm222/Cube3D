@@ -6,14 +6,14 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/01 17:16:49 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:20:15 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "raycast.h"
+#include "../include/raycast.h"
 
 //0 = x, 1 = y
-void    set_north_south(double dir, t_parsing *vectors)
+void    set_north_south(double dir, t_raycasting *vectors)
 {
     double  p_x;
     double  p_y;
@@ -22,16 +22,21 @@ void    set_north_south(double dir, t_parsing *vectors)
     p_y = vectors->pos_vct_y;
     vectors->dir_vct_x = p_x;
     vectors->dir_vct_y = p_y + (DVCT_LEN * dir);
-    vectors->cam_vct_x = p_x + (CP_LEN * dir);
+    vectors->cam_vct_x = p_x - (CP_LEN * dir);
     vectors->cam_vct_y = p_y + (DVCT_LEN * dir);
 }
 
-void    set_east_west(double dir, t_parsing *vectors)
+void    set_east_west(double dir, t_raycasting *vectors)
 {
+    double  p_x;
+    double  p_y;
+
+    p_x = vectors->pos_vct_x;
+    p_y = vectors->pos_vct_y;
     vectors->dir_vct_x = p_x + (DVCT_LEN * dir);
     vectors->dir_vct_y = p_y;
     vectors->cam_vct_x = p_x + (DVCT_LEN * dir);
-    vectors->cam_vct_y = p_y - (CP_LEN * dir);
+    vectors->cam_vct_y = p_y + (CP_LEN * dir);
 }
 
 t_raycasting    *init_vectors(double p_x, double p_y, char dir)
@@ -45,19 +50,24 @@ t_raycasting    *init_vectors(double p_x, double p_y, char dir)
     p_y += 0.5;
     vectors->pos_vct_x = p_x;
     vectors->pos_vct_y = p_y;
-    if (dir == N)
-        set_north_south(1);
-    else if (dir == S)
-        set_north_south(-1);
-    else if (dir == E)
-        set_east_west(1);
+    if (dir == 'N')
+        set_north_south(-1, vectors);
+    else if (dir == 'S')
+        set_north_south(1, vectors);
+    else if (dir == 'E')
+        set_east_west(1, vectors);
     else
-        set_east_west(-1);
+        set_east_west(-1, vectors);
     return (vectors);
 }
 
-//returns a pointer to an image(draws on the image)
-void    *raycaster(t_raycasting *pos, void *img_ptr)
+// returns a pointer to an image(draws on the image) (either draws directly on
+// and returns the pointer given as argument or creates a copy and returns it)
+void    *raycaster(t_cub *cub)
 {
+    t_raycasting *test;
     
+    test = init_vectors(cub->pars.texture.p_y, cub->pars.texture.p_x, cub->pars.texture.p_looking);
+    printf("position vector : %f %f, direction vector : %f %f, camera plane : %f %f\n", test->pos_vct_x, test->pos_vct_y, test->dir_vct_x, test->dir_vct_y, test->cam_vct_x, test->cam_vct_y);
+    return (test);
 }
