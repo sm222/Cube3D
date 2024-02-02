@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/02 18:03:42 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:16:07 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void    init_rayData(int x, t_raycasting *data)
     //deltaDistX represents the ratio of the change in the x-coordinate
     //of the ray's position to the change in distance traveled along the x-axis.
     //So, multiplying this ratio by a certain distance gives you the corresponding change in the ray's x-coordinate.
-    data->deltaDistX = abs(1 / data->rayDirX);
-    data->deltaDistY = abs(1 / data->rayDirY);
+    data->deltaDistX = fabs(1 / data->rayDirX);
+    data->deltaDistY = fabs(1 / data->rayDirY);
     if (data->rayDirX < 0)
     {
         data->stepX = -1;
@@ -96,7 +96,7 @@ void    init_rayData(int x, t_raycasting *data)
     }
 }
 
-void    jum_dirX(t_raycasting *data)
+void    jump_dirX(t_raycasting *data)
 {
     data->sideDistX += data->deltaDistX;
     data->mapX += data->stepX;
@@ -106,7 +106,7 @@ void    jum_dirX(t_raycasting *data)
         data->side = 2;
 }
 
-void    jum_dirY(t_raycasting *data)
+void    jump_dirY(t_raycasting *data)
 {
     data->sideDistY += data->deltaDistY;
     data->mapY += data->stepY;
@@ -142,4 +142,5 @@ void    *raycaster(t_cub *cub)
         //3 : draw column on image
         x++;
     }
+    return (NULL); //img_ptr
 }
