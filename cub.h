@@ -9,6 +9,9 @@
 #include "render/render.h"
 #include "C_tools/inc/C_tool.h"
 
-void debug(t_cub cub);
+void	debug(t_cub cub); //! remove at the end
+int		bad_args_main(int ac);
+void	set_main_data(t_cub *cub);
+void	set_render_data(t_cub *cub);
 
 #endif // CUB_H

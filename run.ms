@@ -1,1 +1,1 @@
-make re && ./Cub3D map/map.cub
+make && ./Cub3D map/map.cub

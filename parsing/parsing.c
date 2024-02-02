@@ -39,6 +39,7 @@ static t_err	look_all(t_parsing *data)
 		clean_parsing(data);
 		return (e_fail);
 	}
+	data->texture.p_looking = data->map[data->texture.p_y][data->texture.p_x];
 	data->pre_map = (t_map)ft_double_sfree((void **)data->pre_map);
 	return (e_success);
 }
@@ -62,5 +63,6 @@ t_map	parsing(char *arg, t_cub *cub)
 	if (look_all(&data) < e_success)
 		return (NULL);
 	ft_memcpy(&cub->pars, &data, sizeof(t_parsing));
+	cub->map = data.map;
 	return (data.map);
 }
