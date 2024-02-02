@@ -20,6 +20,7 @@ SRCS	=	debugft.c\
 			flood_fill.c\
 			parsing_extrac_utils.c\
 			flood_fill_utils.c\
+			free_parsing.c\
 
 
 OBJS	=	$(SRCS:.c=.o)
