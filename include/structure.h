@@ -32,6 +32,9 @@
 #  define WIN_W 2000
 # endif
 
+# ifndef IMAGE_S
+#  define IMAGE_S 500
+# endif
 
 # include <stdio.h>
 # include <unistd.h>

@@ -18,13 +18,15 @@ t_err	make_mlx_image(t_mlx_image *ptr, t_cub *cub)
 	render = &cub->ren;
 	ft = &cub->mlx_ft;
 	ptr->img = ft->mlx_new_image(cub->mlx, WIN_W, WIN_H);
+	if (!ptr->img)
+		return (e_malloc_f);
 	ptr->addr = ft->mlx_get_data_addr(ptr->img, &ptr->b_per_pix, \
 	&ptr->line_len, &ptr->endian);
 	return (e_success);
 }
 
 /*
-int	set_pixel(int32_t color, int x, int y)
+int	set_pixel_in_canvas(int32_t color, int x, int y)
 {
 
 }

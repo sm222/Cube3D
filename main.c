@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 	if (ac < 2 || ac > 2)
 		return (bad_args_main(ac));
 	set_main_data(&cub);
-	if (!parsing(av[1], &cub)) //? saving line, don't know if you like it
+	if (!parsing(av[1], &cub))
 		return (1);
 	set_render_data(&cub);
 	debug(cub); //! free all parsing in here remove for more test
