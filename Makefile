@@ -30,7 +30,9 @@ RM				=	rm -f
 
 # Sources are all .c files
 SRCS	=	main.c\
-			debugft.c
+			debugft.c\
+			main_err.c\
+			main_util.c
 
 OBJS	=	$(SRCS:.c=.o)
 

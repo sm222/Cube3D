@@ -30,7 +30,15 @@ static void	set_back_ground(t_render *data)
 
 static void	render_image(t_render *data, t_cub *cub)
 {
-	data->mlx_image_to_window(cub->mlx, cub->window, data->frame.img, 0, 0);
+	t_mlx_ft	*ft;
+
+	if (!data || !cub)
+	{
+		ft_printf(2, "%o"RED"WARNING: render_image missing data\n", NULL);
+		return ;
+	}
+	ft = &cub->mlx_ft;
+	ft->mlx_image_to_window(cub->mlx, cub->window, data->frame.img, 0, 0);
 }
 
 int	render(t_cub *data, short mode)

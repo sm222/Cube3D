@@ -73,6 +73,18 @@ typedef unsigned char	t_color; // unsing char use for color
 //			struct			//
 //--------------------------//
 
+
+typedef struct s_mlx_ft
+{
+	void			*(*mlx_new_image)(void *, int, int );
+	char			*(*mlx_get_data_addr)(void *, int *, int *, int*);
+	int				(*mlx_image_to_window)(void *, void *, void *, int, int);
+	unsigned int	(*mlx_get_color_value)(void *, int);
+	void			*(*mlx_xpm_file_to_image)(void *, char *, int *, int *);
+	int				(*mlx_destroy_image)(void *, void *);
+
+}	t_mlx_ft;
+
 typedef struct s_mlx_image
 {
 	void	*img;
@@ -85,9 +97,6 @@ typedef struct s_mlx_image
 typedef struct s_render
 {
 	t_mlx_image	frame;
-	void		*(*mlx_make_image)(void *, int, int );
-	char		*(*mlx_addre)(void *, int *, int *, int*);
-	int			(*mlx_image_to_window)(void *, void *, void *, int, int);
 	int32_t		color[2];
 }	t_render;
 
@@ -136,6 +145,7 @@ typedef struct s_cub
 	int			file_fd;
 	void		*mlx;
 	void		*window;
+	t_mlx_ft	mlx_ft;
 }	t_cub;
 
 #endif // STRUCTURE_H

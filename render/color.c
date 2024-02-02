@@ -11,13 +11,15 @@ int32_t	create_rgb(int r, int g, int b)
 t_err	make_mlx_image(t_mlx_image *ptr, t_cub *cub)
 {
 	t_render	*render;
+	t_mlx_ft	*ft;
 
 	if (!ptr || !cub)
 		return (e_bad_args);
 	render = &cub->ren;
-	ptr->img = render->mlx_make_image(cub->mlx, WIN_W, WIN_H);
-	ptr->addr = render->mlx_addre(ptr->img, &ptr->b_per_pix, &ptr->line_len, \
-	&ptr->endian);
+	ft = &cub->mlx_ft;
+	ptr->img = ft->mlx_new_image(cub->mlx, WIN_W, WIN_H);
+	ptr->addr = ft->mlx_get_data_addr(ptr->img, &ptr->b_per_pix, \
+	&ptr->line_len, &ptr->endian);
 	return (e_success);
 }
 

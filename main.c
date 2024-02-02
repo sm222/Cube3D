@@ -10,44 +10,17 @@ int	exit_window(t_cub *info)
 
 int	keybinds(int keycode, t_cub *info)
 {
+	ft_printf(2, "key press = %d\n", keycode);
 	if (keycode == 53)
 		exit_window(info);
 	return (0);
 }
 
-/*
-	use to set all the usefull data and the start of the program
-	*	ft_return_ptr is use like a set and get from any place
-	*	or the data need to come from the main or is malloc so
-	*	the value is not lost
-*/
-static void	set_main_data(t_cub *cub)
-{
-	ft_bzero(cub, sizeof(t_cub));
-	ft_return_ptr(cub, e_data);
-	cub->ren.mlx_addre = &mlx_get_data_addr;
-	cub->ren.mlx_make_image = &mlx_new_image;
-	cub->ren.mlx_image_to_window = &mlx_put_image_to_window;
-}
-
-static int	bad_args_main(int ac)
-{
-	ft_printf(2, "%oError\n", NULL);
-	if (ac > 2)
-		ft_printf(2, "%oCub3D: too many argument\n", NULL);
-	else
-		ft_printf(2, "%oCub3D: need one argument, *.cub\n", NULL);
-	return (1);
-}
-
+/// @brief call the pipeline of rendering
+/// @param cub 
+/// @return 
 int	call_render(t_cub *cub)
 {
-	static int i = 0;
-	if (i > 255)
-		i = 0;
-	cub->ren.color[0] = create_rgb(0, i / 10, i);
-	cub->ren.color[1] = create_rgb(i, i, 0);
-	i += 2;
 	render(cub, e_clean);
 	render(cub, e_render);
 	return (0);
@@ -64,12 +37,12 @@ int	main(int ac, char **av)
 	if (ac < 2 || ac > 2)
 		return (bad_args_main(ac));
 	set_main_data(&cub);
-	cub.map = parsing(av[1], &cub);
-	if (!cub.map)
+	if (!parsing(av[1], &cub)) //? saving line, don't know if you like it
 		return (1);
-	debug(cub); //free all parsing in here
+	set_render_data(&cub);
+	debug(cub); //! free all parsing in here remove for more test
 	cub.mlx = mlx_init();
-	cub.window = mlx_new_window(cub.mlx, WIN_W, WIN_H, "test");
+	cub.window = mlx_new_window(cub.mlx, WIN_W, WIN_H, "test"); //? can add a name for later in a define
 	make_mlx_image(&cub.ren.frame, &cub);
 	mlx_key_hook(cub.window, keybinds, &cub);
 	mlx_hook(cub.window, 17, 0, exit_window, &cub);
