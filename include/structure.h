@@ -33,7 +33,7 @@
 # endif
 
 # ifndef IMAGE_S
-#  define IMAGE_S 500
+#  define IMAGE_S 1980
 # endif
 
 # include <stdio.h>

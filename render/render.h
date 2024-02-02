@@ -33,7 +33,7 @@ enum e_r_mode {
 //			ft				//
 //--------------------------//
 
-int	render(t_cub *data, short mode);
+int		render(t_cub *data, short mode);
 
 int32_t	create_rgb(int r, int g, int b);
 t_err	make_mlx_image(t_mlx_image *ptr, t_cub *cub);

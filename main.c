@@ -21,9 +21,9 @@ int	keybinds(int keycode, t_cub *info)
 /// @return 
 int	call_render(t_cub *cub)
 {
-	render(cub, e_clean);
+	(void) render(cub, e_clean);
 	raycaster(cub);
-	render(cub, e_render);
+	(void) render(cub, e_render);
 	return (0);
 }
 
@@ -41,6 +41,8 @@ int	main(int ac, char **av)
 	if (!parsing(av[1], &cub))
 		return (1);
 	set_render_data(&cub);
+	t_mlx_image	cat;
+	import_img(cub.pars.texture.side[e_no], &cub, &cat);
 	debug(cub); //! free all parsing in here remove for more test
 	cub.mlx = mlx_init();
 	cub.window = mlx_new_window(cub.mlx, WIN_W, WIN_H, "test"); //? can add a name for later in a define

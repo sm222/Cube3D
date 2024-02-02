@@ -34,6 +34,7 @@ SRCS	=	main.c\
 			main_err.c\
 			main_util.c\
 			rendering/raycaster.c\
+			rendering/import_img.c\
 
 OBJS	=	$(SRCS:.c=.o)
 

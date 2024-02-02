@@ -35,6 +35,7 @@ t_err	import_img(char *file, t_cub *cub, t_mlx_image *dst)
 		return (e_bad_args);
 	ft = &cub->mlx_ft;
 	dst->img = ft->mlx_xpm_file_to_image(cub->mlx, file, &w, &h);
+	ft_printf(2, "ici\n");
 	if (!dst->img)
 		return (e_malloc_f);
 	if (w != IMAGE_S || h != IMAGE_S)
