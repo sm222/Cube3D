@@ -32,3 +32,47 @@ void	set_render_data(t_cub *cub)
 	cub->ren.color[0] = color1;
 	cub->ren.color[1] = color2;
 }
+
+t_err	free_wall(t_cub *cub)
+{
+	short	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (cub->wall[i].img)
+			cub->mlx_ft.mlx_destroy_image(cub->mlx, &cub->wall[i]);
+		ft_bzero(&cub->wall[i], sizeof(t_mlx_image));
+		i++;
+	}
+	return (e_success);
+}
+
+static void	print_err(t_err code)
+{
+	if (code == e_malloc_f)
+		ft_printf(2, "Error:\nmalloc fail in import_img, or bad texture name\n");
+	if (code == e_bad_size)
+		ft_printf(2, "Error:\nsize of image don't fit with define\n");
+}
+
+int	import_wall(t_cub *cub)
+{
+	short		i;
+	t_mlx_image	*tmp;
+	t_err		err;
+
+	i = 0;
+	while (i < 4)
+	{
+		tmp = &cub->wall[i];
+		err = import_img(cub->pars.texture.side[i], cub, tmp);
+		if (err < e_success)
+		{
+			print_err(err);
+			return ((void)free_wall(cub), err);
+		}
+		i++;
+	}
+	return (e_success);
+}

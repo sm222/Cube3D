@@ -19,5 +19,16 @@ void	set_render_data(t_cub *cub);
 int32_t	return_color_from_image(t_mlx_image *img, int x, int y);
 t_err	remove_image(t_mlx_image *src, t_cub *cub);
 t_err	import_img(char *file, t_cub *cub, t_mlx_image *dst);
+//
+int 	import_wall(t_cub *cub);
+
+//
+int		keybinds(int keycode, t_cub *cub);
+
+//
+int		exit_window(t_cub *cub);
+void	mlx_fail_omg(t_cub *cub);
+void	free_no_exit(t_cub *cub);
+t_err	free_wall(t_cub *cub);
 
 #endif // CUB_H

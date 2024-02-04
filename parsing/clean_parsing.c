@@ -16,3 +16,15 @@ short	clean_parsing(t_parsing *data)
 	}
 	return (e_success);
 }
+short	clean_wall_name(t_parsing *data)
+{
+	short	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		data->texture.side[i] = ft_free(data->texture.side[i]);
+		i++;
+	}
+	return (e_success);
+}

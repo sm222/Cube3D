@@ -33,6 +33,8 @@ SRCS	=	main.c\
 			debugft.c\
 			main_err.c\
 			main_util.c\
+			mouvement.c\
+			main_exit_ft.c\
 			rendering/raycaster.c\
 			rendering/import_img.c\
 

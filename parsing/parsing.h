@@ -20,6 +20,7 @@ int		open_file(t_parsing *data, char *file);
 
 short	clean_parsing(t_parsing *data);
 t_err	parsing_look_c(t_parsing *data);
+short	clean_wall_name(t_parsing *data);
 t_err	extract_texture(t_parsing *data);
 char	*extract_line_txt(t_str *str, t_err *err);
 

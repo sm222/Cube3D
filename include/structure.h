@@ -26,14 +26,16 @@
 #  define GIT	"\x1b[38;5;82m"
 # endif
 
+/// window size
 # ifndef WIN_SIZE
 #  define WIN_SIZE
 #  define WIN_H 1000
 #  define WIN_W 2000
 # endif
 
+/// image size 
 # ifndef IMAGE_S
-#  define IMAGE_S 1980
+#  define IMAGE_S 200
 # endif
 
 # include <stdio.h>
@@ -149,6 +151,7 @@ typedef struct s_cub
 	void		*mlx;
 	void		*window;
 	t_mlx_ft	mlx_ft;
+	t_mlx_image	wall[4];
 }	t_cub;
 
 #endif // STRUCTURE_H
