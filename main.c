@@ -41,11 +41,11 @@ int	main(int ac, char **av)
 	if (!parsing(av[1], &cub))
 		return (1);
 	set_render_data(&cub);
+	debug(cub); //! remove the free so it leeks live
+	cub.mlx = mlx_init();
+	cub.window = mlx_new_window(cub.mlx, WIN_W, WIN_H, "test"); //? can put the name of the map with so_long
 	t_mlx_image	cat;
 	import_img(cub.pars.texture.side[e_no], &cub, &cat);
-	debug(cub); //! free all parsing in here remove for more test
-	cub.mlx = mlx_init();
-	cub.window = mlx_new_window(cub.mlx, WIN_W, WIN_H, "test"); //? can add a name for later in a define
 	make_mlx_image(&cub.ren.frame, &cub);
 	mlx_key_hook(cub.window, keybinds, &cub);
 	mlx_hook(cub.window, 17, 0, exit_window, &cub);
