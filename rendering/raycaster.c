@@ -6,14 +6,14 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/02 18:16:07 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/04 18:07:52 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/raycast.h"
-
+#include "../render/render.h"
 //0 = x, 1 = y
-void    set_north_south(double dir, t_raycasting *vectors)
+void    set_north_south(int dir, t_raycasting *vectors)
 {
     double  p_x;
     double  p_y;
@@ -26,7 +26,7 @@ void    set_north_south(double dir, t_raycasting *vectors)
     vectors->cam_vct_y = p_y + (DVCT_LEN * dir);
 }
 
-void    set_east_west(double dir, t_raycasting *vectors)
+void    set_east_west(int dir, t_raycasting *vectors)
 {
     double  p_x;
     double  p_y;
@@ -45,8 +45,8 @@ void    init_vectors(t_raycasting *data, double p_x, double p_y, char dir)
 {
     p_x += 0.5;
     p_y += 0.5;
-    data->posX = p_x;
-    data->posY = p_y;
+    data->mapX = p_x;
+    data->mapY = p_y;
     if (dir == 'N')
         set_north_south(-1, data);
 	else if (dir == 'S')
@@ -60,7 +60,7 @@ void    init_vectors(t_raycasting *data, double p_x, double p_y, char dir)
 void    init_rayData(int x, t_raycasting *data)
 {
     data->mapX = (int)data->posX;
-    data->mapX = (int)data->posY;
+    data->mapY = (int)data->posY;
     //This next section aims at scaling cameraX to represent the 
     //x-coordinate on the camera plane coresponding to the column of the screen which will be printed next.
     //It then calculates the direction of the ray by placing a point on the camera plane (rayDir)
@@ -116,6 +116,33 @@ void    jump_dirY(t_raycasting *data)
         data->side = 0;
 }
 
+void    calculate_wall_height(t_raycasting *data)
+{
+    if(data->side == 2 || data->side == 3)
+        data->perpWallDist = (data->sideDistX - data->deltaDistX);
+    else
+        data->perpWallDist = (data->sideDistY - data->deltaDistY);
+    data->lineHeight = (WIN_H / data->perpWallDist);
+    data->drawStart = (data->lineHeight * -1) / 2 + WIN_H / 2;
+    if (data->drawStart < 0)
+        data->drawStart = 0;
+    data->drawEnd = data->lineHeight / 2 + WIN_H / 2;
+    if (data->drawEnd >= WIN_H)
+        data->drawEnd = WIN_H - 1; 
+}
+
+void    draw_vertical_line(t_raycasting *data, int32_t color, t_mlx_image *frame, int x)
+{
+    int y;
+
+    y = data->drawEnd;
+    while (y >= data->drawStart)
+    {
+        render_pixel_to_img(color, frame, x, y);
+        y--;
+    }
+}
+
 // returns a pointer to an image(draws on the image) (either draws directly on
 // and returns the pointer given as argument or creates a copy and returns it)
 void    *raycaster(t_cub *cub)
@@ -124,7 +151,10 @@ void    *raycaster(t_cub *cub)
     int             x;
 
     x = 0;
-    init_vectors(&data, cub->pars.texture.p_x, cub->pars.texture.p_x, cub->pars.texture.p_looking);
+    ft_bzero(&data, sizeof(t_raycasting));
+    data.posX = (double)cub->pars.texture.p_x;
+    data.posY = (double)cub->pars.texture.p_y;
+    init_vectors(&data, data.posX, data.posY, cub->pars.texture.p_looking);
     while (x < WIN_W)
     {
         init_rayData(x, &data);
@@ -134,10 +164,14 @@ void    *raycaster(t_cub *cub)
                 jump_dirX(&data);
             else
                 jump_dirY(&data);
-            if (cub->map[data.mapX][data.mapY] > 0)
+            if (cub->map[data.mapX][data.mapY] > '0')
                 data.hit = 1;
         }
-        //1 : calculate distance from camera plane
+        calculate_wall_height(&data);
+        data.color = create_rgb(204, 0, 204);
+        if (data.side > 1)
+            data.color = create_rgb(102, 0, 102);
+        draw_vertical_line(&data, data.color, &cub->ren.frame, x);
         //2 : retrieve position on texture
         //3 : draw column on image
         x++;
