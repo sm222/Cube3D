@@ -32,8 +32,7 @@ t_err	import_img(char *file, t_cub *cub, t_mlx_image *dst)
 {
 	t_mlx_ft	*ft;
 	int			w;
-	int			h;
-
+	int			h;	
 	if (!file || !cub || !dst)
 		return (e_bad_args);
 	ft = &cub->mlx_ft;
