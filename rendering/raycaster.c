@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/05 16:25:06 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/07 16:36:12 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,49 +15,51 @@
 
 // void    set_north_south(double dir, t_raycasting *vectors)
 // {
-// 	vectors->dirX = vectors->posX;
-// 	vectors->dirY = vectors->posY + (DVCT_LEN * dir);
-// 	vectors->planeX = vectors->posX - (CP_LEN * dir);
-// 	vectors->planeY = vectors->posY + (DVCT_LEN * dir);
+// 	vectors->dirX = 
+// 	vectors->dirY = 
+// 	vectors->planeX = 
+// 	vectors->planeY = 
 // }
 
 // void    set_east_west(double dir, t_raycasting *vectors)
 // {
-// 	vectors->dirX = vectors->posX + (DVCT_LEN * dir);
-// 	vectors->dirY = vectors->posY;
-// 	vectors->planeX = vectors->posX + (DVCT_LEN * dir);
-// 	vectors->planeY = vectors->posY + (CP_LEN * dir);
+// 	vectors->dirX = 
+// 	vectors->dirY =
+// 	vectors->planeX = 
+// 	vectors->planeY =
 // }
 
 //This inits the player's position in X and Y, as well as the direction vector
 //and the camera plane's absolute right position.
+#define FOV 90
 void    init_vectors(t_raycasting *data, char dir)
 {
-	data->dirX = -1;
+	(void) dir;
+	data->dirX = 1;
 	data->dirY = 0;
-	data->planeX = 0;
-	data->planeY = 0.66;
+	data->planeX = data->dirY * ((double)FOV / 100);
+	data->planeY = data->dirX * (-(double)FOV / 100);
 	// if (dir == 'N')
-		// set_north_south(-1, data);
+	// 	set_north_south(-1, data);
 	// else if (dir == 'S')
-		// set_north_south(1, data);
+	// 	set_north_south(1, data);
 	// else if (dir == 'E')
-		// set_east_west(1, data);
+	// 	set_east_west(1, data);
 	// else
-		// set_east_west(-1, data);
+	// 	set_east_west(-1, data);
 }
 
 void    init_rayData(int x, t_raycasting *data)
 {
-	data->mapX = (int)data->posX;
-	data->mapY = (int)data->posY;
+	data->mapX = data->posX;
+	data->mapY = data->posY;
 	//This next section aims at scaling cameraX to represent the 
 	//x-coordinate on the camera plane coresponding to the column of the screen which will be printed next.
 	//It then calculates the direction of the ray by placing a point on the camera plane (rayDir)
 	//through which the ray will be casted from the player's position.
-	data->cameraX = 2 * x / (double)WIN_W -1;
-	data->rayDirX = data->dirX + data->planeX * data->cameraX;
-	data->rayDirY = data->dirY + data->planeY * data->cameraX;
+	data->cameraX = ((2 * x) / (double)WIN_W) - 1;
+	data->rayDirX = data->dirX + (data->planeX * data->cameraX);
+	data->rayDirY = data->dirY + (data->planeY * data->cameraX);
 	//Here, the delta distances are calculated for later use in the DDA algorithm.
 	//deltaDistX represents the ratio of the change in the x-coordinate
 	//of the ray's position to the change in distance traveled along the x-axis.
@@ -155,23 +157,21 @@ void    *raycaster(t_cub *cub)
 
 	x = 0;
 	ft_bzero(&data, sizeof(t_raycasting));
-	data.posX = (double)cub->pars.texture.p_x - 0.5;
-	data.posY = (double)cub->pars.texture.p_y - 0.5;
 	init_vectors(&data, cub->pars.texture.p_looking);
+	data.posX = (double)cub->pars.texture.p_x + 0.5;
+	data.posY = (double)cub->pars.texture.p_y + 0.5;
 	while (x < WIN_W)
 	{
 		init_rayData(x, &data);
 		while (data.hit == 0)
 		{
+			// printf("mapx : %d, mapy : %d, ray : %d", data->);
 			if (data.sideDistX < data.sideDistY)
 				jump_dirX(&data);
 			else
 				jump_dirY(&data);
-			if (cub->map[data.mapX][data.mapY] == '1')
-			{
+			if (cub->map[data.mapY][data.mapX] == '1')
 				data.hit = 1;
-				printf("x : %d y : %d\n", data.mapX, data.mapY);
-			}
 		}
 		data.hit = 0;
 		calculate_wall_height(&data);
@@ -183,12 +183,10 @@ void    *raycaster(t_cub *cub)
 			data.color = create_rgb(64, 50, 168); // blue
 		else
 			data.color = create_rgb(50, 168, 82); // green
-		// print_info(&data, x);
 		draw_vertical_line(&data, data.color, &cub->ren.frame, x);
 		//2 : retrieve position on texture
 		//3 : draw column on image
 		x++;
-		printf("%d\n", x);
 	}
 	return (NULL);
 }

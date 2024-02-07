@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:47:56 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/05 14:27:58 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/05 16:41:10 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 //DVCT stands for direction vector
 //CP stands for camera plane
 # define P_SPEED 0.5
-# define DVCT_LEN 0.4
-# define CP_LEN 0.4
+# define DVCT_LEN 1
+# define CP_LEN 1
 
 //rayDirX/Y are the points on the camera plane needed to determine the ray's direction
 //(Ray is casted from the player's position and goes throught this point in the camera plane)
