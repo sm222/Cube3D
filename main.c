@@ -57,11 +57,13 @@ taken by the preceding function argument./
 */
 int	main(int ac, char **av)
 {
-	t_cub	cub;
+	t_cub			cub;
+	t_player		player;
+	t_raycasting	ray;
 
 	if (ac < 2 || ac > 2)
 		return (bad_args_main(ac));
-	set_main_data(&cub);
+	set_main_data(&cub, &player, &ray);
 	if (!parsing(av[1], &cub))
 		return (1);
 	set_render_data(&cub);

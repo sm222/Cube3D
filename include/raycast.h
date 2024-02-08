@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:47:56 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/02 13:01:38 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/08 14:04:00 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,6 @@
 # define CP_LEN 1
 # define WIN_RES 8
 
-typedef struct s_raycasting
-{
-    double  pos_vct_x;
-    double  pos_vct_y;
-    double  dir_vct_x;
-    double  dir_vct_y;
-    double  cam_vct_x;
-    double  cam_vct_y;
-}	t_raycasting;
-
-void    *raycaster(t_cub *cub);
+void	*raycaster(t_cub *cub);
 
 #endif
