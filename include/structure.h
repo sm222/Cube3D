@@ -78,6 +78,15 @@ typedef unsigned char	t_color; // unsing char use for color
 //			struct			//
 //--------------------------//
 
+typedef struct s_raycasting
+{
+	double	pos_vct_x;
+	double	pos_vct_y;
+	double	dir_vct_x;
+	double	dir_vct_y;
+	double	cam_vct_x;
+	double	cam_vct_y;
+}	t_raycasting;
 
 typedef struct s_mlx_ft
 {
@@ -89,6 +98,14 @@ typedef struct s_mlx_ft
 	int				(*mlx_destroy_image)(void *, void *);
 
 }	t_mlx_ft;
+
+typedef struct s_player 
+{
+	double	playX;
+	double	playY;
+	double	dirX;
+	double	dirY;
+} t_player;
 
 typedef struct s_mlx_image
 {
@@ -144,14 +161,16 @@ typedef struct	s_parsing
 /// @brief 
 typedef struct s_cub
 {
-	t_parsing	pars;
-	t_map		map;
-	t_render	ren;
-	int			file_fd;
-	void		*mlx;
-	void		*window;
-	t_mlx_ft	mlx_ft;
-	t_mlx_image	wall[4];
+	t_parsing		pars;
+	t_map			map;
+	t_render		ren;
+	int				file_fd;
+	void			*mlx;
+	void			*window;
+	t_mlx_ft		mlx_ft;
+	t_mlx_image		wall[4];
+	t_player		*player;
+	t_raycasting	*ray;
 }	t_cub;
 
 #endif // STRUCTURE_H
