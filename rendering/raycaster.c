@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/08 15:41:32 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/08 15:48:48 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void    jump_dirX(t_raycasting *data)
 	data->sideDistX += data->deltaDistX;
 	data->mapX += data->stepX;
 	if (data->stepX > 0)
-		data->side = 3; // west
+		data->side = e_we;
 	else
-		data->side = 2; //east
+		data->side = e_ea;
 }
 
 void    jump_dirY(t_raycasting *data)
@@ -83,14 +83,14 @@ void    jump_dirY(t_raycasting *data)
 	data->sideDistY += data->deltaDistY;
 	data->mapY += data->stepY;
 	if(data->stepY > 0)
-		data->side = 1; // south
+		data->side = e_so;
 	else
-		data->side = 0; // north
+		data->side = e_no;
 }
 
 void    calculate_wall_height(t_raycasting *data)
 {
-	if(data->side == 2 || data->side == 3)
+	if(data->side == e_ea || data->side == e_we)
 		data->perpWallDist = (data->sideDistX - data->deltaDistX);
 	else
 		data->perpWallDist = (data->sideDistY - data->deltaDistY);
@@ -150,9 +150,9 @@ void    *raycaster(t_cub *cub, t_raycasting *data)
 		}
 		data->hit = 0;
 		calculate_wall_height(data);
-		if (data->side == 0)
+		if (data->side == e_no)
 			data->color = create_rgb(204, 0, 204); //purple
-		else if (data->side == 1)
+		else if (data->side == e_so)
 			data->color = create_rgb(168, 50, 58); //red
 		else if (data->color == 2)
 			data->color = create_rgb(64, 50, 168); // blue
