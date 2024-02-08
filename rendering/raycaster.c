@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/07 16:36:12 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/08 14:41:32 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,42 +150,38 @@ void	print_info(t_raycasting *data, double x)
 
 // returns a pointer to an image(draws on the image) (either draws directly on
 // and returns the pointer given as argument or creates a copy and returns it)
-void    *raycaster(t_cub *cub)
+void    *raycaster(t_cub *cub, t_raycasting *data)
 {
-	t_raycasting    data;
 	int             x;
 
 	x = 0;
-	ft_bzero(&data, sizeof(t_raycasting));
-	init_vectors(&data, cub->pars.texture.p_looking);
-	data.posX = (double)cub->pars.texture.p_x + 0.5;
-	data.posY = (double)cub->pars.texture.p_y + 0.5;
+	init_vectors(data, cub->pars.texture.p_looking);
+	data->posX = (double)cub->pars.texture.p_x + 0.5;
+	data->posY = (double)cub->pars.texture.p_y + 0.5;
 	while (x < WIN_W)
 	{
-		init_rayData(x, &data);
-		while (data.hit == 0)
+		init_rayData(x, data);
+		while (data->hit == 0)
 		{
 			// printf("mapx : %d, mapy : %d, ray : %d", data->);
-			if (data.sideDistX < data.sideDistY)
-				jump_dirX(&data);
+			if (data->sideDistX < data->sideDistY)
+				jump_dirX(data);
 			else
-				jump_dirY(&data);
-			if (cub->map[data.mapY][data.mapX] == '1')
-				data.hit = 1;
+				jump_dirY(data);
+			if (cub->map[data->mapY][data->mapX] == '1')
+				data->hit = 1;
 		}
-		data.hit = 0;
-		calculate_wall_height(&data);
-		if (data.side == 0)
-			data.color = create_rgb(204, 0, 204); //purple
-		else if (data.side == 1)
-			data.color = create_rgb(168, 50, 58); //red
-		else if (data.color == 2)
-			data.color = create_rgb(64, 50, 168); // blue
+		data->hit = 0;
+		calculate_wall_height(data);
+		if (data->side == 0)
+			data->color = create_rgb(204, 0, 204); //purple
+		else if (data->side == 1)
+			data->color = create_rgb(168, 50, 58); //red
+		else if (data->color == 2)
+			data->color = create_rgb(64, 50, 168); // blue
 		else
-			data.color = create_rgb(50, 168, 82); // green
-		draw_vertical_line(&data, data.color, &cub->ren.frame, x);
-		//2 : retrieve position on texture
-		//3 : draw column on image
+			data->color = create_rgb(50, 168, 82); // green
+		draw_vertical_line(data, data->color, &cub->ren.frame, x);
 		x++;
 	}
 	return (NULL);

@@ -79,13 +79,31 @@ typedef unsigned char	t_color; // unsing char use for color
 //--------------------------//
 
 typedef struct s_raycasting
-{
-	double	pos_vct_x;
-	double	pos_vct_y;
-	double	dir_vct_x;
-	double	dir_vct_y;
-	double	cam_vct_x;
-	double	cam_vct_y;
+{	
+	double  posX;
+    double  posY;
+    double  dirX;
+    double  dirY;
+    double  planeX;
+    double  planeY;
+    double  cameraX;
+    double  rayDirX;
+    double  rayDirY;
+    int     mapX;
+    int     mapY;
+    double  sideDistX;
+    double  sideDistY;
+    double  deltaDistX;
+    double  deltaDistY;
+    double  perpWallDist;
+    double  lineHeight;
+    double  drawStart;
+    double  drawEnd;
+    int     stepX;
+    int     stepY;
+    int     hit;
+    int     side;
+    int32_t color;
 }	t_raycasting;
 
 typedef struct s_mlx_ft

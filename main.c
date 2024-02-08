@@ -6,7 +6,7 @@
 int	call_render(t_cub *cub)
 {
 	(void) render(cub, e_clean);
-	raycaster(cub);
+	raycaster(cub, cub->ray);
 	(void) render(cub, e_render);
 	return (0);
 }
