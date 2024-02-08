@@ -6,10 +6,14 @@
 	*	or the data need to come from the main or is malloc so
 	*	the value is not lost
 */
-void	set_main_data(t_cub *cub)
+void	set_main_data(t_cub *cub, t_player *player, t_raycasting *ray)
 {
 	ft_bzero(cub, sizeof(t_cub));
+	ft_bzero(player, sizeof(t_player));
+	ft_bzero(ray, sizeof(t_raycasting));
 	ft_return_ptr(cub, e_data);
+	cub->ray = ray;
+	cub->player = player;
 	cub->mlx_ft.mlx_destroy_image = &mlx_destroy_image;
 	cub->mlx_ft.mlx_get_color_value = &mlx_get_color_value;
 	cub->mlx_ft.mlx_get_data_addr = &mlx_get_data_addr;

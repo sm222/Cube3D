@@ -15,7 +15,8 @@
     "cub.h": "c",
     "rander.h": "c",
     "render.h": "c",
-    "mlx.h": "c"
+    "mlx.h": "c",
+    "raycast.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

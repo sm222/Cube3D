@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:47:56 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/02 17:42:09 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/08 14:30:02 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,6 @@
 # define CP_LEN 1
 # define WIN_RES 8
 
-//rayDirX/Y are the points on the camera plane needed to determine the ray's direction
-//(Ray is casted from the player's position and goes throught this point in the camera plane)
-typedef struct s_raycasting
-{
-    double  posX;
-    double  posY;
-    double  dirVctX;
-    double  dirVctY;
-    double  cam_vct_x;
-    double  cam_vct_y;
-    double  cameraX;
-    double  rayDirX;
-    double  rayDirY;
-    int     mapX;
-    int     mapY;
-    double  sideDistX;
-    double  sideDistY;
-    double  deltaDistX;
-    double  deltaDistY;
-    double  perpWallDist;
-    int     stepX;
-    int     stepY;
-    int     hit;
-    int     side;
-}	t_raycasting;
-
-void    *raycaster(t_cub *cub);
+void	*raycaster(t_cub *cub);
 
 #endif

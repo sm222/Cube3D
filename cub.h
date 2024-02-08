@@ -12,8 +12,8 @@
 
 void	debug(t_cub cub); //! remove at the end
 int		bad_args_main(int ac);
-void	set_main_data(t_cub *cub);
 void	set_render_data(t_cub *cub);
+void	set_main_data(t_cub *cub, t_player *player, t_raycasting *ray);
 
 //image ft
 int32_t	return_color_from_image(t_mlx_image *img, int x, int y);
