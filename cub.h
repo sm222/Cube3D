@@ -31,4 +31,8 @@ void	mlx_fail_omg(t_cub *cub);
 void	free_no_exit(t_cub *cub);
 t_err	free_wall(t_cub *cub);
 
+//raycasting init
+void	set_north_south(double dir, t_player *vectors);
+void	set_east_west(double dir, t_player *vectors);
+
 #endif // CUB_H

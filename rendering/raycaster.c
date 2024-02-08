@@ -6,60 +6,40 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/08 14:41:32 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/08 15:41:32 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/raycast.h"
 #include "../render/render.h"
 
-// void    set_north_south(double dir, t_raycasting *vectors)
-// {
-// 	vectors->dirX = 
-// 	vectors->dirY = 
-// 	vectors->planeX = 
-// 	vectors->planeY = 
-// }
-
-// void    set_east_west(double dir, t_raycasting *vectors)
-// {
-// 	vectors->dirX = 
-// 	vectors->dirY =
-// 	vectors->planeX = 
-// 	vectors->planeY =
-// }
-
-//This inits the player's position in X and Y, as well as the direction vector
-//and the camera plane's absolute right position.
-#define FOV 90
-void    init_vectors(t_raycasting *data, char dir)
+void    set_north_south(double dir, t_player *vectors)
 {
-	(void) dir;
-	data->dirX = 1;
-	data->dirY = 0;
-	data->planeX = data->dirY * ((double)FOV / 100);
-	data->planeY = data->dirX * (-(double)FOV / 100);
-	// if (dir == 'N')
-	// 	set_north_south(-1, data);
-	// else if (dir == 'S')
-	// 	set_north_south(1, data);
-	// else if (dir == 'E')
-	// 	set_east_west(1, data);
-	// else
-	// 	set_east_west(-1, data);
+	vectors->dirX = 0;
+	vectors->dirY = dir;
+	vectors->planeX = vectors->dirY * (-(double)FOV / 100);
+	vectors->planeY = vectors->dirX * ((double)FOV / 100);
 }
 
-void    init_rayData(int x, t_raycasting *data)
+void    set_east_west(double dir, t_player *vectors)
 {
-	data->mapX = data->posX;
-	data->mapY = data->posY;
+	vectors->dirX = dir;
+	vectors->dirY = 0;
+	vectors->planeX = vectors->dirY * (-(double)FOV / 100);
+	vectors->planeY = vectors->dirX * ((double)FOV / 100);
+}
+
+void    init_rayData(int x, t_raycasting *data, t_player *player)
+{
+	data->mapX = player->playX;
+	data->mapY = player->playY;
 	//This next section aims at scaling cameraX to represent the 
 	//x-coordinate on the camera plane coresponding to the column of the screen which will be printed next.
 	//It then calculates the direction of the ray by placing a point on the camera plane (rayDir)
 	//through which the ray will be casted from the player's position.
 	data->cameraX = ((2 * x) / (double)WIN_W) - 1;
-	data->rayDirX = data->dirX + (data->planeX * data->cameraX);
-	data->rayDirY = data->dirY + (data->planeY * data->cameraX);
+	data->rayDirX = player->dirX + (player->planeX * data->cameraX);
+	data->rayDirY = player->dirY + (player->planeY * data->cameraX);
 	//Here, the delta distances are calculated for later use in the DDA algorithm.
 	//deltaDistX represents the ratio of the change in the x-coordinate
 	//of the ray's position to the change in distance traveled along the x-axis.
@@ -69,22 +49,22 @@ void    init_rayData(int x, t_raycasting *data)
 	if (data->rayDirX < 0)
 	{
 		data->stepX = -1;
-		data->sideDistX = (data->posX - data->mapX) * data->deltaDistX;
+		data->sideDistX = (player->playX - data->mapX) * data->deltaDistX;
 	}
 	else
 	{
 		data->stepX = 1;
-		data->sideDistX = (data->mapX + 1.0 - data->posX) * data->deltaDistX;
+		data->sideDistX = (data->mapX + 1.0 - player->playX) * data->deltaDistX;
 	}
 	if (data->rayDirY < 0)
 	{
 		data->stepY = -1;
-		data->sideDistY = (data->posY - data->mapY) * data->deltaDistY;
+		data->sideDistY = (player->playY - data->mapY) * data->deltaDistY;
 	}
 	else
 	{
 		data->stepY = 1;
-		data->sideDistY = (data->mapY + 1.0 - data->posY) * data->deltaDistY;
+		data->sideDistY = (data->mapY + 1.0 - player->playY) * data->deltaDistY;
 	}
 }
 
@@ -155,12 +135,9 @@ void    *raycaster(t_cub *cub, t_raycasting *data)
 	int             x;
 
 	x = 0;
-	init_vectors(data, cub->pars.texture.p_looking);
-	data->posX = (double)cub->pars.texture.p_x + 0.5;
-	data->posY = (double)cub->pars.texture.p_y + 0.5;
 	while (x < WIN_W)
 	{
-		init_rayData(x, data);
+		init_rayData(x, data, cub->player);
 		while (data->hit == 0)
 		{
 			// printf("mapx : %d, mapy : %d, ray : %d", data->);

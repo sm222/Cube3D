@@ -35,6 +35,16 @@ void	set_render_data(t_cub *cub)
 	color2 = create_rgb(t->flore[0], t->flore[1], t->flore[2]);
 	cub->ren.color[0] = color1;
 	cub->ren.color[1] = color2;
+	cub->player->playX = cub->pars.texture.p_x + 0.5;
+	cub->player->playY = cub->pars.texture.p_y + 0.5;
+	if (cub->pars.texture.p_looking == 'N')
+		set_north_south(-1, cub->player);
+	else if (cub->pars.texture.p_looking == 'S')
+		set_north_south(1, cub->player);
+	else if (cub->pars.texture.p_looking == 'E')
+		set_east_west(1, cub->player);
+	else
+		set_east_west(-1, cub->player);
 }
 
 t_err	free_wall(t_cub *cub)

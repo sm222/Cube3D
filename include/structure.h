@@ -80,12 +80,6 @@ typedef unsigned char	t_color; // unsing char use for color
 
 typedef struct s_raycasting
 {	
-	double  posX;
-    double  posY;
-    double  dirX;
-    double  dirY;
-    double  planeX;
-    double  planeY;
     double  cameraX;
     double  rayDirX;
     double  rayDirY;
@@ -123,6 +117,8 @@ typedef struct s_player
 	double	playY;
 	double	dirX;
 	double	dirY;
+	double	planeX;
+	double	planeY;
 } t_player;
 
 typedef struct s_mlx_image
