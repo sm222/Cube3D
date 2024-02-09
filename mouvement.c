@@ -8,14 +8,10 @@
 void	move(double dirX, double dirY, t_player *player, char **map)
 {
 	(void)map;
-	// if (map[(int)(player->playY + dirY)][(int)(player->planeX + dirX)] != '1')
-		player->playX += dirX;
-	// if (map[(int)(player->playY + dirY)][(int)(player->planeX + dirX)] != '1')
-		player->playY += dirY;
-	// player->dirX += dirX;
-	// player->dirY += dirY;
-	// player->planeX += dirX;
-	// player->planeY += dirY;
+	printf("%d\n", (int)player->playX + (int)dirX);
+	printf("%d\n", (int)player->playY + (int)dirY);
+	player->playX += dirX;
+	player->playY += dirY;
 }
 
 int	keybinds(int keycode, t_cub *cub)
