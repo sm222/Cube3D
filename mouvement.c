@@ -1,15 +1,25 @@
 #include "cub.h"
 
-// void	rotate(int dir, t_player *player)
-// {
-	// player->
-// }
+void	rotate(int dir, t_player *player)
+{
+    double oldDirX;
+    double oldPlaneX;
+	
+	oldDirX = player->dirX;
+    player->dirX = player->dirX * cos(rotSpeed * dir) - player->dirY * sin(rotSpeed * dir);
+    player->dirY = oldDirX * sin(rotSpeed * dir) + player->dirY * cos(rotSpeed * dir);
+	oldPlaneX = player->planeX;
+    player->planeX = player->planeX * cos(rotSpeed * dir) - player->planeY * sin(rotSpeed * dir);
+    player->planeY = oldPlaneX * sin(rotSpeed * dir) + player->planeY * cos(rotSpeed * dir);
+}
 
 void	move(double dirX, double dirY, t_player *player, char **map)
 {
 	(void)map;
-	player->playX += dirX;
-	player->playY += dirY;
+	if (dirX != 0)
+		player->playX += (player->dirX * P_SPEED) * dirX;
+	if (dirY != 0)
+	player->playY += (player->dirY * P_SPEED) * dirY;
 }
 
 int	keybinds(int keycode, t_cub *cub)
@@ -18,16 +28,16 @@ int	keybinds(int keycode, t_cub *cub)
 	if (keycode == 53)
 		(void) exit_window(cub);
 	if (keycode == 13 || keycode == 126) //w || up arrow
-		move(0, -P_SPEED, cub->player, cub->map);
+		move(0, -1, cub->player, cub->map);
 	if (keycode == 2) //d
-		move(P_SPEED, 0, cub->player, cub->map);
+		move(1, 0, cub->player, cub->map);
 	if (keycode == 1 || keycode == 125) // s || down arrow
-		move(0, P_SPEED, cub->player, cub->map);
+		move(0, 1, cub->player, cub->map);
 	if (keycode == 0) // a
-		move(-P_SPEED, 0, cub->player, cub->map);
-	// if (keycode == 0) // right arrow
-		// rotate();
-	// if (keycode == 0) // left arrow
-		// rotate();
+		move(-1, 0, cub->player, cub->map);
+	if (keycode == 123) // right arrow
+		rotate(-1, cub->player);
+	if (keycode == 124) // left arrow
+		rotate(1, cub->player);
 	return (0);
 }
