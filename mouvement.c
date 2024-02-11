@@ -19,19 +19,35 @@ void	move(double dir, t_player *player, char **map)
 	int	dirX;
 	int	dirY;
 
+	dirX = (player->dirY) * -1;
+    dirY = player->dirX;
 	if (dir == 'w')
 	{
 		if(map[(int)player->playY][(int)(player->playX + player->dirX * P_SPEED)] != '1') 
 			player->playX += player->dirX * P_SPEED;
     	if(map[(int)(player->playY + player->dirY * P_SPEED)][(int)player->playX] != '1')
 			player->playY += player->dirY * P_SPEED;
-	}	
+	}
 	if (dir == 's')
 	{
 		if(map[(int)player->playY][(int)(player->playX - player->dirX * P_SPEED)] != '1') 
 			player->playX -= player->dirX * P_SPEED;
     	if(map[(int)(player->playY - player->dirY * P_SPEED)][(int)player->playX] != '1')
 			player->playY -= player->dirY * P_SPEED;
+	}
+	if (dir == 'a')
+	{
+		if(map[(int)player->playY][(int)(player->playX + player->dirY * P_SPEED)] != '1') 
+			player->playX += player->dirY * P_SPEED;
+    	if(map[(int)(player->playY - player->dirX * P_SPEED)][(int)player->playX] != '1')
+			player->playY -= player->dirX * P_SPEED;
+	}
+	if (dir == 'd')
+	{
+		if(map[(int)player->playY][(int)(player->playX - player->dirY * P_SPEED)] != '1') 
+			player->playX -= player->dirY * P_SPEED;
+    	if(map[(int)(player->playY + player->dirX * P_SPEED)][(int)player->playX] != '1')
+			player->playY += player->dirX * P_SPEED;
 	}
 }
 
