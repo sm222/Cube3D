@@ -13,13 +13,26 @@ void	rotate(int dir, t_player *player)
     player->planeY = oldPlaneX * sin(rotSpeed * dir) + player->planeY * cos(rotSpeed * dir);
 }
 
-void	move(double dirX, double dirY, t_player *player, char **map)
+void	move(double dir, t_player *player, char **map)
 {
-	(void)map;
-	if (dirX != 0)
-		player->playX += (player->dirX * P_SPEED) * dirX;
-	if (dirY != 0)
-	player->playY += (player->dirY * P_SPEED) * dirY;
+
+	int	dirX;
+	int	dirY;
+
+	if (dir == 'w')
+	{
+		if(map[(int)player->playY][(int)(player->playX + player->dirX * P_SPEED)] != '1') 
+			player->playX += player->dirX * P_SPEED;
+    	if(map[(int)(player->playY + player->dirY * P_SPEED)][(int)player->playX] != '1')
+			player->playY += player->dirY * P_SPEED;
+	}	
+	if (dir == 's')
+	{
+		if(map[(int)player->playY][(int)(player->playX - player->dirX * P_SPEED)] != '1') 
+			player->playX -= player->dirX * P_SPEED;
+    	if(map[(int)(player->playY - player->dirY * P_SPEED)][(int)player->playX] != '1')
+			player->playY -= player->dirY * P_SPEED;
+	}
 }
 
 int	keybinds(int keycode, t_cub *cub)
@@ -28,13 +41,13 @@ int	keybinds(int keycode, t_cub *cub)
 	if (keycode == 53)
 		(void) exit_window(cub);
 	if (keycode == 13 || keycode == 126) //w || up arrow
-		move(0, -1, cub->player, cub->map);
+		move('w', cub->player, cub->map);
 	if (keycode == 2) //d
-		move(1, 0, cub->player, cub->map);
+		move('d', cub->player, cub->map);
 	if (keycode == 1 || keycode == 125) // s || down arrow
-		move(0, 1, cub->player, cub->map);
+		move('s', cub->player, cub->map);
 	if (keycode == 0) // a
-		move(-1, 0, cub->player, cub->map);
+		move('a', cub->player, cub->map);
 	if (keycode == 123) // right arrow
 		rotate(-1, cub->player);
 	if (keycode == 124) // left arrow

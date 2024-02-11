@@ -1,24 +1,16 @@
 {
-  "version": "0.2.0",
-  "configurations": [
+    "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
-      "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/Users/anboisve/Documents/Cube3D",
-      "program": "/Users/anboisve/Documents/Cube3D/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
+        "name": "(lldb) Launch",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "/Users/edufour/Desktop/projects/Cube3D/Cub3D",
+        "args": ["map/cat.cub"],
+        "stopAtEntry": false,
+        "cwd": "/Users/edufour/Desktop/projects/Cube3D",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "lldb"
     }
-  ]
+    ]
 }
