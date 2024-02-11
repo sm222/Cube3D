@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/08 15:48:48 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/11 13:08:37 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void    *raycaster(t_cub *cub, t_raycasting *data)
 			data->color = create_rgb(204, 0, 204); //purple
 		else if (data->side == e_so)
 			data->color = create_rgb(168, 50, 58); //red
-		else if (data->color == 2)
+		else if (data->side == e_ea)
 			data->color = create_rgb(64, 50, 168); // blue
 		else
 			data->color = create_rgb(50, 168, 82); // green

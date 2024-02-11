@@ -35,7 +35,7 @@
 
 /// image size 
 # ifndef IMAGE_S
-#  define IMAGE_S 200
+#  define IMAGE_S 512
 # endif
 
 # include <stdio.h>
