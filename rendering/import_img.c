@@ -1,7 +1,7 @@
 #include "../include/raycast.h"
 
 //work
-unsigned int	return_color_from_image(t_mlx_image *img, int x, int y)
+int32_t	return_color_from_image(t_mlx_image *img, int x, int y)
 {
 	char	*dst;
 

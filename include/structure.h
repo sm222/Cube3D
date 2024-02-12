@@ -93,6 +93,11 @@ typedef struct s_raycasting
     double  lineHeight;
     double  drawStart;
     double  drawEnd;
+	double	step;
+	double	texPos;
+	double	wallX;
+	int		texY;
+	int		texX;
     int     stepX;
     int     stepY;
     int     hit;
@@ -172,6 +177,10 @@ typedef struct	s_parsing
 	char		*err_line;
 }	t_parsing;
 
+typedef struct s_texure
+{
+	char	**textures;
+}	t_texure;
 /// @brief 
 typedef struct s_cub
 {
@@ -185,6 +194,7 @@ typedef struct s_cub
 	t_mlx_image		wall[4];
 	t_player		*player;
 	t_raycasting	*ray;
+	t_texture		*textures;
 }	t_cub;
 
 #endif // STRUCTURE_H

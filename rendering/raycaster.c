@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/11 13:08:37 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/12 16:42:09 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,20 +103,28 @@ void    calculate_wall_height(t_raycasting *data)
 		data->drawEnd = WIN_H - 1; 
 }
 
-void    draw_vertical_line(t_raycasting *data, int32_t color, t_mlx_image *frame, int x)
+void    draw_vertical_line(t_cub *cub, t_raycasting *data, t_mlx_image *frame, int x)
 {
 	int y;
+	(void)x;
 
 	y = data->drawStart;
+	data->step = 1.0 * IMAGE_S / data->lineHeight;
+	data->texPos = (data->drawStart - WIN_H / 2 + data->lineHeight / 2) * data->step;
 	if (y >= data->drawEnd)
 	{
-		printf("too smoll\n");
 		y = WIN_H / 2 - 10;
 		data->drawEnd = WIN_H / 2 + 10;
 	}	
-	while (y <= data->drawEnd)
+	while (y < data->drawEnd)
 	{
-		render_pixel_to_img(color, frame, x, y);
+		data->texY = (int)data->texPos & (IMAGE_S -1);
+		//bitwise masking to ensure that data->texY is within the range of 0 to IMAGE_S
+		if (data->texY >= IMAGE_S)
+			data->texY &= (IMAGE_S - 1);
+		data->texPos += data->step;
+		data->color = return_color_from_image(&(cub->wall[0]), data->texX, data->texY);
+		render_pixel_to_img(data->color, frame, x, y);
 		y++;
 	}
 }
@@ -149,16 +157,20 @@ void    *raycaster(t_cub *cub, t_raycasting *data)
 				data->hit = 1;
 		}
 		data->hit = 0;
-		calculate_wall_height(data);
-		if (data->side == e_no)
-			data->color = create_rgb(204, 0, 204); //purple
-		else if (data->side == e_so)
-			data->color = create_rgb(168, 50, 58); //red
-		else if (data->side == e_ea)
-			data->color = create_rgb(64, 50, 168); // blue
+		//wallX is the exact x-coordinate where the wall was hit, scaled between 0 and 1 to represent a proportion of the wall.
+		//Calculated by substacting the integer from the floating point number from the exact position in x and y.
+		if (data->side == e_no || data->side == e_so)
+			data->wallX = cub->player->playX + data->perpWallDist * data->rayDirX;
 		else
-			data->color = create_rgb(50, 168, 82); // green
-		draw_vertical_line(data, data->color, &cub->ren.frame, x);
+			data->wallX = cub->player->playY + data->perpWallDist * data->rayDirY;
+		data->wallX -= floor(data->wallX);
+		data->texX = (int)(data->wallX * IMAGE_S);
+		calculate_wall_height(data);
+		//This checks if the texture needs to be reversed (depending on which side was hit)
+		// if (((data->side == e_so || data->side == e_no) && data->rayDirX > 0)
+			// || ((data->side == e_ea || data->side == e_we) && data->rayDirY < 0))
+			// data->texX = IMAGE_S - data->texX - 1;
+		draw_vertical_line(cub, data, &cub->ren.frame, x);
 		x++;
 	}
 	return (NULL);

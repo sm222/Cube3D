@@ -16,7 +16,6 @@ void	set_render_data(t_cub *cub);
 void	set_main_data(t_cub *cub, t_player *player, t_raycasting *ray);
 
 //image ft
-int32_t	return_color_from_image(t_mlx_image *img, int x, int y);
 t_err	remove_image(t_mlx_image *src, t_cub *cub);
 t_err	import_img(char *file, t_cub *cub, t_mlx_image *dst);
 //
