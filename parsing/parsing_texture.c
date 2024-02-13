@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_texture.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 14:31:55 by anboisve          #+#    #+#             */
+/*   Updated: 2024/02/13 14:31:57 by anboisve         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "parsing.h"
 
@@ -34,7 +45,7 @@ static short	print_err(t_err code, char *line, size_t i)
 	return (1);
 }
 
-/// @brief use to get texture form flore or celing
+/// @brief use to get texture form floor or celing
 /// @param str string
 /// @param data parsing struct
 /// @return code form extract_line_nbr, double_tex, or bad_char

@@ -41,9 +41,7 @@ static t_err	start_game(t_cub *cub)
 		return (e_fail);
 	}
 	if (import_wall(cub) < e_success)
-	{
 		return (e_fail);
-	}
 	cub->window = mlx_new_window(cub->mlx, WIN_W, WIN_H, name_win);
 	if (!cub->window)
 		mlx_fail_omg(cub);
@@ -72,7 +70,7 @@ int	main(int ac, char **av)
 	if (!cub.mlx)
 		mlx_fail_omg(&cub);
 	if (start_game(&cub) < e_success)
-		return (42);
+		return (1);
 	mlx_key_hook(cub.window, keybinds, &cub);
 	mlx_hook(cub.window, 17, 0, exit_window, &cub);
 	mlx_loop_hook(cub.mlx, &call_render, &cub);

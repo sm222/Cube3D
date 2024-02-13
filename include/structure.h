@@ -146,7 +146,7 @@ typedef struct	s_texture
 {
 	char	*side[4];
 	bool	cf[2];
-	t_color	flore[3];
+	t_color	floor[3];
 	t_color	celing[3];
 	int		p_x;
 	int		p_y;

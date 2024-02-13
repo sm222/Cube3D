@@ -44,6 +44,7 @@ t_err	remove_image(t_mlx_image *src, t_cub *cub)
 t_err	import_img(char *file, t_cub *cub, t_mlx_image *dst)
 {
 	t_mlx_ft	*ft;
+
 	int			w;
 	int			h;
 

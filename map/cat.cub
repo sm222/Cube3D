@@ -1,6 +1,6 @@
-NO    texture/wall1_shadow.xpm
-WE    texture/wall1.xpm
-SO    texture/wall1.xpm
+NO    texture/wall.xpm
+WE    texture/wall.xpm
+SO    texture/wall.xpm
 EA    texture/wall.xpm
 C     50, 50, 50
 F 25,52,56
