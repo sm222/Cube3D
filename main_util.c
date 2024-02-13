@@ -8,10 +8,15 @@
 */
 void	set_main_data(t_cub *cub, t_player *player, t_raycasting *ray)
 {
+	int	i;
+
+	i = 0;
 	ft_bzero(cub, sizeof(t_cub));
 	ft_bzero(player, sizeof(t_player));
 	ft_bzero(ray, sizeof(t_raycasting));
 	ft_return_ptr(cub, e_data);
+	while (i < 4)
+		cub->wall[i++].img = NULL;
 	cub->ray = ray;
 	cub->player = player;
 	cub->mlx_ft.mlx_destroy_image = &mlx_destroy_image;
@@ -56,7 +61,7 @@ t_err	free_wall(t_cub *cub)
 	{
 		if (cub->wall[i].img)
 			cub->mlx_ft.mlx_destroy_image(cub->mlx, &cub->wall[i]);
-		ft_bzero(&cub->wall[i], sizeof(t_mlx_image));
+		cub->wall[i].img = NULL;
 		i++;
 	}
 	return (e_success);
@@ -84,7 +89,7 @@ int	import_wall(t_cub *cub)
 		if (err < e_success)
 		{
 			print_err(err);
-			return ((void)free_wall(cub), err);
+			return (err);
 		}
 		i++;
 	}
