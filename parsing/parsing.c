@@ -1,6 +1,27 @@
 
 #include "parsing.h"
 
+static t_err	test_file_name(t_parsing *parsing)
+{
+	int	i;
+	int	fd;
+
+	i = 0;
+	while (i < 4)
+	{
+		fd = open(parsing->texture.side[i], O_RDONLY);
+		close(fd);
+		if (fd < 0)
+		{
+			ft_printf(2, "%oError:\n%s is not a valid file.\n", NULL, \
+			parsing->texture.side[i]);
+			return (e_fail);
+		}
+		i++;
+	}
+	return (e_success);
+}
+
 /// @brief use to set a err len for the print of the red line
 /// @param in add set or get this value
 /// @param set_get flag e_cube
@@ -34,7 +55,7 @@ static t_err	look_all(t_parsing *data)
 	rvalue = extract_texture(data);
 	if (rvalue < e_success)
 		return (clean_parsing(data), rvalue);
-	if (extract_map(data) < e_success)
+	if (extract_map(data) < e_success || test_file_name(data) < e_success)
 	{
 		clean_parsing(data);
 		return (e_fail);
