@@ -1,7 +1,7 @@
-NO    texture/cat.xpm
-WE    texture/cat.xpm
-SO    texture/cat.xpm
-EA    texture/cat.xpm
+NO    texture/wall.xpm
+WE    texture/wall.xpm
+SO    texture/wall.xpm
+EA    texture/wall.xpm
 C     50, 50, 50
 F     150,150,150
 

@@ -6,11 +6,11 @@ void	rotate(int dir, t_player *player)
     double oldPlaneX;
 	
 	oldDirX = player->dirX;
-    player->dirX = player->dirX * cos(rotSpeed * dir) - player->dirY * sin(rotSpeed * dir);
-    player->dirY = oldDirX * sin(rotSpeed * dir) + player->dirY * cos(rotSpeed * dir);
+    player->dirX = player->dirX * cos(ROTSPEED * dir) - player->dirY * sin(ROTSPEED * dir);
+    player->dirY = oldDirX * sin(ROTSPEED * dir) + player->dirY * cos(ROTSPEED * dir);
 	oldPlaneX = player->planeX;
-    player->planeX = player->planeX * cos(rotSpeed * dir) - player->planeY * sin(rotSpeed * dir);
-    player->planeY = oldPlaneX * sin(rotSpeed * dir) + player->planeY * cos(rotSpeed * dir);
+    player->planeX = player->planeX * cos(ROTSPEED * dir) - player->planeY * sin(ROTSPEED * dir);
+    player->planeY = oldPlaneX * sin(ROTSPEED * dir) + player->planeY * cos(ROTSPEED * dir);
 }
 
 void	move(double dir, t_player *player, char **map)

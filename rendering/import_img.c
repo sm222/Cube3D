@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   import_img.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 14:16:26 by edufour           #+#    #+#             */
+/*   Updated: 2024/02/13 14:16:38 by edufour          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/raycast.h"
 
 //work
@@ -34,6 +46,7 @@ t_err	import_img(char *file, t_cub *cub, t_mlx_image *dst)
 	t_mlx_ft	*ft;
 	int			w;
 	int			h;
+
 	if (!file || !cub || !dst)
 		return (e_bad_args);
 	ft = &cub->mlx_ft;

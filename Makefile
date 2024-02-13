@@ -24,7 +24,7 @@ MLX_DIR		=	lib/minilibx_opengl_20191021/
 
 # Compiler and flags
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra
+CFLAGS			=	-Wall -Werror -Wextra -g
 #-fsanitize=address
 RM				=	rm -f
 
@@ -37,6 +37,7 @@ SRCS	=	main.c\
 			main_exit_ft.c\
 			rendering/raycaster.c\
 			rendering/import_img.c\
+			rendering/raycaster_utils.c
 
 OBJS	=	$(SRCS:.c=.o)
 

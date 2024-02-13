@@ -42,7 +42,6 @@ static t_err	start_game(t_cub *cub)
 	}
 	if (import_wall(cub) < e_success)
 	{
-
 		return (e_fail);
 	}
 	cub->window = mlx_new_window(cub->mlx, WIN_W, WIN_H, name_win);
@@ -50,7 +49,6 @@ static t_err	start_game(t_cub *cub)
 		mlx_fail_omg(cub);
 	return (e_success);
 }
-
 
 /*
 /The "param" argument in mlx functions represents the argument 
