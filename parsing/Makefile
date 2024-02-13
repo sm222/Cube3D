@@ -7,8 +7,7 @@ RM		=	rm -f
 LIBFT		=	libft.a
 LIBFT_DIR	=	../lib/lib_ft/
 
-SRCS	=	debugft.c\
-			clean_parsing.c\
+SRCS	=	clean_parsing.c\
 			parsing_map.c\
 			parsing.c\
 			parsing_err.c\

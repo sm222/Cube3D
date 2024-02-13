@@ -27,13 +27,13 @@ static t_err	look_all(t_parsing *data)
 	rvalue = 0;
 	rvalue += parsing_err(data, read_map(data));
 	if (rvalue < e_success)
-		return (rvalue);
+		return (clean_parsing(data), rvalue);
 	rvalue += parsing_err(data, parsing_look_c(data));
 	if (rvalue < e_success)
-		return (rvalue);
+		return(clean_parsing(data), rvalue);
 	rvalue = extract_texture(data);
 	if (rvalue < e_success)
-		return (rvalue);
+		return (clean_parsing(data), rvalue);
 	if (extract_map(data) < e_success)
 	{
 		clean_parsing(data);

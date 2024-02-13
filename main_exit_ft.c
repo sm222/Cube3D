@@ -31,9 +31,15 @@ void	mlx_fail_omg(t_cub *cub)
 void	free_no_exit(t_cub *cub)
 {
 	if (cub->mlx && cub->ren.frame.img)
+	{
 		mlx_destroy_image(cub->mlx, cub->ren.frame.img);
+		cub->ren.frame.img = NULL;
+	}
 	if (cub->mlx && cub->window)
+	{
 		mlx_destroy_window(cub->mlx, cub->window);
+		cub->window = NULL;
+	}
 	cub->map = (t_map)ft_double_sfree((void **)cub->map);
 	clean_wall_name(&cub->pars);
 	free_wall(cub);

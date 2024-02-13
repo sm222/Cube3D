@@ -7,8 +7,6 @@
 # include "../include/structure.h"
 # include "../lib/lib_ft/libft.h"
 
-//debug
-void	print_debug(t_parsing *data);
 
 // use
 t_map	parsing(char *arg, t_cub *cub);

@@ -65,7 +65,10 @@ int	main(int ac, char **av)
 		return (bad_args_main(ac));
 	set_main_data(&cub, &player, &ray);
 	if (!parsing(av[1], &cub))
+	{
+		free_no_exit(&cub);
 		return (1);
+	}
 	set_render_data(&cub);
 	cub.mlx = mlx_init();
 	if (!cub.mlx)
