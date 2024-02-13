@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 09:02:36 by anboisve          #+#    #+#             */
-/*   Updated: 2024/02/13 13:29:10 by anboisve         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:27:21 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ short	clean_parsing(t_parsing *data)
 	}
 	return (e_success);
 }
+
 short	clean_wall_name(t_parsing *data)
 {
 	short	i;

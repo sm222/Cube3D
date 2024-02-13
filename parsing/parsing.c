@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 14:28:51 by anboisve          #+#    #+#             */
+/*   Updated: 2024/02/13 14:29:38 by anboisve         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "parsing.h"
 
@@ -51,7 +62,7 @@ static t_err	look_all(t_parsing *data)
 		return (clean_parsing(data), rvalue);
 	rvalue += parsing_err(data, parsing_look_c(data));
 	if (rvalue < e_success)
-		return(clean_parsing(data), rvalue);
+		return (clean_parsing(data), rvalue);
 	rvalue = extract_texture(data);
 	if (rvalue < e_success)
 		return (clean_parsing(data), rvalue);

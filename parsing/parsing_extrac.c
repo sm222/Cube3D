@@ -1,4 +1,16 @@
-# include "parsing.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_extrac.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 14:30:20 by anboisve          #+#    #+#             */
+/*   Updated: 2024/02/13 14:30:50 by anboisve         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parsing.h"
 
 /// @brief look if the end of the string is only space
 /// @param str input
@@ -17,7 +29,8 @@ static t_err	look_end(t_str *str)
 /// @brief use to extract the 3 color from string
 /// @param str input
 /// @param color t_color were to store the value
-/// @return ivalid if ',' find, bad number if above 255. else return code from look_end
+/// @return ivalid if ',' find, bad number if above 255. 
+/// else return code from look_end
 static t_err	get_nbr(t_str *str, t_color color[3])
 {
 	size_t	j;

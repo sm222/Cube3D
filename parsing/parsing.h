@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 14:30:00 by anboisve          #+#    #+#             */
+/*   Updated: 2024/02/13 14:30:03 by anboisve         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
@@ -6,7 +17,6 @@
 # include <stdbool.h>
 # include "../include/structure.h"
 # include "../lib/lib_ft/libft.h"
-
 
 // use
 t_map	parsing(char *arg, t_cub *cub);
