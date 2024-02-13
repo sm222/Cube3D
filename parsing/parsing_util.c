@@ -63,9 +63,9 @@ void	set_value(char side[5][5], t_parsing *data)
 	data->texture.side[e_so] = NULL;
 	data->texture.side[e_we] = NULL;
 	data->texture.side[e_ea] = NULL;
-	data->texture.flore[0] = 0;
-	data->texture.flore[1] = 0;
-	data->texture.flore[0] = 0;
+	data->texture.floor[0] = 0;
+	data->texture.floor[1] = 0;
+	data->texture.floor[0] = 0;
 	data->texture.celing[0] = 0;
 	data->texture.celing[1] = 0;
 	data->texture.celing[2] = 0;

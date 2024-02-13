@@ -65,7 +65,7 @@ static int	set_up(t_str *str)
 /// @brief use to take the number from line
 /// @param str input string
 /// @param data parsing main struct
-/// @param c flore or celing
+/// @param c floor or celing
 /// @return invalid_args, bad_char or error form get_nbr
 t_err	extract_line_nbr(t_str *str, t_parsing *data, short c)
 {
@@ -90,7 +90,7 @@ t_err	extract_line_nbr(t_str *str, t_parsing *data, short c)
 		if (c == 0)
 			return (get_nbr(str, data->texture.celing));
 		if (c == 1)
-			return (get_nbr(str, data->texture.flore));
+			return (get_nbr(str, data->texture.floor));
 	}
 	return (set_err_and_return_code(str->j, e_inva_arg));
 }

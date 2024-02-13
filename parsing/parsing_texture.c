@@ -34,7 +34,7 @@ static short	print_err(t_err code, char *line, size_t i)
 	return (1);
 }
 
-/// @brief use to get texture form flore or celing
+/// @brief use to get texture form floor or celing
 /// @param str string
 /// @param data parsing struct
 /// @return code form extract_line_nbr, double_tex, or bad_char
