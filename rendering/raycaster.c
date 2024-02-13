@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/12 16:42:09 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/13 12:29:27 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,17 +123,10 @@ void    draw_vertical_line(t_cub *cub, t_raycasting *data, t_mlx_image *frame, i
 		if (data->texY >= IMAGE_S)
 			data->texY &= (IMAGE_S - 1);
 		data->texPos += data->step;
-		data->color = return_color_from_image(&(cub->wall[0]), data->texX, data->texY);
+		data->color = return_color_from_image(&(cub->wall[data->side]), data->texX, data->texY);
 		render_pixel_to_img(data->color, frame, x, y);
 		y++;
 	}
-}
-
-void	print_info(t_raycasting *data, double x)
-{
-	printf("height : %f\n", data->lineHeight);
-	printf("cameraX : %f\n", data->cameraX);
-	printf("x : %f\n", x);
 }
 
 // returns a pointer to an image(draws on the image) (either draws directly on
