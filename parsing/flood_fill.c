@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 09:18:16 by anboisve          #+#    #+#             */
-/*   Updated: 2024/02/13 09:18:19 by anboisve         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:27:39 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static int	flood_fill(int x, int y, t_map const map, char last)
 		return (0);
 	if (map[y][x] == '0' || ft_strchr("NWES", map[y][x]))
 	{
-		if (map[y][x] == '0') 
+		if (map[y][x] == '0')
 			map[y][x] = '\b';
 		else
 			map[y][x] = map[y][x] + 32;

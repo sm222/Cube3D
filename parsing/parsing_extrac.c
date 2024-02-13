@@ -1,4 +1,16 @@
-# include "parsing.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_extrac.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 14:30:20 by anboisve          #+#    #+#             */
+/*   Updated: 2024/02/13 14:30:50 by anboisve         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parsing.h"
 
 /// @brief look if the end of the string is only space
 /// @param str input
@@ -17,7 +29,8 @@ static t_err	look_end(t_str *str)
 /// @brief use to extract the 3 color from string
 /// @param str input
 /// @param color t_color were to store the value
-/// @return ivalid if ',' find, bad number if above 255. else return code from look_end
+/// @return ivalid if ',' find, bad number if above 255. 
+/// else return code from look_end
 static t_err	get_nbr(t_str *str, t_color color[3])
 {
 	size_t	j;
@@ -65,7 +78,7 @@ static int	set_up(t_str *str)
 /// @brief use to take the number from line
 /// @param str input string
 /// @param data parsing main struct
-/// @param c flore or celing
+/// @param c floor or celing
 /// @return invalid_args, bad_char or error form get_nbr
 t_err	extract_line_nbr(t_str *str, t_parsing *data, short c)
 {
@@ -90,7 +103,7 @@ t_err	extract_line_nbr(t_str *str, t_parsing *data, short c)
 		if (c == 0)
 			return (get_nbr(str, data->texture.celing));
 		if (c == 1)
-			return (get_nbr(str, data->texture.flore));
+			return (get_nbr(str, data->texture.floor));
 	}
 	return (set_err_and_return_code(str->j, e_inva_arg));
 }
