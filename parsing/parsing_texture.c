@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:31:55 by anboisve          #+#    #+#             */
-/*   Updated: 2024/02/13 14:31:57 by anboisve         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:41:28 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,10 @@ t_err	extract_texture(t_parsing *data)
 		}
 		if (print_err(var.err, data->pre_map[var.line], \
 		var.line + 1) < e_success)
-			break ;
+			return (e_fail);
 		var.line++;
 	}
 	data->i = var.line;
+	ft_printf(2, "Error:\nError in map\n");
 	return (e_fail);
 }

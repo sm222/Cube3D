@@ -46,8 +46,8 @@ void	set_render_data(t_cub *cub)
 	color2 = create_rgb(t->floor[0], t->floor[1], t->floor[2]);
 	cub->ren.color[0] = color1;
 	cub->ren.color[1] = color2;
-	cub->player->playX = cub->pars.texture.p_x + 0.5;
-	cub->player->playY = cub->pars.texture.p_y + 0.5;
+	cub->player->playx = cub->pars.texture.p_x + 0.5;
+	cub->player->playy = cub->pars.texture.p_y + 0.5;
 	if (cub->pars.texture.p_looking == 'N')
 		set_north_south(-1, cub->player);
 	else if (cub->pars.texture.p_looking == 'S')

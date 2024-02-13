@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structure.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 15:51:52 by edufour           #+#    #+#             */
+/*   Updated: 2024/02/13 15:58:50 by edufour          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
@@ -49,7 +60,8 @@
 //--------------------------//
 
 //use for return_ptr
-enum e_cube {
+enum e_cube
+{
 	e_set,
 	e_get,
 	e_add,
@@ -59,50 +71,43 @@ enum e_cube {
 	e_p_err_index,
 };
 
-enum side_tex {
-	e_no,
-	e_so,
-	e_we,
-	e_ea,
-};
-
 //--------------------------//
 //			type			//
 //--------------------------//
 
-typedef char			**t_map;   // char **
-typedef int				t_fd;    // int
-typedef unsigned char	t_color; // unsing char use for color
+typedef char			**t_map;
+typedef int				t_fd;
+typedef unsigned char	t_color;
 
 //--------------------------//
 //			struct			//
 //--------------------------//
 
 typedef struct s_raycasting
-{	
-    double  cameraX;
-    double  rayDirX;
-    double  rayDirY;
-    int     mapX;
-    int     mapY;
-    double  sideDistX;
-    double  sideDistY;
-    double  deltaDistX;
-    double  deltaDistY;
-    double  perpWallDist;
-    double  lineHeight;
-    double  drawStart;
-    double  drawEnd;
-	double	step;
-	double	texPos;
-	double	wallX;
-	int		texY;
-	int		texX;
-    int     stepX;
-    int     stepY;
-    int     hit;
-    int     side;
-    int32_t color;
+{
+	double		camerax;
+	double		raydirx;
+	double		raydiry;
+	int			mapx;
+	int			mapy;
+	double		sidedistx;
+	double		sidedisty;
+	double		deltadistx;
+	double		deltadisty;
+	double		perpwalldist;
+	double		lineheight;
+	double		drawstart;
+	double		drawend;
+	double		step;
+	double		texpos;
+	double		wallx;
+	int			texy;
+	int			texx;
+	int			stepx;
+	int			stepy;
+	int			hit;
+	int			side;
+	int32_t		color;
 }	t_raycasting;
 
 typedef struct s_mlx_ft
@@ -116,15 +121,15 @@ typedef struct s_mlx_ft
 
 }	t_mlx_ft;
 
-typedef struct s_player 
+typedef struct s_player
 {
-	double	playX;
-	double	playY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-} t_player;
+	double	playx;
+	double	playy;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+}	t_player;
 
 typedef struct s_mlx_image
 {
@@ -142,7 +147,7 @@ typedef struct s_render
 }	t_render;
 
 /// @brief 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	char	*side[4];
 	bool	cf[2];
@@ -154,7 +159,7 @@ typedef struct	s_texture
 }	t_texture;
 
 /// @brief 
-typedef struct	s_extract_t
+typedef struct s_extract_t
 {
 	char	name[5][5];
 	t_err	err;
@@ -162,7 +167,7 @@ typedef struct	s_extract_t
 }	t_extract_t;
 
 /// @brief 
-typedef struct	s_parsing
+typedef struct s_parsing
 {
 	char		*map_name;
 	size_t		i;

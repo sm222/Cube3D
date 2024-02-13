@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/13 15:23:10 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/13 15:58:20 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void	jump_dirx(t_raycasting *data)
 {
-	data->sideDistX += data->deltaDistX;
-	data->mapX += data->stepX;
-	if (data->stepX > 0)
+	data->sidedistx += data->deltadistx;
+	data->mapx += data->stepx;
+	if (data->stepx > 0)
 		data->side = e_we;
 	else
 		data->side = e_ea;
@@ -25,9 +25,9 @@ void	jump_dirx(t_raycasting *data)
 
 void	jump_diry(t_raycasting *data)
 {
-	data->sideDistY += data->deltaDistY;
-	data->mapY += data->stepY;
-	if (data->stepY > 0)
+	data->sidedisty += data->deltadisty;
+	data->mapy += data->stepy;
+	if (data->stepy > 0)
 		data->side = e_no;
 	else
 		data->side = e_so;
@@ -36,47 +36,47 @@ void	jump_diry(t_raycasting *data)
 void	calculate_wall_height(t_raycasting *data, t_cub *cub)
 {
 	if (data->side == e_no || data->side == e_so)
-		data->wallX = cub->player->playX
-			+ data->perpWallDist * data->rayDirX;
+		data->wallx = cub->player->playx
+			+ data->perpwalldist * data->raydirx;
 	else
-		data->wallX = cub->player->playY
-			+ data->perpWallDist * data->rayDirY;
-	data->wallX -= floor(data->wallX);
-	data->texX = (int)(data->wallX * IMAGE_S);
+		data->wallx = cub->player->playy
+			+ data->perpwalldist * data->raydiry;
+	data->wallx -= floor(data->wallx);
+	data->texx = (int)(data->wallx * IMAGE_S);
 	if (data->side == e_ea || data->side == e_we)
-		data->perpWallDist = (data->sideDistX - data->deltaDistX);
+		data->perpwalldist = (data->sidedistx - data->deltadistx);
 	else
-		data->perpWallDist = (data->sideDistY - data->deltaDistY);
-	data->lineHeight = (WIN_H / data->perpWallDist);
-	data->drawStart = (data->lineHeight * -1) / 2 + WIN_H / 2;
-	if (data->drawStart < 0)
-		data->drawStart = 0;
-	data->drawEnd = data->lineHeight / 2 + WIN_H / 2;
-	if (data->drawEnd >= WIN_H)
-		data->drawEnd = WIN_H - 1;
+		data->perpwalldist = (data->sidedisty - data->deltadisty);
+	data->lineheight = (WIN_H / data->perpwalldist);
+	data->drawstart = (data->lineheight * -1) / 2 + WIN_H / 2;
+	if (data->drawstart < 0)
+		data->drawstart = 0;
+	data->drawend = data->lineheight / 2 + WIN_H / 2;
+	if (data->drawend >= WIN_H)
+		data->drawend = WIN_H - 1;
 }
 
 void	draw_vertical_line(t_cub *cub, t_raycasting *data, int x)
 {
 	int		y;
 
-	y = data->drawStart;
-	data->step = 1.0 * IMAGE_S / data->lineHeight;
-	data->texPos = (data->drawStart - WIN_H / 2 + data->lineHeight / 2)
+	y = data->drawstart;
+	data->step = 1.0 * IMAGE_S / data->lineheight;
+	data->texpos = (data->drawstart - WIN_H / 2 + data->lineheight / 2)
 		* data->step;
-	if (y >= data->drawEnd)
+	if (y >= data->drawend)
 	{
 		y = WIN_H / 2 - 10;
-		data->drawEnd = WIN_H / 2 + 10;
+		data->drawend = WIN_H / 2 + 10;
 	}
-	while (y < data->drawEnd)
+	while (y < data->drawend)
 	{
-		data->texY = (int)data->texPos & (IMAGE_S -1);
-		if (data->texY >= IMAGE_S)
-			data->texY &= (IMAGE_S - 1);
-		data->texPos += data->step;
+		data->texy = (int)data->texpos & (IMAGE_S -1);
+		if (data->texy >= IMAGE_S)
+			data->texy &= (IMAGE_S - 1);
+		data->texpos += data->step;
 		data->color = return_color_from_image(&(cub->wall[data->side]),
-				data->texX, data->texY);
+				data->texx, data->texy);
 		render_pixel_to_img(data->color, &(cub->ren.frame), x, y);
 		y++;
 	}
@@ -94,11 +94,11 @@ void	*raycaster(t_cub *cub, t_raycasting *data)
 		init_raydata(x, data, cub->player);
 		while (data->hit == 0)
 		{
-			if (data->sideDistX < data->sideDistY)
+			if (data->sidedistx < data->sidedisty)
 				jump_dirx(data);
 			else
 				jump_diry(data);
-			if (cub->map[data->mapY][data->mapX] == '1')
+			if (cub->map[data->mapy][data->mapx] == '1')
 				data->hit = 1;
 		}
 		data->hit = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:57:22 by anboisve          #+#    #+#             */
-/*   Updated: 2023/11/26 11:24:12 by anboisve         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:59:37 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ int	ft_str_m_free(t_str *data)
 	ft_free(data);
 	return (1);
 }
-

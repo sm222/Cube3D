@@ -2,52 +2,52 @@
 
 void	rotate(int dir, t_player *player)
 {
-    double oldDirX;
-    double oldPlaneX;
+    double olddirx;
+    double oldplanex;
 	
-	oldDirX = player->dirX;
-    player->dirX = player->dirX * cos(ROTSPEED * dir) - player->dirY * sin(ROTSPEED * dir);
-    player->dirY = oldDirX * sin(ROTSPEED * dir) + player->dirY * cos(ROTSPEED * dir);
-	oldPlaneX = player->planeX;
-    player->planeX = player->planeX * cos(ROTSPEED * dir) - player->planeY * sin(ROTSPEED * dir);
-    player->planeY = oldPlaneX * sin(ROTSPEED * dir) + player->planeY * cos(ROTSPEED * dir);
+	olddirx = player->dirx;
+    player->dirx = player->dirx * cos(ROTSPEED * dir) - player->diry * sin(ROTSPEED * dir);
+    player->diry = olddirx * sin(ROTSPEED * dir) + player->diry * cos(ROTSPEED * dir);
+	oldplanex = player->planex;
+    player->planex = player->planex * cos(ROTSPEED * dir) - player->planey * sin(ROTSPEED * dir);
+    player->planey = oldplanex * sin(ROTSPEED * dir) + player->planey * cos(ROTSPEED * dir);
 }
 
 void	move(double dir, t_player *player, char **map)
 {
 
-	int	dirX;
-	int	dirY;
+	int	dirx;
+	int	diry;
 
-	dirX = (player->dirY) * -1;
-    dirY = player->dirX;
+	dirx = (player->diry) * -1;
+    diry = player->dirx;
 	if (dir == 'w')
 	{
-		if(map[(int)player->playY][(int)(player->playX + player->dirX * P_SPEED)] != '1') 
-			player->playX += player->dirX * P_SPEED;
-    	if(map[(int)(player->playY + player->dirY * P_SPEED)][(int)player->playX] != '1')
-			player->playY += player->dirY * P_SPEED;
+		if(map[(int)player->playy][(int)(player->playx + player->dirx * P_SPEED)] != '1') 
+			player->playx += player->dirx * P_SPEED;
+    	if(map[(int)(player->playy + player->diry * P_SPEED)][(int)player->playx] != '1')
+			player->playy += player->diry * P_SPEED;
 	}
 	if (dir == 's')
 	{
-		if(map[(int)player->playY][(int)(player->playX - player->dirX * P_SPEED)] != '1') 
-			player->playX -= player->dirX * P_SPEED;
-    	if(map[(int)(player->playY - player->dirY * P_SPEED)][(int)player->playX] != '1')
-			player->playY -= player->dirY * P_SPEED;
+		if(map[(int)player->playy][(int)(player->playx - player->dirx * P_SPEED)] != '1') 
+			player->playx -= player->dirx * P_SPEED;
+    	if(map[(int)(player->playy - player->diry * P_SPEED)][(int)player->playx] != '1')
+			player->playy -= player->diry * P_SPEED;
 	}
 	if (dir == 'a')
 	{
-		if(map[(int)player->playY][(int)(player->playX + player->dirY * P_SPEED)] != '1') 
-			player->playX += player->dirY * P_SPEED;
-    	if(map[(int)(player->playY - player->dirX * P_SPEED)][(int)player->playX] != '1')
-			player->playY -= player->dirX * P_SPEED;
+		if(map[(int)player->playy][(int)(player->playx + player->diry * P_SPEED)] != '1') 
+			player->playx += player->diry * P_SPEED;
+    	if(map[(int)(player->playy - player->dirx * P_SPEED)][(int)player->playx] != '1')
+			player->playy -= player->dirx * P_SPEED;
 	}
 	if (dir == 'd')
 	{
-		if(map[(int)player->playY][(int)(player->playX - player->dirY * P_SPEED)] != '1') 
-			player->playX -= player->dirY * P_SPEED;
-    	if(map[(int)(player->playY + player->dirX * P_SPEED)][(int)player->playX] != '1')
-			player->playY += player->dirX * P_SPEED;
+		if(map[(int)player->playy][(int)(player->playx - player->diry * P_SPEED)] != '1') 
+			player->playx -= player->diry * P_SPEED;
+    	if(map[(int)(player->playy + player->dirx * P_SPEED)][(int)player->playx] != '1')
+			player->playy += player->dirx * P_SPEED;
 	}
 }
 

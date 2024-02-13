@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:05 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/13 15:23:06 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/13 15:58:38 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,52 +15,52 @@
 
 void	set_north_south(double dir, t_player *vectors)
 {
-	vectors->dirX = 0;
-	vectors->dirY = dir;
-	vectors->planeX = vectors->dirY * (-(double)FOV / 100);
-	vectors->planeY = vectors->dirX * ((double)FOV / 100);
+	vectors->dirx = 0;
+	vectors->diry = dir;
+	vectors->planex = vectors->diry * (-(double)FOV / 100);
+	vectors->planey = vectors->dirx * ((double)FOV / 100);
 }
 
 void	set_east_west(double dir, t_player *vectors)
 {
-	vectors->dirX = dir;
-	vectors->dirY = 0;
-	vectors->planeX = vectors->dirY * (-(double)FOV / 100);
-	vectors->planeY = vectors->dirX * ((double)FOV / 100);
+	vectors->dirx = dir;
+	vectors->diry = 0;
+	vectors->planex = vectors->diry * (-(double)FOV / 100);
+	vectors->planey = vectors->dirx * ((double)FOV / 100);
 }
 
 void	set_raydir(t_raycasting *data, t_player *player)
 {
-	if (data->rayDirX < 0)
+	if (data->raydirx < 0)
 	{
-		data->stepX = -1;
-		data->sideDistX = (player->playX - data->mapX) * data->deltaDistX;
+		data->stepx = -1;
+		data->sidedistx = (player->playx - data->mapx) * data->deltadistx;
 	}
 	else
 	{
-		data->stepX = 1;
-		data->sideDistX = (data->mapX + 1.0 - player->playX) * data->deltaDistX;
+		data->stepx = 1;
+		data->sidedistx = (data->mapx + 1.0 - player->playx) * data->deltadistx;
 	}
-	if (data->rayDirY < 0)
+	if (data->raydiry < 0)
 	{
-		data->stepY = -1;
-		data->sideDistY = (player->playY - data->mapY) * data->deltaDistY;
+		data->stepy = -1;
+		data->sidedisty = (player->playy - data->mapy) * data->deltadisty;
 	}
 	else
 	{
-		data->stepY = 1;
-		data->sideDistY = (data->mapY + 1.0 - player->playY) * data->deltaDistY;
+		data->stepy = 1;
+		data->sidedisty = (data->mapy + 1.0 - player->playy) * data->deltadisty;
 	}
 }
 
 void	init_raydata(int x, t_raycasting *data, t_player *player)
 {
-	data->mapX = player->playX;
-	data->mapY = player->playY;
-	data->cameraX = ((2 * x) / (double)WIN_W) - 1;
-	data->rayDirX = player->dirX + (player->planeX * data->cameraX);
-	data->rayDirY = player->dirY + (player->planeY * data->cameraX);
-	data->deltaDistX = fabs(1 / data->rayDirX);
-	data->deltaDistY = fabs(1 / data->rayDirY);
+	data->mapx = player->playx;
+	data->mapy = player->playy;
+	data->camerax = ((2 * x) / (double)WIN_W) - 1;
+	data->raydirx = player->dirx + (player->planex * data->camerax);
+	data->raydiry = player->diry + (player->planey * data->camerax);
+	data->deltadistx = fabs(1 / data->raydirx);
+	data->deltadisty = fabs(1 / data->raydiry);
 	set_raydir(data, player);
 }

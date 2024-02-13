@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 15:45:05 by edufour           #+#    #+#             */
+/*   Updated: 2024/02/13 15:45:08 by edufour          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
 
-#include <err.h>
-#include <errno.h>
-#include <string.h>
+# include <err.h>
+# include <errno.h>
+# include <string.h>
 
-typedef enum e_err {
+typedef enum e_err
+{
 	e_success		=	1,	//task run corectly
 	e_fail			=	0,	//task did't work but not err from system
 	e_malloc_f		=	-1,	//malloc fail, not my fault but better be safe

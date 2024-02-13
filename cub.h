@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 15:44:15 by edufour           #+#    #+#             */
+/*   Updated: 2024/02/13 15:44:35 by edufour          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-#include "include/structure.h"
-#include "include/raycast.h"
-#include "lib/lib_ft/libft.h"
-#include "lib/minilibx_opengl_20191021/mlx.h"
-#include "parsing/parsing.h"
-#include "render/render.h"
+# include "include/structure.h"
+# include "include/raycast.h"
+# include "lib/lib_ft/libft.h"
+# include "lib/minilibx_opengl_20191021/mlx.h"
+# include "parsing/parsing.h"
+# include "render/render.h"
 
 void	debug(t_cub cub); //! remove at the end
 int		bad_args_main(int ac);
@@ -18,7 +29,7 @@ void	set_main_data(t_cub *cub, t_player *player, t_raycasting *ray);
 t_err	remove_image(t_mlx_image *src, t_cub *cub);
 t_err	import_img(char *file, t_cub *cub, t_mlx_image *dst);
 //
-int 	import_wall(t_cub *cub);
+int		import_wall(t_cub *cub);
 
 //
 int		keybinds(int keycode, t_cub *cub);
