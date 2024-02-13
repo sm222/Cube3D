@@ -16,7 +16,8 @@
     "rander.h": "c",
     "render.h": "c",
     "mlx.h": "c",
-    "raycast.h": "c"
+    "raycast.h": "c",
+    "locale": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

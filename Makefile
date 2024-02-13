@@ -24,7 +24,7 @@ MLX_DIR		=	lib/minilibx_opengl_20191021/
 
 # Compiler and flags
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra -g
+CFLAGS			=	-Wall -Werror -Wextra
 #-fsanitize=address
 RM				=	rm -f
 
@@ -42,20 +42,17 @@ OBJS	=	$(SRCS:.c=.o)
 
 USER = $(shell whoami)
 
-all: C_tool mlx libft parse render $(NAME)
+all: mlx libft parse render $(NAME)
 	@printf "$(CYN) \n\n			correction is made by $(USER)\n\n  $(RESET)\n"
 	
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT) $(RENDER_DIR)$(RENDER_LIB) \
 	$(PARSE_DIR)$(PARSE_LIB) $(MLX_DIR)$(MLX_LIB) \
-	-framework OpenGL -framework AppKit C_tools/C_tool.a -o $(NAME)
+	-framework OpenGL -framework AppKit -o $(NAME)
 
 libft:
 	@printf "$(GRN)making libft$(WHT)\n"
 	@make -C $(LIBFT_DIR)
-
-C_tool:
-	make -C C_tools
 
 render:
 	@printf "$(GRN)making render$(WHT)\n"
@@ -77,7 +74,6 @@ mem:
 clean:
 	@$(RM) $(OBJS)
 	@make -C $(LIBFT_DIR)	clean
-	@make -C C_tools		clean
 	@make -C $(MLX_DIR)		clean
 	@make -C parsing		clean
 	@make -C render			clean
@@ -90,7 +86,6 @@ fclean: clean
 	@$(RM) $(NAME)
 	@make -C $(LIBFT_DIR)		fclean
 	@make -C parsing			fclean
-	@make -C C_tools			fclean
 	@make -C render				fclean
 	@echo $(shell clear)
 	@printf "$(GRN)clean all$(RESET)\n"

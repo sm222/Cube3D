@@ -177,10 +177,6 @@ typedef struct	s_parsing
 	char		*err_line;
 }	t_parsing;
 
-typedef struct s_texure
-{
-	char	**textures;
-}	t_texure;
 /// @brief 
 typedef struct s_cub
 {

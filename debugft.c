@@ -21,9 +21,9 @@ void debug(t_cub cub)
 		printf("|%s|\n", cub.map[i]);
 	}
 	printf("\nplayer spwan x%d y%d and is looking %c\n", cub.pars.texture.p_x, cub.pars.texture.p_y, cub.pars.texture.p_looking);
-	//ft_double_sfree((void **)cub.map);
-	//ft_free(cub.pars.texture.side[e_no]);
-	//ft_free(cub.pars.texture.side[e_so]);
-	//ft_free(cub.pars.texture.side[e_we]);
-	//ft_free(cub.pars.texture.side[e_ea]);
+	ft_double_sfree((void **)cub.map);
+	ft_free(cub.pars.texture.side[e_no]);
+	ft_free(cub.pars.texture.side[e_so]);
+	ft_free(cub.pars.texture.side[e_we]);
+	ft_free(cub.pars.texture.side[e_ea]);
 }

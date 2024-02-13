@@ -1,4 +1,5 @@
 #include "cub.h"
+#include "parsing/parsing.h"
 
 /// @brief call the pipeline of rendering
 /// @param cub 
@@ -41,7 +42,7 @@ static t_err	start_game(t_cub *cub)
 	}
 	if (import_wall(cub) < e_success)
 	{
-		free_no_exit(cub);
+
 		return (e_fail);
 	}
 	cub->window = mlx_new_window(cub->mlx, WIN_W, WIN_H, name_win);
@@ -70,11 +71,10 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	set_render_data(&cub);
-	cub.mlx = mlx_init();
 	if (!cub.mlx)
 		mlx_fail_omg(&cub);
 	if (start_game(&cub) < e_success)
-		exit(1);
+		return (42);
 	mlx_key_hook(cub.window, keybinds, &cub);
 	mlx_hook(cub.window, 17, 0, exit_window, &cub);
 	mlx_loop_hook(cub.mlx, &call_render, &cub);

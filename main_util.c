@@ -35,6 +35,12 @@ void	set_render_data(t_cub *cub)
 	int32_t		color2;
 	t_texture	*t;
 
+	cub->mlx = mlx_init();
+	if (!cub->mlx)
+	{
+		mlx_fail_omg(cub);
+		exit(1);
+	}
 	t = &cub->pars.texture;
 	color1 = create_rgb(t->celing[0], t->celing[1], t->celing[2]);
 	color2 = create_rgb(t->flore[0], t->flore[1], t->flore[2]);
@@ -60,7 +66,7 @@ t_err	free_wall(t_cub *cub)
 	while (i < 4)
 	{
 		if (cub->wall[i].img)
-			cub->mlx_ft.mlx_destroy_image(cub->mlx, &cub->wall[i]);
+			cub->mlx_ft.mlx_destroy_image(cub->mlx, cub->wall[i].img);
 		cub->wall[i].img = NULL;
 		i++;
 	}
@@ -78,17 +84,16 @@ static void	print_err(t_err code)
 int	import_wall(t_cub *cub)
 {
 	short		i;
-	t_mlx_image	*tmp;
 	t_err		err;
 
 	i = 0;
 	while (i < 4)
 	{
-		tmp = &cub->wall[i];
-		err = import_img(cub->pars.texture.side[i], cub, tmp);
+		err = import_img(cub->pars.texture.side[i], cub, &cub->wall[i]);
 		if (err < e_success)
 		{
 			print_err(err);
+			free_no_exit(cub);
 			return (err);
 		}
 		i++;

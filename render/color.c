@@ -25,13 +25,6 @@ t_err	make_mlx_image(t_mlx_image *ptr, t_cub *cub)
 	return (e_success);
 }
 
-/*
-int	set_pixel_in_canvas(int32_t color, int x, int y)
-{
-
-}
-*/
-
 int	render_pixel_to_img(int32_t color, t_mlx_image *img, int x, int y)
 {
 	char	*dst;
