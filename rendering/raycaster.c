@@ -6,12 +6,13 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:44:11 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/13 15:58:20 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:29:53 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/raycast.h"
 #include "../render/render.h"
+#include "../include/structure.h"
 
 void	jump_dirx(t_raycasting *data)
 {

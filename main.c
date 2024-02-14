@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:00:04 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/13 16:00:07 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:12:43 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	call_render(t_cub *cub)
 	return (0);
 }
 
-static	void set_name_window(t_cub *cub, char *name)
+static void	set_name_window(t_cub *cub, char *name)
 {
 	size_t	i;
 	size_t	j;

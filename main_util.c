@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_util.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/14 11:13:43 by edufour           #+#    #+#             */
+/*   Updated: 2024/02/14 11:13:48 by edufour          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 /*
@@ -76,7 +88,8 @@ t_err	free_wall(t_cub *cub)
 static void	print_err(t_err code)
 {
 	if (code == e_malloc_f)
-		ft_printf(2, "Error:\nmalloc fail in import_img, or bad texture name\n");
+		ft_printf(2,
+			"Error:\nmalloc fail in import_img, or bad texture name\n");
 	if (code == e_bad_size)
 		ft_printf(2, "Error:\nsize of image don't fit with define\n");
 }

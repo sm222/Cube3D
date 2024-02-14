@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_exit_ft.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/14 11:12:58 by edufour           #+#    #+#             */
+/*   Updated: 2024/02/14 11:13:21 by edufour          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 int	exit_window(t_cub *cub)
@@ -6,9 +18,9 @@ int	exit_window(t_cub *cub)
 	mlx_destroy_window(cub->mlx, cub->window);
 	cub->map = (t_map)ft_double_sfree((void **)cub->map);
 	clean_wall_name(&cub->pars);
-	cub->mlx = ft_free(cub->mlx);	//* add the free of mlx ptr
+	cub->mlx = ft_free(cub->mlx);
 	ft_printf(2, "%oexit\n", NULL);
-	exit(0); //you need it ;)
+	exit(0);
 	return (0);
 }
 
