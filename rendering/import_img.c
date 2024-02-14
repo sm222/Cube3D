@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:16:26 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/13 14:16:38 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:48:17 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_err	remove_image(t_mlx_image *src, t_cub *cub)
 t_err	import_img(char *file, t_cub *cub, t_mlx_image *dst)
 {
 	t_mlx_ft	*ft;
-
 	int			w;
 	int			h;
 
