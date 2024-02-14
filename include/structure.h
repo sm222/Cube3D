@@ -6,7 +6,7 @@
 /*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:52 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/14 12:18:48 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:50:16 by edufour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,13 @@ enum e_cube
 	e_p_err_index,
 };
 
-enum side_tex
+enum e_side_tex
 {
-       e_no,
-       e_so,
-       e_we,
-       e_ea,
+	e_no,
+	e_so,
+	e_we,
+	e_ea,
 };
-
 
 //--------------------------//
 //			type			//
