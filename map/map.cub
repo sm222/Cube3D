@@ -1,8 +1,8 @@
-NO                      ./img/optic/4.png
-WE                                                           ./img/optic/3.png
+NO                      texture/wall7.xpm
+WE                                                           texture/wall7.xpm
                      C     0,        0,         0
-                               SO ./img/optic/2.png
-EA ./img/optic/1.png
+                               SO texture/wall7.xpm
+EA texture/wall7.xpm
 
 
 

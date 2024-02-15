@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouvement.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edufour <edufour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:14:35 by edufour           #+#    #+#             */
-/*   Updated: 2024/02/14 12:46:23 by edufour          ###   ########.fr       */
+/*   Updated: 2024/02/15 13:20:42 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	move_sideways(double dir, t_player *p, char **map)
 
 int	keybinds(int keycode, t_cub *cub)
 {
-	ft_printf(2, "key press = %d\n", keycode);
 	if (keycode == 53)
 		(void) exit_window(cub);
 	if (keycode == 13 || keycode == 126)

@@ -1,10 +1,10 @@
   C 21, 255, 20
-WE .a
-SO .b
+WE texture/wall7.xpm
+SO texture/wall6.xpm
                              
-EA .c
+EA texture/wall5.xpm
 F 42              ,24,44 
-NO .d
+NO texture/wall4.xpm
 
 
 
